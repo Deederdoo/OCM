@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:metadata>
+<f:viewAction action="#{orgfitechController.loadPersons()}" phase="UPDATE_MODEL_VALUES" />
+</f:metadata>
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+
+<style>
+table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: auto;
+    width: 95%;
+}
+
+table td {
+    border: solid 1px #DDEEEE;
+}
+
+table th {
+    border: solid 1px black;
+    background-color: #d8d8d8;
+}
+
+
+
+h2.header {
+text-align: center;
+}
+
+
+footer {
+position: absolute;
+bottom: 0;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #f0f0e0;
+}
+
+caption {
+    white-space: nowrap;
+    caption-side: bottom;
+}
+</style>
+
+
+</h:head>
+
+
+
+
+
+
+
+
+
+
+
+<h:body style="background-color: #00BFFF;">
+	
+		<h:form>
+       
+        <h:commandButton value="new user"   />
+
+
+        <h:dataTable value="#{orgfitechController.persons}" var="p" 
+            styleClass="table-hover">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{p.id}" />
+            </h:column>
+
+            <!-- TODO rest of column headers -->
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                <h:outputText value="#{p.firstName}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                <h:outputText value="#{p.lastName}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                <h:outputText value="#{p.email}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Department</f:facet>
+                <h:outputText value="#{p.department}" />
+            </h:column>
+
+             <h:column>
+                <f:facet name="header">Access Level</f:facet>
+                <h:outputText value="#{p.accesslevel}" />
+            </h:column>
+            
+            
+            <!-- Action column -->
+            <h:column>
+                <f:facet name="header">#{uiconsts['columnLabel_Action']}</f:facet>
+                <!-- TODO: once the navigation to some new 'editEmployee' page is figured out, remove onclick handler, add action handler -->
+                <h:commandButton value="#{uiconsts['editButtonLabel']}"  
+                     />
+
+
+                <!-- TODO: once deletion is actually implemented, remove (#{uiconsts.nyi}) -->
+                <h:commandButton     value="#{uiconsts['deleteButtonLabel']}"  
+                    onclick="if (!confirm('#{uiconsts.rus}')) return false"
+                    />
+            </h:column>
+
+            <f:facet name="caption">#{uiconsts['listCaption']}</f:facet>
+        </h:dataTable>
+    </h:form>
+	
+</h:body>
+</html>

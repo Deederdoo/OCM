@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:metadata>
+
+</f:metadata>
+
+<h:head>
+	<title>#{uiconsts['viewTitle']}</title>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+
+
+<h:body style="background-color: #00BFFF;">
+	<div id="regcontainer">
+		<h:form>
+
+			<h:outputLabel for="username">User Name</h:outputLabel>
+			<h:inputText type="Text" value=" " id="username" name="firstName" />
+
+			<h:outputLabel for="password"> Password </h:outputLabel>
+			<h:inputText type="Text" value=" " id="password"></h:inputText>
+
+			<h:outputLabel for="confirmpassword"> Comfirm Password </h:outputLabel>
+			<h:inputText type="Text" value=" " id="comfirmpassword"></h:inputText>
+
+			<div id="lower">
+				<h:commandButton value="Login" action="login" />
+				<h:commandButton value="Register" action=" " />
+
+			</div>
+
+		</h:form>
+	</div>
+</h:body>
+</html>
