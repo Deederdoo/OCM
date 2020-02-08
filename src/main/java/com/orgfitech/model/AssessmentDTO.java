@@ -2,7 +2,6 @@ package com.orgfitech.model;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
