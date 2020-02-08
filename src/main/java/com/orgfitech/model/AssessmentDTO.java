@@ -1,28 +1,21 @@
 package com.orgfitech.model;
 
-public class AssessmentDTO {
+import java.io.Serializable;
 
-	private int assessmentID;
-	private String assessmentName;
-	private String date;
-	private boolean legacy;
-	private double avgPCM;
-	
-	public AssessmentDTO() {
-		this(0, "", "", false, 0);
-	}
-	
-	public AssessmentDTO(String surveyName) {
-		this(0, surveyName, "", false, 0);
-	}
+import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
-	public AssessmentDTO(int assessmentID, String assessmentName, String date, boolean legacy, double avgPCM) {
-		this.assessmentID = assessmentID;
-		this.assessmentName = assessmentName;
-		this.setDate(date);
-		this.legacy = legacy;
-		this.avgPCM = avgPCM;
-	}
+@Named("assessmentDTO")
+@ViewScoped
+public class AssessmentDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	protected int assessmentID;
+	protected String assessmentName;
+	protected String date;
+	protected boolean legacy;
+	protected double avgPCM;
 
 	/**
 	 * @return the surveyID
@@ -93,6 +86,29 @@ public class AssessmentDTO {
 	public void setAvgPCM(double avgPCM) {
 		this.avgPCM = avgPCM;
 	}
+	
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + assessmentID;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof PersonDTO)) {
+            return false;
+        }
+        PersonDTO other = (PersonDTO) obj;
+        if (assessmentID != other.id) {
+            return false;
+        }
+        return true;
+    }
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -11,15 +11,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.sql.DataSource;
 
 import com.orgfitech.model.AssessmentDTO;
 
-@Named
-@ApplicationScoped
-public class AssessmentDaoImpl implements AssessmentDao {
+public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
@@ -101,5 +97,4 @@ public class AssessmentDaoImpl implements AssessmentDao {
 
 		return assessments;
 	}
-
 }
