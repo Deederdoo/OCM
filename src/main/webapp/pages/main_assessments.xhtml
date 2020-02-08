@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+  >
+
+  <h:head>
+
+    <style>
+        table {
+          border: solid 1px #DDEEEE;
+          border-collapse: collapse;
+          border-spacing: 0;
+          table-layout: auto;
+          width: 95%;
+        }
+        table td {
+          border: solid 1px #DDEEEE;
+        }
+        table th {
+          border: solid 1px black;
+          background-color: #d8d8d8;
+        }
+        table tr:nth-child(even) {
+          background: #f2f2f2;
+        }
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+          background-color: #f0f0e0;
+        }
+        caption {
+          white-space: nowrap;
+          caption-side: bottom;
+        }
+    </style>
+  </h:head>
+  <h:body style="background-color:#42A7AD;">
+    <br />
+    <h2>Current Assessments</h2>
+      <h:dataTable value="#{orgfitechController.assessments}" var="ass" styleClass="table-hover">
+        <h:column>
+          <f:facet name="header">Assessment Name</f:facet>
+          <h:outputText value="#{ass.assessmentName}"/>
+        </h:column>
+        <h:column>
+          <f:facet name="header">Date Created</f:facet>
+          <h:outputText value="#{ass.date}"/>
+        </h:column>
+      </h:dataTable>
+      
+      <br />
+      <h2>Legacy Assessments</h2>
+      <h:dataTable value="#{employeeController.employees}" var="emp" styleClass="table-hover">
+        <h:column>
+          <f:facet name="header">Assessment Name</f:facet>
+          <h:outputText value="#{emp.id}"/>
+        </h:column>
+        <h:column>
+          <f:facet name="header">Date Created</f:facet>
+          <h:outputText value="#{emp.salary}"/>
+        </h:column>
+      </h:dataTable>
+    
+    <footer>
+    </footer>
+  </h:body>
+</html>

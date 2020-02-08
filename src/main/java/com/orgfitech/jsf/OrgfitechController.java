@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.orgfitech.dao.PersonDao;
+import com.orgfitech.model.AssessmentDTO;
 import com.orgfitech.model.PersonDTO;
 
 @Named("orgfitechController")
@@ -28,9 +29,14 @@ public class OrgfitechController implements Serializable {
 	protected PersonDao personDao;
 
 	protected List<PersonDTO> persons;
+	
+	protected List<AssessmentDTO> assessments;
 
 	@Inject
 	protected PersonDTO person;
+	
+	@Inject
+	protected AssessmentDTO assessment;
 
 	@Inject
 	public OrgfitechController(PersonDao personDao) {
@@ -43,6 +49,22 @@ public class OrgfitechController implements Serializable {
 
 	public void setPersons(List<PersonDTO> persons) {
 		this.persons = persons;
+	}
+	
+	public List<AssessmentDTO> getAsses(){
+		return assessments;
+	}
+	
+	public void setAsses(List<AssessmentDTO> asses) {
+		this.assessments = asses;
+	}
+	
+	public AssessmentDTO getAss() {
+		return assessment;
+	}
+	
+	public void setAss(AssessmentDTO ass) {
+		this.assessment = ass;
 	}
 
 	public PersonDTO getPerson() {
@@ -61,6 +83,10 @@ public class OrgfitechController implements Serializable {
 		loadPersons();
 		return "users";
 	}
+	
+	public String displayAssessments() {
+		return "main_assessments";
+	}
 
 	public String validateLogin() {
 
@@ -75,7 +101,7 @@ public class OrgfitechController implements Serializable {
 
 				for (int i = 0; i < persons.size(); i++) {
 					
-					if (persons.get(i).getFirstName().toLowerCase().equals(person.getFirstName().toLowerCase()) 
+					if (persons.get(i).getFirstName().toLowerCase().equals(person.getFirstName().toLowerCase())
 							&& persons.get(i).getPassword().equals(person.getPassword())) {
 						
 						return "mainpage";
