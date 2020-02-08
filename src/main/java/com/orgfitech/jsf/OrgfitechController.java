@@ -9,17 +9,16 @@ package com.orgfitech.jsf;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.orgfitech.dao.PersonDao;
-import com.orgfitech.model.AssessmentDTO;
 import com.orgfitech.model.PersonDTO;
 
 @Named("orgfitechController")
-@SessionScoped
+@ApplicationScoped
 public class OrgfitechController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,14 +28,9 @@ public class OrgfitechController implements Serializable {
 	protected PersonDao personDao;
 
 	protected List<PersonDTO> persons;
-	
-	protected List<AssessmentDTO> assessments;
 
 	@Inject
 	protected PersonDTO person;
-	
-	@Inject
-	protected AssessmentDTO assessment;
 
 	@Inject
 	public OrgfitechController(PersonDao personDao) {
@@ -49,22 +43,6 @@ public class OrgfitechController implements Serializable {
 
 	public void setPersons(List<PersonDTO> persons) {
 		this.persons = persons;
-	}
-	
-	public List<AssessmentDTO> getAsses(){
-		return assessments;
-	}
-	
-	public void setAsses(List<AssessmentDTO> asses) {
-		this.assessments = asses;
-	}
-	
-	public AssessmentDTO getAss() {
-		return assessment;
-	}
-	
-	public void setAss(AssessmentDTO ass) {
-		this.assessment = ass;
 	}
 
 	public PersonDTO getPerson() {
@@ -82,10 +60,6 @@ public class OrgfitechController implements Serializable {
 	public String displayAllUsers() {
 		loadPersons();
 		return "users";
-	}
-	
-	public String displayAssessments() {
-		return "main_assessments";
 	}
 
 	public String validateLogin() {

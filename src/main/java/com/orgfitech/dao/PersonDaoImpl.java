@@ -6,7 +6,6 @@
  *
  */
 package com.orgfitech.dao;
-import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -19,19 +18,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.sql.DataSource;
 
 import com.orgfitech.model.PersonDTO;
 
-
-@Named
-@ApplicationScoped
 public class PersonDaoImpl implements PersonDao, Serializable {
     private static final long serialVersionUID = 1L;
-
-
 
     private static final String USER_DS_JNDI =  "java:comp/env/jdbc/ocm";
 
@@ -122,7 +114,4 @@ public class PersonDaoImpl implements PersonDao, Serializable {
         
         return persons;
     }
-
-
-
 }
