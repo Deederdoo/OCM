@@ -22,7 +22,7 @@ public class AssessmentController implements Serializable {
 	protected AssessmentDao assessmentDao;
 	
 	protected List<AssessmentDTO> assessments;
-	
+
 	@Inject
 	protected AssessmentDTO assessment;
 
@@ -31,28 +31,32 @@ public class AssessmentController implements Serializable {
 		this.assessmentDao = assesmentDao;
 	}
 	
-	public List<AssessmentDTO> getAsses(){
-		return assessments;
-	}
-	
-	public void setAsses(List<AssessmentDTO> assessments) {
+	public void setAssessments(List<AssessmentDTO> assessments) {
 		this.assessments = assessments;
 	}
 	
-	public AssessmentDTO getAss() {
+	public List<AssessmentDTO> getAssessments() {
+		return assessments;
+	}
+	
+	public AssessmentDTO getAssessment() {
 		return assessment;
 	}
 	
-	public void setAss(AssessmentDTO assessment) {
+	public void setAssessment(AssessmentDTO assessment) {
 		this.assessment = assessment;
 	}
 	
 	public void loadAssessments() {
-		setAsses(assessmentDao.readAllAsessments());
+		setAssessments(assessmentDao.readAllAsessments());
 	}
 	
 	public String displayAssessments() {
 		loadAssessments();
 		return "main_assessments";
+	}
+	
+	public String createNewAssessment() {
+		return "create_assessments";
 	}
 }
