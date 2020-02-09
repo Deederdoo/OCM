@@ -7,21 +7,26 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-<f:metadata>
-
-<f:viewAction action="#{assessmentController.loadAssessments}" phase="UPDATE_MODEL_VALUES" />
-
-</f:metadata>
+	<f:metadata>
+	
+	<f:viewAction action="#{factorDefaultController.loadDefaultFactors}" phase="UPDATE_MODEL_VALUES" />
+	
+	</f:metadata>
 
   <h:head>
 
     <style>
+    	h2 {
+    	  text-align: center;
+    	}
+    
         table {
           border: solid 1px #DDEEEE;
           border-collapse: collapse;
           border-spacing: 0;
           table-layout: auto;
           width: 70%;
+          margin: 0 auto;
         }
         table td {
           border: solid 1px #DDEEEE;
@@ -44,27 +49,17 @@
   </h:head>
   <h:body style="background-color:#42A7AD;">
     <br />
-    <h2>Assessments</h2>
-      <h:dataTable value="#{assessmentController.assessments}" var="ass" styleClass="table-hover">
+    <h2>Factors</h2>
+      <h:dataTable value="#{factorDefaultController.factorDefaults}" var="fac" styleClass="table-hover">
         <h:column>
-          <f:facet name="header">Assessment Name</f:facet>
-          <h:outputText value="#{ass.assessmentName}"/>
-        </h:column>
-        <h:column>
-          <f:facet name="header">Date Created</f:facet>
-          <h:outputText value="#{ass.date}"/>
-        </h:column>
-        <h:column>
-          <f:facet name="header">Legacy</f:facet>
-          <h:outputText value="#{ass.legacy}"/>
+          <h:inputText value="#{fac.details}" style="display:block;width:100%;"/>
         </h:column>
       </h:dataTable>
       
       <br />
       <h:form>
-      	<h:commandButton value="New" action="#{factorDefaultController.createQuestionFactors}"/>
+      	<h:commandButton value="Submit" action="#{questionDefaultController.createQuestions}"/>
       </h:form>
-      
       
   </h:body>
 </html>
