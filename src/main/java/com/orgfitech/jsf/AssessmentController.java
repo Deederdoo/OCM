@@ -55,8 +55,4 @@ public class AssessmentController implements Serializable {
 		loadAssessments();
 		return "main_assessments";
 	}
-	
-	public String createNewAssessment() {
-		return "create_assessments";
-	}
 }
