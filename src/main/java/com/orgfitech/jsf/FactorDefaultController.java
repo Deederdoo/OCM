@@ -40,7 +40,7 @@ public class FactorDefaultController implements Serializable {
 	}
 	
 	public void loadDefaultFactors() {
-		setFactorDefaults(factorDefaultDao.readAllFactors());
+		setFactorDefaults(factorDefaultDao.readAllDefaultFactors());
 	}
 	
 	public String createQuestionFactors() {

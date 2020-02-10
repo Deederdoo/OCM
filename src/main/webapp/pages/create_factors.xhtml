@@ -50,15 +50,19 @@
   <h:body style="background-color:#42A7AD;">
     <br />
     <h2>Factors</h2>
+    
+    <h:form>
       <h:dataTable value="#{factorDefaultController.factorDefaults}" var="fac" styleClass="table-hover">
         <h:column>
           <h:inputText value="#{fac.details}" style="display:block;width:100%;"/>
         </h:column>
       </h:dataTable>
       
-      <br />
-      <h:form>
-      	<h:commandButton value="Submit" action="#{questionDefaultController.createQuestions}"/>
+      	<br />
+      	<h:inputText value="Assessment Name..." var="name"/>
+      	<h:commandButton id="submit" value="Submit" action="#{assessmentController.createAssessment(name, false, null)}">
+      		<f:actionListener binding="#{assessmentController.createAssessment(name, false, null)}"/>
+      	</h:commandButton>
       </h:form>
       
   </h:body>

@@ -21,6 +21,10 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
 	private static final String READ_ALL = "select * from survey";
+	
+	private static final String INSERT_ASSESSMENT =
+    		"INSERT INTO EMPLOYEE (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
+    		+ "VALUES (?,?,?,?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
@@ -30,7 +34,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
-	// protected PreparedStatement createPstmt;
+	protected PreparedStatement createPstmt;
 	// protected PreparedStatement updatePstmt;
 	// protected PreparedStatement deleteByIdPstmt;
 
@@ -43,7 +47,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
 			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
-			// createPstmt = conn.prepareStatement(INSERT_EMPLOYEE);
+			createPstmt = conn.prepareStatement(INSERT_ASSESSMENT);
 			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
 			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
 
@@ -60,7 +64,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 			readAllPstmt.close();
 			// readByIdPstmt.close();
-			// createPstmt.close();
+			createPstmt.close();
 			// updatePstmt.close();
 			// deleteByIdPstmt.close();
 
@@ -96,5 +100,21 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		}
 
 		return assessments;
+	}
+	
+	public String createAssessment(AssessmentDTO assessment) {
+		
+		try {
+			createPstmt.setString(1, assessment.getAssessmentName());
+			createPstmt.setString(2, assessment.getDate());
+			createPstmt.setBoolean(3, assessment.isLegacy());
+			createPstmt.setDouble(4, assessment.getAvgPCM());
+			createPstmt.execute();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 }

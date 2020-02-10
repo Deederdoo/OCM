@@ -6,6 +6,6 @@ import com.orgfitech.model.QuestionDefaultDTO;
 
 public interface QuestionDefaultDao {
 
-		public List<QuestionDefaultDTO> readAllQuestions();
+		public List<QuestionDefaultDTO> readAllDefaultQuestions();
 	
 }
