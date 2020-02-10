@@ -6,5 +6,5 @@ import com.orgfitech.model.FactorDefaultDTO;
 
 public interface FactorDefaultDao {
 
-	public List<FactorDefaultDTO> readAllFactors();
+	public List<FactorDefaultDTO> readAllDefaultFactors();
 }

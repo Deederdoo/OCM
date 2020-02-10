@@ -70,7 +70,7 @@ public class QuestionDefaultDaoImpl implements QuestionDefaultDao, Serializable{
 		}
 	}
 	
-	public List<QuestionDefaultDTO> readAllQuestions() {
+	public List<QuestionDefaultDTO> readAllDefaultQuestions() {
 		
 		List<QuestionDefaultDTO> questionD = new ArrayList<>();
 		

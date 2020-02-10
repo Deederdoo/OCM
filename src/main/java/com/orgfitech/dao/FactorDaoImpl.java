@@ -13,14 +13,18 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import com.orgfitech.model.FactorDefaultDTO;
+import com.orgfitech.model.FactorDTO;
 
-public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
+public class FactorDaoImpl implements FactorDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
-	private static final String READ_ALL = "select * from factor_default";
+	private static final String READ_ALL = "select * from factor";
+	
+	private static final String INSERT_FACTOR =
+    		"INSERT INTO EMPLOYEE (SURVEYID, DETAILS, AVGFACTORPCM) "
+    		+ "VALUES (?,?,?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
@@ -30,7 +34,7 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
-	// protected PreparedStatement createPstmt;
+	protected PreparedStatement createPstmt;
 	// protected PreparedStatement updatePstmt;
 	// protected PreparedStatement deleteByIdPstmt;
 
@@ -43,7 +47,7 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
 			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
-			// createPstmt = conn.prepareStatement(INSERT_EMPLOYEE);
+			createPstmt = conn.prepareStatement(INSERT_FACTOR);
 			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
 			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
 
@@ -60,7 +64,7 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 
 			readAllPstmt.close();
 			// readByIdPstmt.close();
-			// createPstmt.close();
+			createPstmt.close();
 			// updatePstmt.close();
 			// deleteByIdPstmt.close();
 
@@ -70,16 +74,18 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 		}
 	}
 
-	public List<FactorDefaultDTO> readAllDefaultFactors() {
+	public List<FactorDTO> readAllFactors() {
 
-		List<FactorDefaultDTO> facs = new ArrayList<>();
+		List<FactorDTO> facs = new ArrayList<>();
 		try {
 			ResultSet rs = readAllPstmt.executeQuery();
 
 			while (rs.next()) {
-				FactorDefaultDTO newFac = new FactorDefaultDTO();
-				newFac.setFactorID(rs.getInt("factordefaultid"));
+				FactorDTO newFac = new FactorDTO();
+				newFac.setFactorID(rs.getInt("factorid"));
+				newFac.setAssessmentID(rs.getInt("surveyid"));
 				newFac.setDetails(rs.getString("details"));
+				newFac.setAvgFactorPCM(rs.getInt("avgfactorpcm"));
 
 				facs.add(newFac);
 			}
@@ -95,4 +101,18 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 		return facs;
 	}
 
+	public String createFactor(FactorDTO factor) {
+
+		try {
+			createPstmt.setInt(1, factor.getAssessmentID());
+			createPstmt.setString(2, factor.getDetails());
+			createPstmt.setInt(3, factor.getAvgFactorPCM());
+			createPstmt.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "";
+	}
 }

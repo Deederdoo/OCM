@@ -13,24 +13,28 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import com.orgfitech.model.FactorDefaultDTO;
+import com.orgfitech.model.QuestionDTO;
 
-public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
+public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
-	private static final String READ_ALL = "select * from factor_default";
+	private static final String READ_ALL = "select * from question";
+	
+	private static final String INSERT_QUESTION =
+    		"INSERT INTO EMPLOYEE (FACTORID, DETAILS) "
+    		+ "VALUES (?,?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource assDS;
+	protected DataSource qDS;
 
 	protected Connection conn;
 
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
-	// protected PreparedStatement createPstmt;
+	protected PreparedStatement createPstmt;
 	// protected PreparedStatement updatePstmt;
 	// protected PreparedStatement deleteByIdPstmt;
 
@@ -38,12 +42,12 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 
-			conn = assDS.getConnection();
+			conn = qDS.getConnection();
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
 			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
-			// createPstmt = conn.prepareStatement(INSERT_EMPLOYEE);
+			createPstmt = conn.prepareStatement(INSERT_QUESTION);
 			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
 			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
 
@@ -60,7 +64,7 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 
 			readAllPstmt.close();
 			// readByIdPstmt.close();
-			// createPstmt.close();
+			createPstmt.close();
 			// updatePstmt.close();
 			// deleteByIdPstmt.close();
 
@@ -70,18 +74,20 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 		}
 	}
 
-	public List<FactorDefaultDTO> readAllDefaultFactors() {
+	public List<QuestionDTO> readAllQuestions() {
 
-		List<FactorDefaultDTO> facs = new ArrayList<>();
+		List<QuestionDTO> question = new ArrayList<>();
+
 		try {
 			ResultSet rs = readAllPstmt.executeQuery();
 
 			while (rs.next()) {
-				FactorDefaultDTO newFac = new FactorDefaultDTO();
-				newFac.setFactorID(rs.getInt("factordefaultid"));
-				newFac.setDetails(rs.getString("details"));
+				QuestionDTO newQ = new QuestionDTO();
+				newQ.setQuestionID(rs.getInt("questionid"));
+				newQ.setFactorID(rs.getInt("factorid"));
+				newQ.setDetails(rs.getString("details"));
 
-				facs.add(newFac);
+				question.add(newQ);
 			}
 			try {
 				rs.close();
@@ -89,10 +95,25 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 				System.out.println("something went wrong getting ...: ");
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("something went wrong getting .......: ");
 		}
 
-		return facs;
+		return question;
+	}
+
+	public String createQuestion(QuestionDTO question) {
+
+		try {
+			createPstmt.setInt(1, question.getFactorID());
+			createPstmt.setString(2, question.getDetails());
+			createPstmt.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "";
 	}
 
 }

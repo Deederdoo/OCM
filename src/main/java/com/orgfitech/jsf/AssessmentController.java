@@ -1,6 +1,7 @@
 package com.orgfitech.jsf;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -54,5 +55,18 @@ public class AssessmentController implements Serializable {
 	public String displayAssessments() {
 		loadAssessments();
 		return "main_assessments";
+	}
+	
+	public String createAssessment(String assessmentName, boolean isLegacy, double avgPCM) {
+		
+		assessment = new AssessmentDTO();
+		
+		assessment.setAssessmentName(assessmentName);
+		assessment.setDate(new Date().toString());
+		assessment.setLegacy(isLegacy);
+		assessment.setAvgPCM(avgPCM);
+		assessmentDao.createAssessment(assessment);
+		
+		return "create_questions";
 	}
 }
