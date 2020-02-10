@@ -60,8 +60,7 @@
       
       	<br />
       	<h:inputText value="Assessment Name..." var="name"/>
-      	<h:commandButton id="submit" value="Submit" action="#{assessmentController.createAssessment(name, false, null)}">
-      		<f:actionListener binding="#{assessmentController.createAssessment(name, false, null)}"/>
+      	<h:commandButton id="submit" value="Submit" action="#{questionDefaultController.createDefaultQuestions}">
       	</h:commandButton>
       </h:form>
       
