@@ -43,7 +43,7 @@ public class QuestionDefaultController implements Serializable {
 		setQuestionDefaults(questionDefaultDao.readAllDefaultQuestions());
 	}
 	
-	public String createQuestions() {
+	public String createDefaultQuestions() {
 		loadDefaultQuestions();
 		return "create_questions";
 	}

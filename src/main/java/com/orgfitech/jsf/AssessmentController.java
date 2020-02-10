@@ -67,6 +67,6 @@ public class AssessmentController implements Serializable {
 		assessment.setAvgPCM(avgPCM);
 		assessmentDao.createAssessment(assessment);
 		
-		return "create_questions";
+		return "";
 	}
 }
