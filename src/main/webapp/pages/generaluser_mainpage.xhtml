@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:metadata>
+
+</f:metadata>
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+
+
+<h:body style="background-color: #00BFFF;">
+
+<div>
+    <h:graphicImage library="images" name="Final-logo.png" width="60" height="80" />
+    <h:outputLabel value="OrgFitech"/>
+</div>
+
+<div align="right">
+	<h:outputLabel value="Hello"/> <!-- A user name should be shown after Hello -->
+	<h:commandButton  value="Logout" action=" " />
+</div>
+
+<div>
+    <p> Assessment must be created first before it can be taken </p>
+</div>
+
+<div id="asscontainer">
+    <h:form>
+        <h:commandButton id="startAssessment" value="Start Assessments" />
+    </h:form>
+</div>
+
+<div id="usercontainer">
+	<h:form>
+		<h:commandButton id="viewResults" value="View Results"  />
+	</h:form>
+</div>
+
+</h:body>
+</html> 

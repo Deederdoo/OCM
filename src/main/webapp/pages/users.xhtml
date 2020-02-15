@@ -83,7 +83,7 @@
 									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Firstname']}
 									<h:inputText id="new_firstName" required="true"
 										requiredMessage="#{uiconsts['enter_valid_string']}"
-										value="#{personDTO.firstName}">
+										value="#{userDTO.firstName}">
 										<f:validateRegex pattern="^.{0,30}$" />
 									</h:inputText> </span>
 							</div>
@@ -96,7 +96,7 @@
 									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Lastname']}
 									<h:inputText id="new_lastName" required="true"
 										requiredMessage="#{uiconsts['enter_valid_string']}"
-										value="#{personDTO.lastName}">
+										value="#{userDTO.lastName}">
 										<f:validateRegex pattern="^.{0,30}$" />
 									</h:inputText> </span>
 							</div>
@@ -110,7 +110,7 @@
 									class="fa fa-at" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Email']}
 									<h:inputText id="new_email" required="true"
 										requiredMessage="#{uiconsts['enter_valid_string']}"
-										value="#{personDTO.email}">
+										value="#{userDTO.email}">
 
 										<f:validateRegex pattern=".+@.+" />
 									</h:inputText> </span>
@@ -125,7 +125,7 @@
 									class="fa fa-landmark" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Department']}
 									<h:inputText id="new_department" required="true"
 										requiredMessage="#{uiconsts['enter_valid_string']}"
-										value="#{personDTO.department}">
+										value="#{userDTO.department}">
 
 										<f:validateRegex pattern="^.{0,100}$" />
 									</h:inputText> </span>
@@ -138,7 +138,7 @@
 									class="fa fa-lock" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Password']}
 									<h:inputText id="new_password" required="true"
 										requiredMessage="#{uiconsts['enter_valid_string']}"
-										value="#{personDTO.password}">
+										value="#{userDTO.password}">
 
 										<f:validateRegex pattern="^.{8,20}$" />
 
@@ -152,7 +152,7 @@
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-eye" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Access']}
 									<h:inputText id="new_accessLevel"
-										value="#{personDTO.accesslevel}">
+										value="#{userDTO.accesslevel}">
 									</h:inputText> </span>
 							</div>
 						</div>
@@ -161,7 +161,7 @@
 
 					<h:panelGrid id="actions" columns="4" cellpadding="10">
 						<h:commandLink value="Submit"
-							action="#{userController.addNewUser(personDTO.firstName,personDTO.lastName,personDTO.email,personDTO.department,personDTO.password)}" />
+							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password)}" />
 
 						<h:commandLink value="Dismiss"
 							action="#{userController.hideAddPage}" immediate="true" />
@@ -248,13 +248,13 @@
 						<f:facet name="header">Access Level</f:facet>
 						<h:outputText value="#{p.accesslevel}"
 							rendered="#{not p.editable}" />
-						<h:inputText id="accesslevel_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
+						<h:inputText id="accesslevel_editable" size="10" 
+							
 							rendered="#{p.editable}" value="#{p.accesslevel}">
-							<f:validateRegex pattern="^.{0,100}$" />
+							
 						</h:inputText>
 						<br />
-						<h:message for="accesslevel_editable" style="color:red" />
+						
 					</h:column>
 
 
