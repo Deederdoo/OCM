@@ -1,130 +1,313 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:jsf="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
+<!-- view that supports full C-R-U-D for Employees without navigation to other pages -->
+
 <f:metadata>
-<f:viewAction action="#{orgfitechController.loadPersons}" phase="UPDATE_MODEL_VALUES" />
+	<f:viewAction action="#{userController.loadPersons()}"
+		phase="UPDATE_MODEL_VALUES" />
 </f:metadata>
 
 <h:head>
-	<h:outputStylesheet name="css/style.css" />
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- title of tab/window in browser -->
+	<title>#{uiconsts['viewTitle']}</title>
+	<!-- Bootstrap: Open source toolkit for developing front-end apps using HTML, CSS, and JS
+          load from its public CDN (Content Delivery Network) 
+          requires JQuery, Bootstrap's JS and Bootstrap's CSS
+    -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+		crossorigin="anonymous" />
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous" />
+	<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+		rel="stylesheet" crossorigin="anonymous" />
 
-<style>
-table {
-    border: solid 1px #DDEEEE;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: auto;
-    width: 95%;
-}
-
-table td {
-    border: solid 1px #DDEEEE;
-}
-
-table th {
-    border: solid 1px black;
-    background-color: #d8d8d8;
-}
-
-
-
-h2.header {
-text-align: center;
-}
-
-
-footer {
-position: absolute;
-bottom: 0;
-}
-
+	<!-- misc style tweaks: table hover color (you can change/add to this if you like), make Id column smaller -->
+	<style>
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: #f0f0e0;
-}
-
-caption {
-    white-space: nowrap;
-    caption-side: bottom;
+	background-color: #f0f0e0;
 }
 </style>
-
-
 </h:head>
 
 
+<!-- view body  -->
+<h:body style="background-color:#00BFFF;">
 
 
+	<div class="container-fluid">
+
+		<h:form id="nav">
+			<div style="text-align: right">
+
+				<h:commandButton class="btn btn-info" value="Home"
+					action="#{userController.homePage()}" />
+				<h:commandButton class="btn btn-info" value="LogOut"
+					action="#{userController.logOut()}" />
+
+			</div>
+		</h:form>
+
+		<div id="main" role="main" class="main col-12">
+			<h:form id="addUser">
+
+				<h:commandLink action="#{userController.showAddPage()}" immediate="true">
+					<i class="fa fa-user-plus" />&#xa0;<h:outputText value="Add User" />
+				</h:commandLink>
+
+				<h:panelGroup rendered="#{userController.addPageVisiable}">
+					<h:panelGrid id="fixlayout" columns="4">
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Firstname']}
+									<h:inputText id="new_firstName" required="true"
+										requiredMessage="#{uiconsts['enter_valid_string']}"
+										value="#{personDTO.firstName}">
+										<f:validateRegex pattern="^.{0,30}$" />
+									</h:inputText> </span>
+							</div>
+							<h:message for="new_firstName" style="color:red" />
+						</div>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Lastname']}
+									<h:inputText id="new_lastName" required="true"
+										requiredMessage="#{uiconsts['enter_valid_string']}"
+										value="#{personDTO.lastName}">
+										<f:validateRegex pattern="^.{0,30}$" />
+									</h:inputText> </span>
+							</div>
+							<h:message for="new_lastName" style="color:red" />
+						</div>
 
 
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-at" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Email']}
+									<h:inputText id="new_email" required="true"
+										requiredMessage="#{uiconsts['enter_valid_string']}"
+										value="#{personDTO.email}">
+
+										<f:validateRegex pattern=".+@.+" />
+									</h:inputText> </span>
+							</div>
+							<h:message for="new_email" style="color:red" />
+						</div>
 
 
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-landmark" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Department']}
+									<h:inputText id="new_department" required="true"
+										requiredMessage="#{uiconsts['enter_valid_string']}"
+										value="#{personDTO.department}">
+
+										<f:validateRegex pattern="^.{0,100}$" />
+									</h:inputText> </span>
+							</div>
+							<h:message for="new_department" style="color:red" />
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-lock" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Password']}
+									<h:inputText id="new_password" required="true"
+										requiredMessage="#{uiconsts['enter_valid_string']}"
+										value="#{personDTO.password}">
+
+										<f:validateRegex pattern="^.{8,20}$" />
+
+									</h:inputText> </span>
+							</div>
+							<h:message for="new_password" style="color:red" />
+						</div>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-transparent border-0"><i
+									class="fa fa-eye" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Access']}
+									<h:inputText id="new_accessLevel"
+										value="#{personDTO.accesslevel}">
+									</h:inputText> </span>
+							</div>
+						</div>
+
+					</h:panelGrid>
+
+					<h:panelGrid id="actions" columns="4" cellpadding="10">
+						<h:commandLink value="Submit"
+							action="#{userController.addNewUser(personDTO.firstName,personDTO.lastName,personDTO.email,personDTO.department,personDTO.password)}" />
+
+						<h:commandLink value="Dismiss"
+							action="#{userController.hideAddPage}" immediate="true" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</h:form>
+			<br />
+
+			<h:form id="userList">
+				<h:dataTable id="userTable" binding="#{table}"
+					value="#{userController.users}" var="p"
+					class="table table-hover table-bordered tableUpdated">
+
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{p.id}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">First Name</f:facet>
+						<h:outputText value="#{p.firstName}" rendered="#{not p.editable}" />
+						<h:inputText id="firstname_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.firstName}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="firstname_editable" style="color:red" />
+					</h:column>
 
 
+					<h:column>
+						<f:facet name="header">Last Name</f:facet>
+						<h:outputText value="#{p.lastName}" rendered="#{not p.editable}" />
+						<h:inputText id="lastname_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.lastName}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="lastname_editable" style="color:red" />
+					</h:column>
 
-<h:body style="background-color: #00BFFF;">
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputText value="#{p.email}" rendered="#{not p.editable}" />
+
+						<h:inputText id="email_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.email}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="email_editable" style="color:red" />
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Department</f:facet>
+						<h:outputText value="#{p.department}" rendered="#{not p.editable}" />
+						<h:inputText id="department_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.department}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="department_editable" style="color:red" />
+					</h:column>
+
+
+					<h:column>
+						<f:facet name="header">Password</f:facet>
+						<h:outputText value="#{p.password}" rendered="#{not p.editable}" />
+						<h:inputText id="password_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.password}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="accesslevel_editable" style="color:red" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Access Level</f:facet>
+						<h:outputText value="#{p.accesslevel}"
+							rendered="#{not p.editable}" />
+						<h:inputText id="accesslevel_editable" size="10" required="true"
+							requiredMessage="#{uiconsts['enter_valid_string']}"
+							rendered="#{p.editable}" value="#{p.accesslevel}">
+							<f:validateRegex pattern="^.{0,100}$" />
+						</h:inputText>
+						<br />
+						<h:message for="accesslevel_editable" style="color:red" />
+					</h:column>
+
+
+					<!-- Action column -->
+					<h:column>
+						<f:facet name="header">Edit</f:facet>
+
+						<h:commandLink action="#{userController.editUser(p)}"
+							rendered="#{not p.editable}">
+							<i class="fa fa-edit" />&#xa0;<h:outputText value="Edit" />
+						</h:commandLink>
+              &#xa0;
+                            
+                        <h:commandLink value="Save"
+							action="#{userController.updateUser(p)}" rendered="#{p.editable}" />
 	
-		<h:form>
-       
-        <h:commandButton value="new user"   />
+							 
+						
+              &#xa0;
+                   
+						</h:column>
+
+					<h:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandLink action="#{userController.deleteUser(p.id)}"
+							immediate="true" rendered="#{not p.editable}">
+							<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
+						</h:commandLink>
+              &#xa0;
+              
+              
+                        <h:commandLink
+							action="#{userController.cancelUpdateUser(p)}" immediate="true"
+							rendered="#{p.editable}">
+							<i class="fa fa-undo" />&#xa0;<h:outputText value="Dismiss" />
+						</h:commandLink>
+              &#xa0;
+              
+              
+				    </h:column>
 
 
-        <h:dataTable value="#{orgfitechController.persons}" var="p" 
-            styleClass="table-hover">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                <h:outputText value="#{p.id}" />
-            </h:column>
-
-            <!-- TODO rest of column headers -->
-            <h:column>
-                <f:facet name="header">First Name</f:facet>
-                <h:outputText value="#{p.firstName}" />
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Last Name</f:facet>
-                <h:outputText value="#{p.lastName}" />
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                <h:outputText value="#{p.email}" />
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Department</f:facet>
-                <h:outputText value="#{p.department}" />
-            </h:column>
-
-             <h:column>
-                <f:facet name="header">Access Level</f:facet>
-                <h:outputText value="#{p.accesslevel}" />
-            </h:column>
-            
-            
-            <!-- Action column -->
-            <h:column>
-                <f:facet name="header">#{uiconsts['columnLabel_Action']}</f:facet>
-                <!-- TODO: once the navigation to some new 'editEmployee' page is figured out, remove onclick handler, add action handler -->
-                <h:commandButton value="#{uiconsts['editButtonLabel']}"  
-                     />
+				</h:dataTable>
 
 
-                <!-- TODO: once deletion is actually implemented, remove (#{uiconsts.nyi}) -->
-                <h:commandButton     value="#{uiconsts['deleteButtonLabel']}"  
-                    onclick="if (!confirm('#{uiconsts.rus}')) return false"
-                    />
-            </h:column>
+			</h:form>
 
-            <f:facet name="caption">#{uiconsts['listCaption']}</f:facet>
-        </h:dataTable>
-    </h:form>
-	
+
+		</div>
+	</div>
+
+
+
+
 </h:body>
 </html>
