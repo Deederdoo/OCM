@@ -14,8 +14,8 @@ import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.orgfitech.dao.PersonDao;
-import com.orgfitech.model.PersonDTO;
+import com.orgfitech.dao.UserDao;
+import com.orgfitech.model.UserDTO;
 
 @Named("orgfitechController")
 @ApplicationScoped
@@ -25,42 +25,42 @@ public class OrgfitechController implements Serializable {
 	@Inject
 	protected ExternalContext externalContext;
 
-	protected PersonDao personDao;
+	protected UserDao userDao;
 
-	protected List<PersonDTO> persons;
-
-	@Inject
-	protected PersonDTO person;
+	protected List<UserDTO> persons;
 
 	@Inject
-	public OrgfitechController(PersonDao personDao) {
-		this.personDao = personDao;
+	protected UserDTO person;
+
+	@Inject
+	public OrgfitechController(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
-	public List<PersonDTO> getPersons() {
+	public List<UserDTO> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(List<PersonDTO> persons) {
+	public void setPersons(List<UserDTO> persons) {
 		this.persons = persons;
 	}
 
-	public PersonDTO getPerson() {
+	public UserDTO getPerson() {
 		return person;
 	}
 
-	public void setPerson(PersonDTO person) {
+	public void setPerson(UserDTO person) {
 		this.person = person;
 	}
 
-	public void loadPersons() {
-		setPersons(personDao.readAllPerson());
-	}
-
-	public String displayAllUsers() {
-		loadPersons();
-		return "users";
-	}
+//	public void loadPersons() {
+//		setPersons(userDao.readAllPerson());
+//	}
+//
+//	public String displayAllUsers() {
+//		loadPersons();
+//		return "users";
+//	}
 
 	public String validateLogin() {
 
@@ -71,7 +71,7 @@ public class OrgfitechController implements Serializable {
 				return "mainpage";
 			} else {
 
-				persons = personDao.readAllPerson();
+				persons = userDao.readAllPerson();
 
 				for (int i = 0; i < persons.size(); i++) {
 					
