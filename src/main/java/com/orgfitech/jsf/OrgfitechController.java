@@ -53,9 +53,9 @@ public class OrgfitechController implements Serializable {
 		this.person = person;
 	}
 
-//	public void loadPersons() {
-//		setPersons(userDao.readAllPerson());
-//	}
+	public void loadUsers() {
+		setPersons(userDao.readAllPerson());
+	}
 //
 //	public String displayAllUsers() {
 //		loadPersons();
@@ -71,7 +71,7 @@ public class OrgfitechController implements Serializable {
 				return "mainpage";
 			} else {
 
-				persons = userDao.readAllPerson();
+				loadUsers();
 
 				for (int i = 0; i < persons.size(); i++) {
 					
