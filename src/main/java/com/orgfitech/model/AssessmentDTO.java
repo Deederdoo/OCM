@@ -99,10 +99,10 @@ public class AssessmentDTO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof PersonDTO)) {
+        if (!(obj instanceof UserDTO)) {
             return false;
         }
-        PersonDTO other = (PersonDTO) obj;
+        UserDTO other = (UserDTO) obj;
         if (assessmentID != other.id) {
             return false;
         }

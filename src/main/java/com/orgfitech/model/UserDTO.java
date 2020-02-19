@@ -11,9 +11,9 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-@Named("personDTO")
+@Named("userDTO")
 @ViewScoped
-public class PersonDTO implements Serializable {
+public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected int id;
@@ -23,6 +23,8 @@ public class PersonDTO implements Serializable {
     protected String department;
     protected String password;
     protected int accesslevel;
+    
+    protected boolean editable;
     //protected int accessstate;
     //protected int accessflag;
     
@@ -85,7 +87,24 @@ public class PersonDTO implements Serializable {
     
     public void setAccesslevel(int accesslevel) {
         this.accesslevel = accesslevel;
-    } 
+    }
+    
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+    
+    public void resetPerson() {
+        this.firstName = "";
+        this.lastName = "";
+        this.email ="";
+        this.department="";
+        this.password="";
+        this.accesslevel=0;
+    }
     
    // public int getAccessstate() {
       //  return accessstate;
@@ -118,10 +137,10 @@ public class PersonDTO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof PersonDTO)) {
+        if (!(obj instanceof UserDTO)) {
             return false;
         }
-        PersonDTO other = (PersonDTO) obj;
+        UserDTO other = (UserDTO) obj;
         if (id != other.id) {
             return false;
         }
