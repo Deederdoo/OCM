@@ -40,6 +40,6 @@ public class FactorResultController implements Serializable {
     }
     
     public void loadFactorResult(int userID) {
-        setFactorResults(FactorResultDao.readFactorResult(userID));
+        setFactorResults(FactorResultDao.readFactorResultByUserId(userID));
     }
 }
