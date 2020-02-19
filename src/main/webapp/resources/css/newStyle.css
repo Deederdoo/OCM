@@ -35,6 +35,13 @@ background-color: #4e42ad;
 
 #image{
 	border: 0;
+	width: 25%;
+	height: 25%;
+	opacity: 0.5;
+	display: block;
+ 	margin-left: 40%;
+  	margin-right: auto;
+  	margin-top: 5%;
 }
 
 #companyName{
