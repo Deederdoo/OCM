@@ -35,19 +35,19 @@
 		<h:form>
 			<h:outputLabel  for="username">Username:    </h:outputLabel>
 			<h:inputText type="Text"
-				value="#{orgfitechController.person.firstName}" id="username"
-				name="firstName" />
+				value="#{userDTO.email}" id="username"
+				name="email" />
 
 <br />
 <br />
 			<h:outputLabel for="password"> Password: </h:outputLabel>
 			<h:inputText type="Text"
-				value="#{orgfitechController.person.password}" id="password"></h:inputText>
+				value="#{userDTO.password}" id="password"></h:inputText>
 <br></br>
 <br></br>
 			<div id="lower">
 				<h:commandButton  id="Button" value="Login"
-					action="#{orgfitechController.validateLogin}" />
+					action="#{loginController.validateLogin(userDTO.email, userDTO.password)}" />
 			</div>
 
 		</h:form>

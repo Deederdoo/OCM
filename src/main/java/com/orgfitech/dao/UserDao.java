@@ -16,34 +16,42 @@ import com.orgfitech.model.UserDTO;
  */
 public interface UserDao {
 
-	public List<UserDTO> readAllPerson();
 
-	/**
-	 * createEmployee method
-	 * 
-	 * @param employee
-	 */
-	public UserDTO createUser(String firstname, String lastname, String email, String department, String password);
+    public boolean validateLogin1(String user, String password);
 
-	/**
-	 * readEmployee method
-	 * 
-	 * @param employeeId
-	 */
-	// public PersonDTO readUserById(int userId);
+    public boolean validateLogin2(String user, String password);
 
-	/**
-	 * updateEmployee method
-	 * 
-	 * @param employee
-	 */
-	public void updateUser(UserDTO user);
 
-	/**
-	 * deleteEmployee method
-	 * 
-	 * @param employeeId
-	 */
-	public void deleteUserById(int userId);
+    public List<UserDTO> readAllPerson();
+
+    /**
+     * createEmployee method
+     * 
+     * @param employee
+     */
+    public UserDTO createUser(String firstname, String lastname, String email, String department, String password);
+
+    /**
+     * readEmployee method
+     * 
+     * @param employeeId
+     */
+    // public PersonDTO readUserById(int userId);
+
+    /**
+     * updateEmployee method
+     * 
+     * @param employee
+     */
+    public void updateUser(UserDTO user);
+
+    /**
+     * deleteEmployee method
+     * 
+     * @param employeeId
+     */
+    public void deleteUserById(int userId);
+
+
 
 }
