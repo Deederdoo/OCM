@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 
 import com.orgfitech.dao.FactorResultDao;
 import com.orgfitech.model.FactorResultDTO;
@@ -31,6 +32,10 @@ public class FactorResultController implements Serializable {
         this.FactorResultDao = FactorResultDao;
     }
     
+    private void logMsg(String msg) {
+        ((ServletContext)externalContext.getContext()).log(getClass().getSimpleName()+msg);
+    }
+    
     public List<FactorResultDTO> getFactorResults() {
         return FactorResults;
     }
@@ -39,7 +44,10 @@ public class FactorResultController implements Serializable {
         this.FactorResults = FactorResults;
     }
     
-    public void loadFactorResult(int userID) {
-        setFactorResults(FactorResultDao.readFactorResultByUserId(userID));
+    public String loadFactorResult(String loginEmail) {
+        //setFactorResults(FactorResultDao.readFactorResultByUserId(userID));
+        logMsg("loginEmail " + loginEmail + " login.");
+        FactorResultDao.readFactorResultByLoginEmail(loginEmail);
+        return null;
     }
 }

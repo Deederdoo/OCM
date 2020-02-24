@@ -6,5 +6,5 @@ import com.orgfitech.model.FactorResultDTO;
 
 public interface FactorResultDao {
 
-    public List<FactorResultDTO> readFactorResultByUserId(int userID);
+    public List<FactorResultDTO> readFactorResultByLoginEmail(String email);
 }

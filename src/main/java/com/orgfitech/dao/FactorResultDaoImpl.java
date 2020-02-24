@@ -10,6 +10,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import com.orgfitech.model.FactorDefaultDTO;
@@ -18,8 +20,11 @@ import com.orgfitech.model.FactorResultDTO;
 public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     private static final long serialVersionUID = 1L;
 
+    protected ServletContext sc;
+    
     private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
-    private static final String READ_FACTOR_RESULT_BY_USER_ID = "select * from FACTOR_ANSWER where UserID='";
+    private static final String READ_FACTOR_RESULT_BY_USER_ID = "select * from FACTOR_ANSWER where UserID=?";
+    private static final String FIND_USER_ID_BY_EMAIL = "select * from PERSON where Email=?";
     private static final String INSERT_FACTOR_RESULT =
             "INSERT INTO FACTOR_RESULT (UserID, SurveyID, FactorRank, FactorPCM, FactorID) "
             + "VALUES (?,?,?,?,?);";
@@ -27,16 +32,28 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     protected DataSource assDS;
     protected Connection conn;
     protected PreparedStatement readFactorResultByUserIdPstmt;
+    protected PreparedStatement findUserIdByEmailPstmt;
     protected PreparedStatement createFactorResultPstmt;
+    
+    @Inject
+    public FactorResultDaoImpl(ServletContext sc) {
+        super();
+        this.sc = sc;
+    }
+    
+    private void myLog(String log) {
+        sc.log(getClass().getSimpleName()+log);
+    }
     
     @PostConstruct
     protected void buildConnectionAndStatements() {
         try {
             conn = assDS.getConnection();
+            findUserIdByEmailPstmt = conn.prepareStatement(FIND_USER_ID_BY_EMAIL);
+            readFactorResultByUserIdPstmt = conn.prepareStatement(READ_FACTOR_RESULT_BY_USER_ID);
             createFactorResultPstmt = conn.prepareStatement(INSERT_FACTOR_RESULT);
         } catch (Exception e) {
-            System.out.println("TEST: " + readFactorResultByUserIdPstmt);
-            System.out.println("something went wrong getting connection from database: ");
+            myLog("something went wrong getting connection from database: ");
             e.printStackTrace();
         }
     }
@@ -45,34 +62,46 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     protected void closeConnectionAndStatements() {
         try {
             createFactorResultPstmt.close();
+            findUserIdByEmailPstmt.close();
+            readFactorResultByUserIdPstmt.close();
             conn.close();
         } catch (Exception e) {
-            System.out.println("something went wrong getting connection from database: ");
+            myLog("something went wrong getting connection from database: ");
         }
     }
     
     @Override
-    public List<FactorResultDTO> readFactorResultByUserId(int userId) {
+    public List<FactorResultDTO> readFactorResultByLoginEmail(String email) {
         List<FactorResultDTO> factorResultDto = new ArrayList<>();
         
         try {
-            readFactorResultByUserIdPstmt = conn.prepareStatement(READ_FACTOR_RESULT_BY_USER_ID+userId+"'");
-            ResultSet rs = readFactorResultByUserIdPstmt.executeQuery();
-            while (rs.next()) {
+            int userId;
+            findUserIdByEmailPstmt.setString(1, email);
+            ResultSet rsFindUser = findUserIdByEmailPstmt.executeQuery();
+            if (rsFindUser.next()) {
+                myLog("rsFindUser: "+rsFindUser.toString());
+                userId = rsFindUser.getInt("UserID");
+            } else {
+                myLog("Cannot find user via email "+email);
+                return null;
+            }
+            
+            readFactorResultByUserIdPstmt.setInt(1, userId);
+            ResultSet rsFactorResult = readFactorResultByUserIdPstmt.executeQuery();
+            while (rsFactorResult.next()) {
+                myLog("rsFactorResult: "+rsFactorResult.toString());
                 FactorResultDTO newFactorResult = new FactorResultDTO();
-                newFactorResult.setFactorAnswerID(rs.getInt("FactorAnswerID"));
-                newFactorResult.setUserID(rs.getInt("UserID"));
-                newFactorResult.setSurveyID(rs.getInt("surveyID"));
-                newFactorResult.setFactorRank(rs.getInt("factorRank"));
-                newFactorResult.setFactorPCM(rs.getInt("factorPCM"));
-                newFactorResult.setFactorID(rs.getInt("factorID"));
+                newFactorResult.setFactorAnswerID(rsFactorResult.getInt("FactorAnswerID"));
+                newFactorResult.setUserID(rsFactorResult.getInt("UserID"));
+                newFactorResult.setSurveyID(rsFactorResult.getInt("surveyID"));
+                newFactorResult.setFactorRank(rsFactorResult.getInt("factorRank"));
+                newFactorResult.setFactorPCM(rsFactorResult.getInt("factorPCM"));
+                newFactorResult.setFactorID(rsFactorResult.getInt("factorID"));
 
                 factorResultDto.add(newFactorResult);
             }
-            readFactorResultByUserIdPstmt.close();
         } catch (Exception e) {
-            System.out.println("TEST: " + readFactorResultByUserIdPstmt);
-            System.out.println("something went wrong getting connection from database: ");
+            myLog("something went wrong getting connection from database: ");
             e.printStackTrace();
         }
 
