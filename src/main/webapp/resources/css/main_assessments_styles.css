@@ -1,0 +1,46 @@
+html {
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+
+table {
+	border: solid 1px #DDEEEE;
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: auto;
+	width: 70%;
+	margin: 0 auto;
+}
+
+table td {
+	text-align: center;
+	height: 35px;
+	border: solid 1px #DDEEEE;
+}
+
+table th {
+	border: solid 1px black;
+	background-color: #dadada;
+}
+
+table tr:nth-child(even) {
+	background: #f2f2f2;
+}
+
+table tr {
+	background-color: #ffffff;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: #c9c9c9;
+}
+
+#foot {
+	position: fixed;
+	bottom: 5%;
+	right: 8%;
+	font-family: "Cairo Regular", sans-serif;
+	font-size: 16px;
+	color: white;
+}
