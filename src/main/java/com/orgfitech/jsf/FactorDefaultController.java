@@ -1,6 +1,7 @@
 package com.orgfitech.jsf;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -15,6 +16,8 @@ import com.orgfitech.model.FactorDefaultDTO;
 @ApplicationScoped
 public class FactorDefaultController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	protected String details;
 	
 	@Inject
 	protected ExternalContext externalContext;
@@ -39,12 +42,34 @@ public class FactorDefaultController implements Serializable {
 		this.factorDefaults = factorDefaults;
 	}
 	
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	
+	public String getDetails() {
+		return details;
+	}
+	
 	public void loadDefaultFactors() {
+		
 		setFactorDefaults(factorDefaultDao.readAllDefaultFactors());
 	}
 	
 	public String createQuestionFactors() {
 		loadDefaultFactors();
 		return "create_factors";
+	}
+	
+	public String addFactor() {
+		
+		FactorDefaultDTO fac = new FactorDefaultDTO();
+		
+		fac.setFactorID(factorDefaults.size() + 1);
+		fac.setDetails(this.details);
+		
+		factorDefaults.add(fac);
+		setDetails(null);
+		
+		return null;
 	}
 }
