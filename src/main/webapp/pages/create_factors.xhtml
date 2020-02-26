@@ -7,62 +7,92 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-	<f:metadata>
-	
-	<f:viewAction action="#{factorDefaultController.loadDefaultFactors}" phase="UPDATE_MODEL_VALUES" />
-	
-	</f:metadata>
+<f:metadata>
 
-  <h:head>
+	<f:viewAction action="#{factorDefaultController.loadDefaultFactors}"
+		phase="UPDATE_MODEL_VALUES" />
 
-    <style>
-    	h2 {
-    	  text-align: center;
-    	}
-    
-        table {
-          border: solid 1px #DDEEEE;
-          border-collapse: collapse;
-          border-spacing: 0;
-          table-layout: auto;
-          width: 70%;
-          margin: 0 auto;
-        }
-        table td {
-          border: solid 1px #DDEEEE;
-        }
-        table th {
-          border: solid 1px black;
-          background-color: #d8d8d8;
-        }
-        table tr:nth-child(even) {
-          background: #f2f2f2;
-        }
-        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-          background-color: #f0f0e0;
-        }
-        caption {
-          white-space: nowrap;
-          caption-side: bottom;
-        }
-    </style>
-  </h:head>
-  <h:body style="background-color:#42A7AD;">
-    <br />
-    <h2>Factors</h2>
-    
-    <h:form>
-      <h:dataTable value="#{factorDefaultController.factorDefaults}" var="fac" styleClass="table-hover">
-        <h:column>
-          <h:inputText value="#{fac.details}" style="display:block;width:100%;"/>
-        </h:column>
-      </h:dataTable>
-      
-      	<br />
-      	<h:inputText value="Assessment Name..." var="name"/>
-      	<h:commandButton id="submit" value="Submit" action="#{questionDefaultController.createDefaultQuestions}">
-      	</h:commandButton>
-      </h:form>
-      
-  </h:body>
+</f:metadata>
+
+<h:head>
+
+	<style>
+html {
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0; table-layout : auto;
+	width: 45%;
+	margin: 0 auto;
+	table-layout: auto;
+}
+
+tr {
+	padding-bottom: 5px;
+}
+
+input[type=Text] {
+	border-radius: 2px 25px;
+	padding: 16px;
+	width: 75%;
+	height: 5%;
+}
+
+input[type=submit] {
+	background-color: #42a7ad;
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 24px;
+	border-radius: 26px;
+	padding: 10px 32px;
+	border: 0px;
+	float: right;
+}
+
+input[type=submit]:hover {
+	background-color: #4e42ad;
+}
+
+</style>
+</h:head>
+<h:body>
+	<br />
+	<h2>Factors</h2>
+
+	<h:form>
+		
+		<h:inputText type="text" value="Assessment Name..." var="name" />
+		<h:commandButton id="submit" value="Submit"
+			action="#{questionDefaultController.createDefaultQuestions}">
+		</h:commandButton>
+		<br />
+		<br />
+
+		<h:dataTable value="#{factorDefaultController.factorDefaults}"
+			var="fac" styleClass="table-hover">
+			<h:column>
+				<h:outputText type="text" value="Factor #{fac.factorID}:" />
+			</h:column>	
+			<f:facet name="header">Must have between 3-10 factors</f:facet>
+			<h:column>
+				<h:inputText type="text" value="#{fac.details}" />
+			</h:column>	
+		</h:dataTable>
+		
+		<table>
+			<tr>
+    			<td>Add new Factor: </td>
+    			<td><h:inputText size="100" value="#{factorDefaultController.details}" /></td>
+    		</tr>
+		</table>
+    		
+		<h:commandButton value="Add" action="#{factorDefaultController.addFactor()}" />
+
+	</h:form>
+
+</h:body>
 </html>
