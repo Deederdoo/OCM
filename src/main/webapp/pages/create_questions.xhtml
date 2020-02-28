@@ -63,67 +63,80 @@ input[type=submit]:hover {
 <h:body>
 	<br />
 	<h2>Questions</h2>
-	<h:dataTable value="#{questionDefaultController.questionDefaults}"
-		var="ass" styleClass="table-hover">
-		<h:column>
-			<h:inputText value="#{ass.details}" style="display:block;width:100%;" />
-		</h:column>
-	</h:dataTable>
-	
 	<br />
 	<h:form>
 	
 		<table>
 		
-			<tr><td>Factor 1: </td><td><h:outputText value="#{questionDefaultController.fac[0].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[0]}">
+				<tr><td>Factor 1: </td><td><h:outputText value="#{questionDefaultController.fac[0].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 2: </td><td><h:outputText value="#{questionDefaultController.fac[1].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[1]}">
+				<tr><td>Factor 2: </td><td><h:outputText value="#{questionDefaultController.fac[1].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 3: </td><td><h:outputText value="#{questionDefaultController.fac[2].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[2]}">
+				<tr><td>Factor 3: </td><td><h:outputText value="#{questionDefaultController.fac[2].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 4: </td><td><h:outputText value="#{questionDefaultController.fac[3].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[3]}">
+				<tr><td>Factor 4: </td><td><h:outputText value="#{questionDefaultController.fac[3].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 5: </td><td><h:outputText value="#{questionDefaultController.fac[4].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[4]}">
+				<tr><td>Factor 5: </td><td><h:outputText value="#{questionDefaultController.fac[4].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 6: </td><td><h:outputText value="#{questionDefaultController.fac[5].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[5]}">
+				<tr><td>Factor 6: </td><td><h:outputText value="#{questionDefaultController.fac[5].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 7: </td><td><h:outputText value="#{questionDefaultController.fac[6].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[6]}">
+				<tr><td>Factor 7: </td><td><h:outputText value="#{questionDefaultController.fac[6].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 8: </td><td><h:outputText value="#{questionDefaultController.fac[7].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[7]}">
+				<tr><td>Factor 8: </td><td><h:outputText value="#{questionDefaultController.fac[7].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 9: </td><td><h:outputText value="#{questionDefaultController.fac[8].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[8]}">
+				<tr><td>Factor 9: </td><td><h:outputText value="#{questionDefaultController.fac[8].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
-			<tr><td>Factor 10: </td><td><h:outputText value="#{questionDefaultController.fac[9].getDetails()}"/></td></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
+			<ui:fragment rendered="#{questionDefaultController.boolarray[9]}">
+				<tr><td>Factor 10: </td><td><h:outputText value="#{questionDefaultController.fac[9].getDetails()}"/></td></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+			</ui:fragment>
 			
 		</table>
 	

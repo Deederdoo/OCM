@@ -74,86 +74,12 @@ public class QuestionDefaultController implements Serializable {
 			boolarray[i] = true;
 		}
 	}
-	
-	//Setters and Getters for displaying the factors and questions--------------------------------------------------------------------------------
 
-	public boolean isFacQues1() {
-		return facQues1;
+	public boolean[] getBoolarray() {
+		return boolarray;
 	}
 
-	public void setFacQues1(boolean facQues1) {
-		this.facQues1 = facQues1;
-	}
-
-	public boolean isFacQues2() {
-		return facQues2;
-	}
-
-	public void setFacQues2(boolean facQues2) {
-		this.facQues2 = facQues2;
-	}
-
-	public boolean isFacQues3() {
-		return facQues3;
-	}
-
-	public void setFacQues3(boolean facQues3) {
-		this.facQues3 = facQues3;
-	}
-
-	public boolean isFacQues4() {
-		return facQues4;
-	}
-
-	public void setFacQues4(boolean facQues4) {
-		this.facQues4 = facQues4;
-	}
-
-	public boolean isFacQues5() {
-		return facQues5;
-	}
-
-	public void setFacQues5(boolean facQues5) {
-		this.facQues5 = facQues5;
-	}
-
-	public boolean isFacQues6() {
-		return facQues6;
-	}
-
-	public void setFacQues6(boolean facQues6) {
-		this.facQues6 = facQues6;
-	}
-
-	public boolean isFacQues7() {
-		return facQues7;
-	}
-
-	public void setFacQues7(boolean facQues7) {
-		this.facQues7 = facQues7;
-	}
-
-	public boolean isFacQues8() {
-		return facQues8;
-	}
-
-	public void setFacQues8(boolean facQues8) {
-		this.facQues8 = facQues8;
-	}
-
-	public boolean isFacQues9() {
-		return facQues9;
-	}
-
-	public void setFacQues9(boolean facQues9) {
-		this.facQues9 = facQues9;
-	}
-
-	public boolean isFacQues10() {
-		return facQues10;
-	}
-
-	public void setFacQues10(boolean facQues10) {
-		this.facQues10 = facQues10;
+	public void setBoolarray(boolean[] boolarray) {
+		this.boolarray = boolarray;
 	}
 }
