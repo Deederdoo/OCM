@@ -50,7 +50,6 @@ input[type=submit] {
 	border-radius: 26px;
 	padding: 10px 32px;
 	border: 0px;
-	float: right;
 }
 
 input[type=submit]:hover {
@@ -65,14 +64,16 @@ input[type=submit]:hover {
 
 	<h:form>
 		
-		<h:inputText type="text" value="Assessment Name..." var="name" />
+		<h:outputText type="text" value="Assessment Name: "/>
+		<h:inputText type="text" value="#{assessmentController.assName}" var="name" />
 		<h:commandButton id="submit" value="Submit"
-			action="#{questionDefaultController.createDefaultQuestions}">
+			action="#{questionDefaultController.createDefaultQuestions}" >
+			<f:actionListener binding="#{factorDefaultController.submitFactors()}"/>
 		</h:commandButton>
 		<br />
 		<br />
 
-		<h:dataTable value="#{factorDefaultController.factorDefaults}"
+		<h:dataTable id="facTable" value="#{factorDefaultController.factorDefaults}"
 			var="fac" styleClass="table-hover">
 			<h:column>
 				<h:outputText type="text" value="Factor #{fac.factorID}:" />
@@ -80,6 +81,9 @@ input[type=submit]:hover {
 			<f:facet name="header">Must have between 3-10 factors</f:facet>
 			<h:column>
 				<h:inputText type="text" value="#{fac.details}" />
+			</h:column>
+			<h:column>
+				<h:commandButton value ="Remove" title="remove" action="#{factorDefaultController.removeFactor(fac)}"/>
 			</h:column>	
 		</h:dataTable>
 		
@@ -87,10 +91,9 @@ input[type=submit]:hover {
 			<tr>
     			<td>Add new Factor: </td>
     			<td><h:inputText size="100" value="#{factorDefaultController.details}" /></td>
+    			<td><h:commandButton value="Add" action="#{factorDefaultController.addFactor()}" /></td>
     		</tr>
 		</table>
-    		
-		<h:commandButton value="Add" action="#{factorDefaultController.addFactor()}" />
 
 	</h:form>
 
