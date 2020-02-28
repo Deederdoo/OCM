@@ -1,8 +1,9 @@
 package com.orgfitech.jsf;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
@@ -18,6 +19,7 @@ public class FactorDefaultController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	protected String details;
+	public static Map<String, List<FactorDefaultDTO>> sizeMap;
 	
 	@Inject
 	protected ExternalContext externalContext;
@@ -60,15 +62,37 @@ public class FactorDefaultController implements Serializable {
 		return "create_factors";
 	}
 	
+	public void submitFactors() {
+		
+		sizeMap = new HashMap<String, List<FactorDefaultDTO>>();
+		
+		sizeMap.put("fdMap", factorDefaults);
+	}
+	
 	public String addFactor() {
 		
 		FactorDefaultDTO fac = new FactorDefaultDTO();
 		
-		fac.setFactorID(factorDefaults.size() + 1);
-		fac.setDetails(this.details);
+		if(factorDefaults.size() < 10) {
+			
+			fac.setFactorID(factorDefaults.size() + 1);
+			fac.setDetails(this.details);
+			
+			factorDefaults.add(fac);
+			setDetails(null);
+		}
 		
-		factorDefaults.add(fac);
-		setDetails(null);
+		return null;
+	}
+	
+	public String removeFactor(FactorDefaultDTO fd) {
+		
+		factorDefaults.remove(fd);
+		
+		for(int i = 0; i < factorDefaults.size(); i++) {
+			
+			factorDefaults.get(i).setFactorID(i + 1);
+		}
 		
 		return null;
 	}

@@ -17,6 +17,8 @@ import com.orgfitech.model.AssessmentDTO;
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	protected String assName;
+	
 	@Inject
 	protected ExternalContext externalContext;
 	
@@ -46,6 +48,16 @@ public class AssessmentController implements Serializable {
 	
 	public void setAssessment(AssessmentDTO assessment) {
 		this.assessment = assessment;
+	}
+	
+	public String getAssName() {
+		
+		return assName;
+	}
+	
+	public void setAssName(String assName) {
+		
+		this.assName = assName;
 	}
 	
 	public void loadAssessments() {
