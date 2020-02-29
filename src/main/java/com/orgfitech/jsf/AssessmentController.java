@@ -69,6 +69,13 @@ public class AssessmentController implements Serializable {
 		return "main_assessments";
 	}
 	
+	public int getAssIdByName(String name) {
+		
+		int id = assessmentDao.getIdByName(name);
+		
+		return id;
+	}
+	
 	public String createAssessment(String assessmentName, boolean isLegacy, double avgPCM) {
 		
 		assessment = new AssessmentDTO();

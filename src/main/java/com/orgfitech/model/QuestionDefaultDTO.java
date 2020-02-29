@@ -28,8 +28,8 @@ public class QuestionDefaultDTO implements Serializable {
 		this.questionID = questionID;
 	}
 
-	public FactorDefaultDTO getFactorID() {
-		return factor;
+	public int getFactorID() {
+		return factor.getFactorID();
 	}
 
 	public void setFactorID(int factor) {
