@@ -25,12 +25,17 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String INSERT_ASSESSMENT =
     		"INSERT INTO EMPLOYEE (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
     		+ "VALUES (?,?,?,?);";
+	
+	private static final String GET_ID_BY_NAME = "SELECT id FROM survey "
+			+ "WHERE surveyname = (?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
 
 	protected Connection conn;
 
+	protected PreparedStatement readByNamePstmt;
+	
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
@@ -43,6 +48,9 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		try {
 
 			conn = assDS.getConnection();
+			
+			readByNamePstmt = conn.prepareStatement(GET_ID_BY_NAME);
+			
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
@@ -62,6 +70,8 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			readByNamePstmt.close();
+			
 			readAllPstmt.close();
 			// readByIdPstmt.close();
 			createPstmt.close();
@@ -72,6 +82,24 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
 		}
+	}
+	
+	public int getIdByName(String name) {
+		
+		int temp = -1;
+		
+		try {
+			readByNamePstmt.setString(0, name);
+			
+			ResultSet rs = readByNamePstmt.executeQuery();
+			temp = rs.getInt("surveyid");
+			rs.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return temp;
 	}
 
 	public List<AssessmentDTO> readAllAsessments() {
