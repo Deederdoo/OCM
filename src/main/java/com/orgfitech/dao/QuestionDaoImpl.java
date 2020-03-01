@@ -23,8 +23,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final String READ_ALL = "select * from question";
 	
 	private static final String INSERT_QUESTION =
-    		"INSERT INTO EMPLOYEE (FACTORID, DETAILS) "
-    		+ "VALUES (?,?);";
+    		"INSERT INTO QUESTION (SURVEYID, IDFAC, DETAILS) "
+    		+ "VALUES (?,?,?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource qDS;
@@ -84,7 +84,7 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			while (rs.next()) {
 				QuestionDTO newQ = new QuestionDTO();
 				newQ.setQuestionID(rs.getInt("questionid"));
-				newQ.setFactorID(rs.getInt("factorid"));
+				newQ.setFactorID(rs.getInt("idfac"));
 				newQ.setDetails(rs.getString("details"));
 
 				question.add(newQ);
@@ -102,18 +102,17 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 		return question;
 	}
 
-	public String createQuestion(QuestionDTO question) {
+	public void createQuestion(int quesId, QuestionDTO question) {
 
 		try {
-			createPstmt.setInt(1, question.getFactorID());
-			createPstmt.setString(2, question.getDetails());
+			createPstmt.setInt(1, quesId);
+			createPstmt.setInt(2, question.getFactorID());
+			createPstmt.setString(3, question.getDetails());
 			createPstmt.execute();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return "";
 	}
 
 }

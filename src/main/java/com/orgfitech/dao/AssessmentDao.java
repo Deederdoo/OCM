@@ -10,5 +10,5 @@ public interface AssessmentDao {
 	
 	public List<AssessmentDTO> readAllAsessments();
 	
-	public String createAssessment(AssessmentDTO assessment);
+	public void createAssessment(AssessmentDTO assessment);
 }

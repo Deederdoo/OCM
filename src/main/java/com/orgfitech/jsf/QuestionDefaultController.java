@@ -2,13 +2,17 @@ package com.orgfitech.jsf;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.orgfitech.dao.AssessmentDao;
+import com.orgfitech.dao.QuestionDao;
 import com.orgfitech.dao.QuestionDefaultDao;
 import com.orgfitech.model.FactorDefaultDTO;
 import com.orgfitech.model.QuestionDefaultDTO;
@@ -17,6 +21,8 @@ import com.orgfitech.model.QuestionDefaultDTO;
 @ApplicationScoped
 public class QuestionDefaultController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static Map<String, List<List<QuestionDefaultDTO>>> questionsMap;
 	
 	protected boolean facQues1, facQues2, facQues3, facQues4, facQues5, facQues6, facQues7, facQues8, facQues9, facQues10 = false;
 	protected boolean[] boolarray = {facQues1, facQues2, facQues3, facQues4, facQues5
@@ -63,7 +69,7 @@ public class QuestionDefaultController implements Serializable {
 	public String createDefaultQuestions() {
 		loadDefaultQuestions();
 		toggleBoxes();
-		return "create_questions";
+		return "create_questions?faces-redirect=true";
 	}
 	
 	//gets the questions with the given factor ID
@@ -140,12 +146,57 @@ public class QuestionDefaultController implements Serializable {
 		}
 	}
 	
-	public void testSub() {
+	public void mapQuestions() {
 		
-//		for(int i = 0; i < q1.size(); i++) {
-//			
-//			System.out.println(q1.toString());
-//		}
+		questionsMap = new HashMap<>();
+		questionsMap.put("cleanedQuestions", emptyQuestionCleaner());
+	}
+	
+	public List<List<QuestionDefaultDTO>> emptyQuestionCleaner() {
+		
+		List<Integer> removeCount = new ArrayList<>();
+		List<List<QuestionDefaultDTO>> toClean = new ArrayList<>();
+		
+		toClean.add(q1);
+		toClean.add(q2);
+		toClean.add(q3);
+		toClean.add(q4);
+		toClean.add(q5);
+		toClean.add(q6);
+		toClean.add(q7);
+		toClean.add(q8);
+		toClean.add(q9);
+		toClean.add(q10);
+		
+		for(int i = 0; i < toClean.size(); i++) {
+			
+			try {
+				
+				for(int j = 0; j < toClean.get(i).size(); j++) {
+					
+					if(toClean.get(i).get(j).getDetails().equals(null) || toClean.get(i).get(j).getDetails().isEmpty()) {
+						
+						System.out.println("CLEANING...");
+						System.out.println(toClean.get(i).get(j));
+						
+						toClean.get(i).remove(j);
+					}
+				}
+				
+			}catch(NullPointerException e) {
+				
+				System.out.println("NULL AT I: " + i);
+				removeCount.add(i);
+			}
+		}
+		
+		for(int i = removeCount.size() - 1; i >= 0; i--) {
+			
+			System.out.println("REMOVED: " + removeCount.get(i));
+			toClean.remove(removeCount.get(i).intValue());
+		}
+		
+		return toClean;
 	}
 	
 	public void toggleBoxes() {
@@ -155,7 +206,7 @@ public class QuestionDefaultController implements Serializable {
 		for(int i = 0; i < fac.size(); i++) {
 			
 			boolarray[i] = true;
-			setQuestions(i);
+			setQuestions(i + 1);
 		}
 	}
 
@@ -166,6 +217,8 @@ public class QuestionDefaultController implements Serializable {
 	public void setBoolarray(boolean[] boolarray) {
 		this.boolarray = boolarray;
 	}
+	
+	
 	
 	//Getters and Setters for all the available questions--------------------------------
 

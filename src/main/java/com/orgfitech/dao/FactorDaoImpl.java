@@ -17,20 +17,20 @@ import com.orgfitech.model.FactorDTO;
 
 public class FactorDaoImpl implements FactorDao, Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
 	private static final String READ_ALL = "select * from factor";
 	
 	private static final String INSERT_FACTOR =
-    		"INSERT INTO EMPLOYEE (SURVEYID, DETAILS, AVGFACTORPCM) "
-    		+ "VALUES (?,?,?);";
+    		"INSERT INTO FACTOR (SURVEYID, IDFAC, DETAILS, AVGFACTORPCM) "
+    		+ "VALUES (?,?,?,?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
 
 	protected Connection conn;
-
+	
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
@@ -43,6 +43,7 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 		try {
 
 			conn = assDS.getConnection();
+			
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
@@ -82,7 +83,7 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 
 			while (rs.next()) {
 				FactorDTO newFac = new FactorDTO();
-				newFac.setFactorID(rs.getInt("factorid"));
+				newFac.setFactorID(rs.getInt("idfac"));
 				newFac.setAssessmentID(rs.getInt("surveyid"));
 				newFac.setDetails(rs.getString("details"));
 				newFac.setAvgFactorPCM(rs.getInt("avgfactorpcm"));
@@ -101,18 +102,17 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 		return facs;
 	}
 
-	public String createFactor(FactorDTO factor) {
-
+	public void createFactor(FactorDTO factor) {
+		
 		try {
 			createPstmt.setInt(1, factor.getAssessmentID());
-			createPstmt.setString(2, factor.getDetails());
-			createPstmt.setInt(3, factor.getAvgFactorPCM());
+			createPstmt.setInt(2, factor.getFactorID());
+			createPstmt.setString(3, factor.getDetails());
+			createPstmt.setInt(4, factor.getAvgFactorPCM());
 			createPstmt.execute();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return "";
 	}
 }

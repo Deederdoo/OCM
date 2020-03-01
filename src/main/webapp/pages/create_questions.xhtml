@@ -160,7 +160,11 @@ input[type=submit]:hover {
 			
 		</table>
 	
-		<h:commandButton value="Submit" action="#{questionDefaultController.testSub()}"/>
+		<h:commandButton value="Submit" action="#{questionController.createQuestion()}">
+			<f:actionListener binding="#{questionDefaultController.mapQuestions()}"/>
+			<f:actionListener binding="#{assessmentController.createAssessment()}"/>
+			<f:actionListener binding="#{factorController.createFactors()}"/>
+		</h:commandButton>
 	</h:form>
 
 </h:body>

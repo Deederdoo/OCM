@@ -59,7 +59,7 @@ public class FactorDefaultController implements Serializable {
 	
 	public String createQuestionFactors() {
 		loadDefaultFactors();
-		return "create_factors";
+		return "create_factors?faces-redirect=true";
 	}
 	
 	public void submitFactors() {
