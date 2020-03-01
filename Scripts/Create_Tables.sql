@@ -32,6 +32,7 @@ CREATE TABLE PERSON_SURVEY (
 );
 
 CREATE TABLE FACTOR (
+	IDFAC			int(10) NOT NULL,
     FactorID        int(10) NOT NULL AUTO_INCREMENT,
     SurveyID        int(10),
     Details         varchar(255),
@@ -41,6 +42,8 @@ CREATE TABLE FACTOR (
 );
 
 CREATE TABLE QUESTION (
+	IDFAC			int(10) NOT NULL,
+	SurveyID		int(10),
     QuestionID      int(10) NOT NULL AUTO_INCREMENT,
     FactorID        int(10),
     Details         varchar(255),

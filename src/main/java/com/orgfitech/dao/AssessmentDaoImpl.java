@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +25,11 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String READ_ALL = "select * from survey";
 	
 	private static final String INSERT_ASSESSMENT =
-    		"INSERT INTO EMPLOYEE (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
+    		"INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
     		+ "VALUES (?,?,?,?);";
 	
-	private static final String GET_ID_BY_NAME = "SELECT id FROM survey "
-			+ "WHERE surveyname = (?);";
+	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY "
+			+ "WHERE SURVEYNAME = (?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
@@ -86,17 +88,22 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	
 	public int getIdByName(String name) {
 		
+		System.out.println("GETNAMEID NAME: " + name);
+		
 		int temp = -1;
 		
 		try {
-			readByNamePstmt.setString(0, name);
+			readByNamePstmt.setString(1, name);
 			
 			ResultSet rs = readByNamePstmt.executeQuery();
+			while(rs.next()) {
 			temp = rs.getInt("surveyid");
+			}
 			rs.close();
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("IT BROKE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 		
 		return temp;
@@ -112,7 +119,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 				AssessmentDTO newAss = new AssessmentDTO();
 				newAss.setAssessmentID(rs.getInt("surveyid"));
 				newAss.setAssessmentName(rs.getString("surveyname"));
-				newAss.setDate(rs.getString("datecreated"));
+				newAss.setDate(rs.getDate("datecreated"));
 				newAss.setLegacy(rs.getBoolean("islegacy"));
 				newAss.setAvgPCM(rs.getDouble("avgpcm"));
 
@@ -130,11 +137,13 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		return assessments;
 	}
 	
-	public String createAssessment(AssessmentDTO assessment) {
+	public void createAssessment(AssessmentDTO assessment) {
+		
+		java.sql.Date sqlDate = new java.sql.Date(assessment.getDate().getTime());
 		
 		try {
 			createPstmt.setString(1, assessment.getAssessmentName());
-			createPstmt.setString(2, assessment.getDate());
+			createPstmt.setDate(2, sqlDate);
 			createPstmt.setBoolean(3, assessment.isLegacy());
 			createPstmt.setDouble(4, assessment.getAvgPCM());
 			createPstmt.execute();
@@ -142,7 +151,5 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		return "";
 	}
 }

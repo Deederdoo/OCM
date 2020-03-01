@@ -1,6 +1,7 @@
 package com.orgfitech.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -12,7 +13,7 @@ public class AssessmentDTO implements Serializable {
 
 	protected int assessmentID;
 	protected String assessmentName;
-	protected String date;
+	protected Date date;
 	protected boolean legacy;
 	protected double avgPCM;
 
@@ -61,14 +62,14 @@ public class AssessmentDTO implements Serializable {
 	/**
 	 * @return the date
 	 */
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
