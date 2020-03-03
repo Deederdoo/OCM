@@ -6,7 +6,9 @@ import com.orgfitech.model.AssessmentDTO;
 
 public interface AssessmentDao {
 
+	public int getIdByName(String name);
+	
 	public List<AssessmentDTO> readAllAsessments();
 	
-	public String createAssessment(AssessmentDTO assessment);
+	public void createAssessment(AssessmentDTO assessment);
 }

@@ -10,11 +10,21 @@ import javax.inject.Named;
 public class QuestionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private int assessmentId;
+	
 	private int questionID;
 	
-	private FactorDTO factor;
+	private int factorid;
 	
 	private String details;
+
+	public int getAssessmentId() {
+		return assessmentId;
+	}
+
+	public void setAssessmentId(int assessmentId) {
+		this.assessmentId = assessmentId;
+	}
 
 	public int getQuestionID() {
 		return questionID;
@@ -25,11 +35,11 @@ public class QuestionDTO implements Serializable {
 	}
 
 	public int getFactorID() {
-		return factor.getFactorID();
+		return factorid;
 	}
 
 	public void setFactorID(int factorid) {
-		this.factor.setFactorID(factorid);
+		this.factorid = factorid;
 	}
 
 	public String getDetails() {
@@ -43,6 +53,6 @@ public class QuestionDTO implements Serializable {
 	@Override
 	public String toString() {
 
-		return "Factor [QuestionID=" + questionID + ", FactorID=" + factor + ", Details=" + details + "]";
+		return "Factor [ "+ "AssessmentId=" + assessmentId + "QuestionID=" + questionID + ", FactorID=" + factorid + ", Details=" + details + "]";
 	}
 }

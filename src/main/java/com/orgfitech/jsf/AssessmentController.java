@@ -2,7 +2,9 @@ package com.orgfitech.jsf;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
@@ -16,6 +18,10 @@ import com.orgfitech.model.AssessmentDTO;
 @ApplicationScoped
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	protected String assName;
+	
+	public static Map<String, Integer> assIdMap;
 	
 	@Inject
 	protected ExternalContext externalContext;
@@ -48,6 +54,16 @@ public class AssessmentController implements Serializable {
 		this.assessment = assessment;
 	}
 	
+	public String getAssName() {
+		
+		return assName;
+	}
+	
+	public void setAssName(String assName) {
+		
+		this.assName = assName;
+	}
+	
 	public void loadAssessments() {
 		setAssessments(assessmentDao.readAllAsessments());
 	}
@@ -57,16 +73,25 @@ public class AssessmentController implements Serializable {
 		return "main_assessments";
 	}
 	
-	public String createAssessment(String assessmentName, boolean isLegacy, double avgPCM) {
+	public int getAssIdByName(String name) {
+		
+		int id = assessmentDao.getIdByName(name);
+		
+		return id;
+	}
+	
+	public void createAssessment() {
 		
 		assessment = new AssessmentDTO();
 		
-		assessment.setAssessmentName(assessmentName);
-		assessment.setDate(new Date().toString());
-		assessment.setLegacy(isLegacy);
-		assessment.setAvgPCM(avgPCM);
+		assessment.setAssessmentName(assName);
+		assessment.setDate(new Date());
+		assessment.setLegacy(false);
+		assessment.setAvgPCM(0);
 		assessmentDao.createAssessment(assessment);
 		
-		return "";
+		assIdMap = new HashMap<>();
+		assIdMap.clear();
+		assIdMap.put("assId", getAssIdByName(assName));
 	}
 }
