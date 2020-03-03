@@ -62,7 +62,7 @@
       <artifactId>weld-servlet-shaded</artifactId>
       <version>3.0.1.Final</version>
     </dependency>
-  
+
   </dependencies>
   
   

@@ -21,6 +21,7 @@ public class LoginController {
 
     protected UserDao userDao;
     protected UserDTO userDTO;
+    private String CurrentLoginUser;
     
     @Inject
     public LoginController(UserDao userDao) {
@@ -34,7 +35,7 @@ public class LoginController {
         boolean commonUser=userDao.validateLogin2(user, password);
         //adminUser = false;
        // commonUser = true;
-        
+        setCurrentLoginUser(user);
         if(adminUser) {
             return "mainpage";
         }
@@ -47,6 +48,17 @@ public class LoginController {
         
         
     }
+
+    public String getCurrentLoginUser() {
+        return CurrentLoginUser;
+    }
+
+
+    public void setCurrentLoginUser(String currentLoginUser) {
+        CurrentLoginUser = currentLoginUser;
+    }
+    
+    
 
 
 
