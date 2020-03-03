@@ -23,13 +23,11 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
 	private static final String READ_ALL = "select * from survey";
-	
-	private static final String INSERT_ASSESSMENT =
-    		"INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
-    		+ "VALUES (?,?,?,?);";
-	
-	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY "
-			+ "WHERE SURVEYNAME = (?);";
+
+	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
+			+ "VALUES (?,?,?,?);";
+
+	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
@@ -37,7 +35,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected Connection conn;
 
 	protected PreparedStatement readByNamePstmt;
-	
+
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
@@ -50,9 +48,9 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		try {
 
 			conn = assDS.getConnection();
-			
+
 			readByNamePstmt = conn.prepareStatement(GET_ID_BY_NAME);
-			
+
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
@@ -73,7 +71,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		try {
 
 			readByNamePstmt.close();
-			
+
 			readAllPstmt.close();
 			// readByIdPstmt.close();
 			createPstmt.close();
@@ -85,27 +83,27 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			System.out.println("something went wrong getting connection from database: ");
 		}
 	}
-	
+
 	public int getIdByName(String name) {
-		
+
 		System.out.println("GETNAMEID NAME: " + name);
-		
+
 		int temp = -1;
-		
+
 		try {
 			readByNamePstmt.setString(1, name);
-			
+
 			ResultSet rs = readByNamePstmt.executeQuery();
-			while(rs.next()) {
-			temp = rs.getInt("surveyid");
+			while (rs.next()) {
+				temp = rs.getInt("surveyid");
 			}
 			rs.close();
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("IT BROKE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("get id by name broke");
 		}
-		
+
 		return temp;
 	}
 
@@ -136,11 +134,11 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 		return assessments;
 	}
-	
+
 	public void createAssessment(AssessmentDTO assessment) {
-		
+
 		java.sql.Date sqlDate = new java.sql.Date(assessment.getDate().getTime());
-		
+
 		try {
 			createPstmt.setString(1, assessment.getAssessmentName());
 			createPstmt.setDate(2, sqlDate);
@@ -148,7 +146,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			createPstmt.setDouble(4, assessment.getAvgPCM());
 			createPstmt.execute();
 			
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

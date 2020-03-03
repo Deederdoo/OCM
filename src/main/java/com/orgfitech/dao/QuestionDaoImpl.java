@@ -109,7 +109,7 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			createPstmt.setInt(2, question.getFactorID());
 			createPstmt.setString(3, question.getDetails());
 			createPstmt.execute();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

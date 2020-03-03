@@ -65,12 +65,15 @@ input[type=submit]:hover {
 	<h:form>
 		
 		<h:outputText type="text" value="Assessment Name: "/>
-		<h:inputText type="text" value="#{assessmentController.assName}" var="name" />
+		<h:inputText id="assessment_name" type="text" value="#{assessmentController.assName}" var="name">
+			<f:validator validatorId="assessmentNameValidator"/>
+		</h:inputText>
 		<h:commandButton id="submit" value="Submit"
 			action="#{questionDefaultController.createDefaultQuestions}" >
 			<f:actionListener binding="#{factorDefaultController.submitFactors()}"/>
 		</h:commandButton>
 		<br />
+		<h:message for="assessment_name" style="color:red;" />
 		<br />
 
 		<h:dataTable id="facTable" value="#{factorDefaultController.factorDefaults}"
