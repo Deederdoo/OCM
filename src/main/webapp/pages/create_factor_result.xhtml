@@ -61,6 +61,8 @@
         <div id="main" role="main" class="main col-12">
 
             <h:form id="factortList">
+            <table>
+            <ui:fragment>
                 <h:dataTable id="factorTable" binding="#{table}"
                     value="#{factorController.factors}" var="f"
                     class="table table-hover table-bordered tableUpdated">
@@ -74,23 +76,30 @@
                         <f:facet name="header">Factor Detail</f:facet>
                         <h:outputText value="#{f.details}" />
                     </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Rank</f:facet>
+                        <h:inputText value="" />
+                    </h:column>
                 </h:dataTable>
-            
-            </h:form>
-
-            <h:form id="factortResultList">
+                </ui:fragment>
+                
+          <!--       <ui:fragment>
                 <h:dataTable id="factorResultTable" binding="#{table}"
                     value="#{factorResultController.factorResult}" var="r"
                     class="table table-hover table-bordered tableUpdated">
-
                     <h:column>
-                        <f:facet name="header">Factor Rank</f:facet>
-                        <h:outputText value="#{r.factorRank}" />
+                        <f:facet name="header">Rank</f:facet>
+                        <h:inputText value="#{r.factorRank}" />
                     </h:column>
-
                 </h:dataTable>
-            
+                </ui:fragment>
+                  -->
+            </table>
+            <h:commandButton value="Submit" action="#{factorResultController.createFactorResult(factorResultController.factorResult)}">
+            </h:commandButton>
             </h:form>
+
         </div>
  
     </div>

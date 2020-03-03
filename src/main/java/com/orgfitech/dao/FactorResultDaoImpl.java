@@ -27,7 +27,7 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     private static final String READ_FACTOR_RESULT_BY_USER_ID = "select * from FACTOR_ANSWER where UserID=?";
     private static final String FIND_USER_ID_BY_EMAIL = "select * from PERSON where Email=?";
     private static final String INSERT_FACTOR_RESULT =
-            "INSERT INTO FACTOR_RESULT (UserID, SurveyID, FactorRank, FactorPCM, FactorID) "
+            "INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) "
             + "VALUES (?,?,?,?,?);";
     @Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
     protected DataSource assDS;

@@ -47,4 +47,9 @@ public class FactorResultController implements Serializable {
         setFactorResult(factorResultDao.readFactorResultByLoginEmail(loginEmail));
         return "create_factor_result";
     }
+    
+    public String createFactorResult(List<FactorResultDTO> factorResult) {
+        logMsg(factorResult.toString());
+        return "";
+    }
 }
