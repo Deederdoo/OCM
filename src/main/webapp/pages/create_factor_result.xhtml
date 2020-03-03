@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<!-- view that supports full C-R-U-D for Employees without navigation to other pages -->
+
+<f:metadata>
+    <f:viewAction action="#{factorController.loadFactors()}"
+        phase="UPDATE_MODEL_VALUES" />
+        <f:viewAction action="#{factorResultController.loadFactorResult('tu@gmail.com')}"
+        phase="UPDATE_MODEL_VALUES" />
+</f:metadata>
+
+<h:head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- title of tab/window in browser -->
+    <title>#{uiconsts['viewTitle']}</title>
+    <!-- Bootstrap: Open source toolkit for developing front-end apps using HTML, CSS, and JS
+          load from its public CDN (Content Delivery Network) 
+          requires JQuery, Bootstrap's JS and Bootstrap's CSS
+    -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous" />
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous" />
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous" />
+    <link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+        rel="stylesheet" crossorigin="anonymous" />
+
+    <!-- misc style tweaks: table hover color (you can change/add to this if you like), make Id column smaller -->
+    <style>
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #f0f0e0;
+}
+</style>
+</h:head>
+
+
+<!-- view body  -->
+<h:body style="background-color:#00BFFF;">
+
+
+    <div class="container-fluid">
+
+        <div id="main" role="main" class="main col-12">
+
+            <h:form id="factortList">
+                <h:dataTable id="factorTable" binding="#{table}"
+                    value="#{factorController.factors}" var="f"
+                    class="table table-hover table-bordered tableUpdated">
+
+                    <h:column>
+                        <f:facet name="header">Factor ID</f:facet>
+                        <h:outputText value="#{f.factorID}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Factor Detail</f:facet>
+                        <h:outputText value="#{f.details}" />
+                    </h:column>
+                </h:dataTable>
+            
+            </h:form>
+
+            <h:form id="factortResultList">
+                <h:dataTable id="factorResultTable" binding="#{table}"
+                    value="#{factorResultController.factorResult}" var="r"
+                    class="table table-hover table-bordered tableUpdated">
+
+                    <h:column>
+                        <f:facet name="header">Factor Rank</f:facet>
+                        <h:outputText value="#{r.factorRank}" />
+                    </h:column>
+
+                </h:dataTable>
+            
+            </h:form>
+        </div>
+ 
+    </div>
+
+
+
+
+</h:body>
+</html>
