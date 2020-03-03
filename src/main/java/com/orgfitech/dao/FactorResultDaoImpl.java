@@ -16,12 +16,13 @@ import javax.sql.DataSource;
 
 import com.orgfitech.model.FactorDefaultDTO;
 import com.orgfitech.model.FactorResultDTO;
+import com.orgfitech.model.UserDTO;
 
 public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     private static final long serialVersionUID = 1L;
 
     protected ServletContext sc;
-    
+
     private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
     private static final String READ_FACTOR_RESULT_BY_USER_ID = "select * from FACTOR_ANSWER where UserID=?";
     private static final String FIND_USER_ID_BY_EMAIL = "select * from PERSON where Email=?";
@@ -42,7 +43,7 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     }
     
     private void myLog(String log) {
-        sc.log(getClass().getSimpleName()+log);
+        sc.log(getClass().getSimpleName()+":"+log);
     }
     
     @PostConstruct
@@ -79,8 +80,8 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
             findUserIdByEmailPstmt.setString(1, email);
             ResultSet rsFindUser = findUserIdByEmailPstmt.executeQuery();
             if (rsFindUser.next()) {
-                myLog("rsFindUser: "+rsFindUser.toString());
                 userId = rsFindUser.getInt("UserID");
+                myLog("rsFindUser: "+userId);
             } else {
                 myLog("Cannot find user via email "+email);
                 return null;
@@ -89,7 +90,7 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
             readFactorResultByUserIdPstmt.setInt(1, userId);
             ResultSet rsFactorResult = readFactorResultByUserIdPstmt.executeQuery();
             while (rsFactorResult.next()) {
-                myLog("rsFactorResult: "+rsFactorResult.toString());
+               
                 FactorResultDTO newFactorResult = new FactorResultDTO();
                 newFactorResult.setFactorAnswerID(rsFactorResult.getInt("FactorAnswerID"));
                 newFactorResult.setUserID(rsFactorResult.getInt("UserID"));
@@ -100,6 +101,7 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
 
                 factorResultDto.add(newFactorResult);
             }
+            myLog("rsFactorResult: "+factorResultDto.toString());
         } catch (Exception e) {
             myLog("something went wrong getting connection from database: ");
             e.printStackTrace();
