@@ -9,6 +9,7 @@ CREATE TABLE SURVEY (
     AvgPCM          int(10),
     CONSTRAINT surveyid_pk PRIMARY KEY (SurveyID)
 );
+INSERT INTO SURVEY (SurveyName, IsLegacy, AvgPCM) VALUES ('Survey-1','1', 100);
 
 CREATE TABLE PERSON(
     UserID          int(10) NOT NULL AUTO_INCREMENT,
@@ -50,6 +51,7 @@ CREATE TABLE QUESTION (
     CONSTRAINT assess_questionid_pk PRIMARY KEY (QuestionID),
     CONSTRAINT assess_factor_fk FOREIGN KEY (FactorID) REFERENCES FACTOR(FactorID) ON DELETE CASCADE
 );
+INSERT INTO QUESTION (FactorID, Details) VALUES ('3', 'Question-1');
 
 CREATE TABLE FACTOR_ANSWER (
     FactorAnswerID  int(10) NOT NULL AUTO_INCREMENT,
@@ -63,6 +65,17 @@ CREATE TABLE FACTOR_ANSWER (
     CONSTRAINT fk_surveyid FOREIGN KEY (SurveyID) REFERENCES SURVEY(SurveyID) ON DELETE CASCADE,
     CONSTRAINT fk_factorid FOREIGN KEY (FactorID) REFERENCES FACTOR(FactorID) ON DELETE CASCADE
 );
+
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '1', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '2', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '3', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '4', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '5', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '6', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '7', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '8', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '9', '1', '0', '1');
+INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) VALUES ('2', '10', '1', '0', '1');
 
 CREATE TABLE QUESTION_ANSWER (
     QuestionAnswerID    int(10) NOT NULL AUTO_INCREMENT,
@@ -106,6 +119,14 @@ INSERT INTO FACTOR_DEFAULT (FactorDefaultID, Details) VALUES ('4', 'Is a balance
 INSERT INTO FACTOR_DEFAULT (FactorDefaultID, Details) VALUES ('5', 'How business decisions are made');
 INSERT INTO FACTOR_DEFAULT (FactorDefaultID, Details) VALUES ('6', 'The compensation meets my requirements');
 INSERT INTO FACTOR_DEFAULT (FactorDefaultID, Details) VALUES ('7', 'How leaders behave is important to this organization');
+
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','How career development decisions are made','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','Does the organization encourage creativity','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','How flexible the organization is in the way one works','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','Is a balanced work and personal life valued here','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','How business decisions are made','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','The compensation meets my requirements','0');
+INSERT INTO FACTOR (SurveyID, Details, AvgFactorPCM) VALUES ('1','How leaders behave is important to this organization','0');
 
 INSERT INTO QUESTION_DEFAULT (QuestionDefaultID, FactorDefaultID, Details) VALUES ('1', '1', 'Do you believe decisions on your career development are easily accessible, or made by your immediate manager?');
 INSERT INTO QUESTION_DEFAULT (QuestionDefaultID, FactorDefaultID, Details) VALUES ('2', '1', 'Do you feel you have sufficient input on your career decisions?');
