@@ -22,16 +22,12 @@ public class assessmentNameValidator implements Validator<String>{
 		 * Pull assessment name from db to compare
 		 * 
 		 * */
-		System.out.println("VAL:1");
 		if(AssessmentController.assNameMap != null) {
 			
-			System.out.println("VAL:2");
 			for(int i = 0; i < AssessmentController.assNameMap.size(); i++) {
 				
-				System.out.println("VAL:3 " + i);
 				if(value.equals(AssessmentController.assNameMap.get(i))) {
 					
-					System.out.println("VAL:4");
 					msg = new FacesMessage("Assessment Name Already Exists");
 					
 					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -39,8 +35,6 @@ public class assessmentNameValidator implements Validator<String>{
 					throw new ValidatorException(msg);
 				}
 			}
-			
-			System.out.println("VAL:5");
 		}
 	}
 

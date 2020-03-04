@@ -71,24 +71,19 @@ public class AssessmentController implements Serializable {
 		
 		if(assNameMap != null) {
 			
-			System.out.println("HERE:1");
 			assNameMap.clear();
 		}
 		
 		if(assessments != null && !assessments.isEmpty() && assessments.size() > 0) {
-			System.out.println("HERE:2");
-			System.out.println("ASSSIZE: " + assessments.size());
+			
 			assNameMap = new HashMap<>();
 		
 			// Loads the assessment name to later compare in validator
 			for (int i = 0; i < assessments.size(); i++) {
-
-				System.out.println("ASSTEST: " + i + ", " + assessments.get(i).getAssessmentName());
+				
 				assNameMap.put(i, assessments.get(i).getAssessmentName());
 			}
 		}
-		
-		System.out.println("HERE:3");
 	}
 
 	public String displayAssessments() {
