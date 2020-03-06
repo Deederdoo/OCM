@@ -1,8 +1,6 @@
 package com.orgfitech.jsf;
 
-import java.util.List;
-
-import javax.enterprise.context.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +9,7 @@ import com.orgfitech.dao.UserDao;
 import com.orgfitech.model.UserDTO;
 
 @Named("loginController")
-@ApplicationScoped
+@ViewScoped
 public class LoginController {
 
     private static final long serialVersionUID = 1L;

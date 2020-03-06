@@ -3,7 +3,6 @@ package com.orgfitech.jsf;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
@@ -18,6 +17,8 @@ import com.orgfitech.model.FactorResultDTO;
 public class FactorResultController implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    protected List<Integer> inputFactors;
+    
     @Inject
     protected ExternalContext externalContext;
     
@@ -52,4 +53,12 @@ public class FactorResultController implements Serializable {
         logMsg(factorResult.toString());
         return "";
     }
+
+	public List<Integer> getInputFactors() {
+		return inputFactors;
+	}
+
+	public void setInputFactors(List<Integer> inputFactors) {
+		this.inputFactors = inputFactors;
+	}
 }

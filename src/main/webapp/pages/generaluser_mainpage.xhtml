@@ -26,13 +26,9 @@
 </div>
     <div id="logcontainer">
         <h:form>
-            <h:commandButton id="startAssessment" value="Start Assessments" />
-<br></br>
-<br></br>
-            <h:commandButton id="viewResults" value="View Results" 
-                    action="#{factorResultController.loadFactorResult(loginController.getCurrentLoginUser())}"/>
-<br></br>
-<br></br>
+            <h:commandButton id="startAssessment" value="View Assessments" action="#{assessmentController.displayGenAssessments()}"/>
+            
+            
             <div id="lower">
                 <h:commandButton  id="Button" value="Logout" />
             </div>

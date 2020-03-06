@@ -17,6 +17,8 @@ public class FactorDTO implements Serializable {
 	private String details;
 	
 	private int avgFactorPCM;
+	
+	private int factorScore;
 
 	/**
 	 * @return the factorID
@@ -72,6 +74,14 @@ public class FactorDTO implements Serializable {
 	 */
 	public void setAvgFactorPCM(int avgFactorPCM) {
 		this.avgFactorPCM = avgFactorPCM;
+	}
+
+	public int getFactorScore() {
+		return factorScore;
+	}
+
+	public void setFactorScore(int factorScore) {
+		this.factorScore = factorScore;
 	}
 
 	@Override

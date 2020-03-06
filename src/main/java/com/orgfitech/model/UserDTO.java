@@ -23,6 +23,7 @@ public class UserDTO implements Serializable {
     protected String department;
     protected String password;
     protected int accesslevel;
+    protected int orgID;
     
     protected boolean editable;
     //protected int accessstate;
@@ -97,6 +98,14 @@ public class UserDTO implements Serializable {
         this.editable = editable;
     }
     
+    public int getOrgID() {
+		return orgID;
+	}
+
+	public void setOrgID(int orgID) {
+		this.orgID = orgID;
+	}
+    
     public void resetPerson() {
         this.firstName = "";
         this.lastName = "";
@@ -121,10 +130,8 @@ public class UserDTO implements Serializable {
     //public void setAccessflag(int accessflag) {
         //this.accessflag = accessflag;
     //} 
-    
-  
-    
-    @Override
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
