@@ -1,7 +1,9 @@
 package com.orgfitech.jsf;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
@@ -17,6 +19,8 @@ import com.orgfitech.model.FactorDefaultDTO;
 public class FactorController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static Map<Integer, Integer> factorScore;
+	
 	@Inject
 	protected ExternalContext externalContext;
 
@@ -51,10 +55,15 @@ public class FactorController implements Serializable {
 	public void loadFactors() {
 		setFactors(factorDao.readAllFactors());
 	}
+	
+	public void genUserLoadFactors(int assID) {
+		setFactors(factorDao.readAllFactorsByID(assID));
+	}
 
-	public String displayFactors() {
-		loadFactors();
-		return "";
+	public String genUserDisplayFactors(int assID) {
+		genUserLoadFactors(assID);
+		
+		return "generaluser_factors";
 	}
 
 	public void createFactors() {
@@ -72,6 +81,17 @@ public class FactorController implements Serializable {
 
 			factorDao.createFactor(temp);
 			System.out.println("PASSED: " + i);
+		}
+	}
+	
+	//Saved the user entered factors to this map for later use
+	public void submitScore() {
+		
+		factorScore = new HashMap<>();
+		
+		for(int i = 0; i < factors.size(); i++) {
+			
+			factorScore.put(i, factors.get(i).getFactorScore());
 		}
 	}
 }

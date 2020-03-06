@@ -13,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,6 +26,8 @@ import com.orgfitech.model.UserDTO;
 
 public class UserDaoImpl implements UserDao, Serializable {
     private static final long serialVersionUID = 1L;
+    
+    public static Map<String, Integer> usersOrgIDMap;
 
     private static final String USER_DS_JNDI =  "java:comp/env/jdbc/ocm";
 
@@ -108,6 +112,8 @@ public class UserDaoImpl implements UserDao, Serializable {
             ResultSet rs = searchLogin1stmt.executeQuery();
 
             if(rs.next()) {
+            	usersOrgIDMap = new HashMap<>();
+            	usersOrgIDMap.put("userOrgID", rs.getInt("orgid"));
                 return true;
             }else {
                 return false;
@@ -129,7 +135,10 @@ public class UserDaoImpl implements UserDao, Serializable {
             searchLogin2stmt.setString(1, user);
             searchLogin2stmt.setString(2, password); 
             rs = searchLogin2stmt.executeQuery();
+            
             if(rs.next()) {
+            	usersOrgIDMap = new HashMap<>();
+            	usersOrgIDMap.put("userOrgID", rs.getInt("orgid"));
                 return true;
             }else {   
                 return false;

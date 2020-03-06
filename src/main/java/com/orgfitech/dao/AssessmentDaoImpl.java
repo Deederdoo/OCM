@@ -22,10 +22,10 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
-	private static final String READ_ALL = "select * from survey";
+	private static final String READ_ALL = "select * from survey where orgid = " + UserDaoImpl.usersOrgIDMap.get("userOrgID");
 
-	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM) "
-			+ "VALUES (?,?,?,?);";
+	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM, ORGID) "
+			+ "VALUES (?,?,?,?,?);";
 
 	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
 
@@ -144,6 +144,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			createPstmt.setDate(2, sqlDate);
 			createPstmt.setBoolean(3, assessment.isLegacy());
 			createPstmt.setDouble(4, assessment.getAvgPCM());
+			createPstmt.setInt(5, assessment.getOrgID());
 			createPstmt.execute();
 			
 		} catch (Exception e) {

@@ -16,6 +16,7 @@ public class AssessmentDTO implements Serializable {
 	protected Date date;
 	protected boolean legacy;
 	protected double avgPCM;
+	protected int orgID;
 
 	/**
 	 * @return the surveyID
@@ -87,6 +88,14 @@ public class AssessmentDTO implements Serializable {
 		this.avgPCM = avgPCM;
 	}
 	
+	public int getOrgID() {
+		return orgID;
+	}
+
+	public void setOrgID(int orgID) {
+		this.orgID = orgID;
+	}
+
 	@Override
     public int hashCode() {
         final int prime = 31;

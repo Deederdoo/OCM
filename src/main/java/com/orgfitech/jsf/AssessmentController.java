@@ -6,16 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.orgfitech.dao.AssessmentDao;
+import com.orgfitech.dao.UserDaoImpl;
 import com.orgfitech.model.AssessmentDTO;
 
 @Named("assessmentController")
-@ApplicationScoped
+@SessionScoped
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -91,6 +92,16 @@ public class AssessmentController implements Serializable {
 
 		return "main_assessments";
 	}
+	
+	public void genUserLoadAssessments() {
+		setAssessments(assessmentDao.readAllAsessments());
+	}
+	
+	public String displayGenAssessments() {
+		genUserLoadAssessments();
+		
+		return "generaluser_assessments";
+	}
 
 	public int getAssIdByName(String name) {
 
@@ -107,6 +118,8 @@ public class AssessmentController implements Serializable {
 		assessment.setDate(new Date());
 		assessment.setLegacy(false);
 		assessment.setAvgPCM(0);
+		assessment.setOrgID(UserDaoImpl.usersOrgIDMap.get("userOrgID"));
+		System.out.println("ORGIDASS: " + UserDaoImpl.usersOrgIDMap.get("userOrgID"));
 		assessmentDao.createAssessment(assessment);
 
 		assIdMap = new HashMap<>();

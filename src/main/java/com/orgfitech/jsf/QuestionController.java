@@ -18,6 +18,10 @@ import com.orgfitech.model.QuestionDefaultDTO;
 public class QuestionController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	protected boolean facQues1, facQues2, facQues3, facQues4, facQues5, facQues6, facQues7, facQues8, facQues9, facQues10 = false;
+	protected boolean[] boolarray = {facQues1, facQues2, facQues3, facQues4, facQues5
+			, facQues6, facQues7, facQues8, facQues9, facQues10};
+	
 	@Inject
 	protected ExternalContext externalContext;
 
@@ -81,6 +85,14 @@ public class QuestionController implements Serializable{
 		AssessmentController.assIdMap.clear();
 		
 		return "main_assessments?faces-redirect=true";
+	}
+
+	public boolean[] getBoolarray() {
+		return boolarray;
+	}
+
+	public void setBoolarray(boolean[] boolarray) {
+		this.boolarray = boolarray;
 	}
 
 }

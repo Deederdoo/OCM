@@ -74,6 +74,13 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 			System.out.println("something went wrong getting connection from database: ");
 		}
 	}
+	
+	public List<FactorDTO> readAllFactorsByID(int id){
+		
+		List<FactorDTO> tempFacs = readAllFactors();
+		
+		return tempFacs;
+	}
 
 	public List<FactorDTO> readAllFactors() {
 
