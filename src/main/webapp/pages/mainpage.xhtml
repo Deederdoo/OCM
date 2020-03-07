@@ -12,41 +12,59 @@
 </f:metadata>
 
 <h:head>
-	<h:outputStylesheet name="css/style.css" />
+	<style>
+html {
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+
+tr {
+	padding-bottom: 5px;
+}
+
+input[type=Text] {
+	border-radius: 2px 25px;
+	padding: 16px;
+	width: 75%;
+	height: 5%;
+}
+
+input[type=submit] {
+	background-color: #42a7ad;
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 24px;
+	border-radius: 26px;
+	padding: 10px 32px;
+	border: 0px;
+}
+
+input[type=submit]:hover {
+	background-color: #4e42ad;
+}
+
+#menucontainer{
+	margin: 0 auto;
+}
+
+</style>
 </h:head>
 
 
-<h:body style="background-color: #00BFFF;">
-	<div id="usercontainer">
+<h:body>
+	<div id="menucontainer">
 		<h:form>
-
 			
 			<h:commandButton id="userButton" value="users" action="#{userController.displayAllUsers}" />
-				
 		
-
-		</h:form>
-	</div>
-
-	<div id="asscontainer">
-		<h:form>
-
-
-
-
 			<h:commandButton id="assButton" value="assessments" action="#{assessmentController.displayAssessments}" />
-
-
+			
+			<h:commandButton id="resultButton" value="Results" action="#{resultsController.goToResults}"/>
+			
+			<h:commandButton id="logOut" value="Log Out" action=" " />
 
 		</h:form>
 	</div>
-
-
-	<br />
-	<div>    
-        <h:commandButton id="logOut" value="Log Out" action=" " />
-    </div>
-
-
 </h:body>
 </html>
