@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:metadata>
+
+	<f:viewAction action="#{resultsController.loadTestValues}"
+		phase="UPDATE_MODEL_VALUES" />
+
+</f:metadata>
+
+<h:head>
+
+	<style>
+html {
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+
+table {
+	border: solid 1px #DDEEEE;
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: auto;
+	width: 70%;
+	margin: 0 auto;
+}
+
+table td {
+	text-align: center;
+	height: 35px;
+	border: solid 1px #DDEEEE;
+}
+
+table th {
+	border: solid 1px black;
+	background-color: #dadada;
+}
+
+table tr:nth-child(even) {
+	background: #f2f2f2;
+}
+
+table tr {
+	background-color: #ffffff;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: #c9c9c9;
+}
+
+input[type=submit] {
+	background-color: #42a7ad;
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 24px;
+	border-radius: 26px;
+	padding: 10px 32px;
+	border: 0px;
+	float: right;
+}
+
+input[type=submit]:hover {
+	background-color: #4e42ad;
+}
+
+#foot {
+	position: fixed;
+	bottom: 5%;
+	right: 8%;
+	font-family: "Cairo Regular", sans-serif;
+	font-size: 16px;
+	color: white;
+}
+
+#barcontainer{
+	margin: 0 auto;
+	padding:20px;
+	width:70%;
+}
+
+#tablecontainer{
+	margin: 0 auto;
+	padding:20px;
+	width:90%;
+}
+
+</style>
+</h:head>
+<h:body>
+
+	<div id="barcontainer">
+	
+		<div id="top">  
+			<p:chart type="bar" model="#{adminBarChart.model}"/>
+		</div>
+		
+	</div>
+	
+	<div id="tablecontainer">
+	
+		<div id="bottom">
+			<h:form>
+				<table>
+					<h:dataTable id="data1" value="#{resultsController.adminCharts}" var="ad" styleClass="table-hover">
+					
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText type="text" value="#{ad.id}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+							<h:outputText type="text" value="#{ad.firstName}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Last Name</f:facet>
+							<h:outputText type="text" value="#{ad.lastName}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Department</f:facet>
+							<h:outputText type="text" value="#{ad.department}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Gender</f:facet>
+							<h:outputText type="text" value="#{ad.gender}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Age Group</f:facet>
+							<h:outputText type="text" value="#{ad.ageGroup}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">PCM</f:facet>
+							<h:outputText type="text" value="#{ad.pcm}"/>
+						</h:column>
+						
+					</h:dataTable>
+				</table>
+			</h:form>
+		</div>
+	
+	</div>
+
+</h:body>
+</html>
