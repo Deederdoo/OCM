@@ -10,7 +10,7 @@ import javax.inject.Named;
 public class AdminChartDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String department;
@@ -19,11 +19,11 @@ public class AdminChartDTO implements Serializable{
 	private int pcm;
 	
 	
-	public int getId() {
-		return id;
+	public int getUserID() {
+		return userID;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public String getFirstName() {
 		return firstName;

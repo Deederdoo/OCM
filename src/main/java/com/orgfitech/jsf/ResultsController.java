@@ -9,14 +9,18 @@ import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.orgfitech.chart.AdminBarChart;
 import com.orgfitech.dao.AdminChartDao;
 import com.orgfitech.model.AdminChartDTO;
+import com.orgfitech.model.FactorResultDTO;
 
 @Named("resultsController")
 @SessionScoped
 public class ResultsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	protected int assessmentID;
+	
 	@Inject
     protected ExternalContext externalContext;
 	
@@ -24,8 +28,13 @@ public class ResultsController implements Serializable{
 	
 	protected List<AdminChartDTO> adminCharts;
 	
+	protected List<FactorResultDTO> factorResults;
+	
 	@Inject
 	protected AdminChartDTO adminChart;
+	
+	@Inject
+	protected FactorResultDTO factorResult;
 	
 	@Inject
 	public ResultsController(AdminChartDao dao) {
@@ -35,24 +44,44 @@ public class ResultsController implements Serializable{
 	public void loadTestValues() {
 		
 		adminCharts = new ArrayList<>();
-		adminChart = new AdminChartDTO();
 		
-		adminChart.setId(1);
-		adminChart.setFirstName("John");
-		adminChart.setLastName("Doe");
-		adminChart.setDepartment("Shipping");
-		adminChart.setGender("Other");
-		adminChart.setAgeGroup("");
-		adminChart.setPcm(66);
+		for(int i = 0; i < 30; i++) {
+			
+			adminChart = new AdminChartDTO();
+			
+			adminChart.setUserID(i + 1);
+			adminChart.setFirstName("John");
+			adminChart.setLastName("Doe");
+			adminChart.setDepartment("Shipping");
+			adminChart.setGender("Other");
+			adminChart.setAgeGroup("");
+			adminChart.setPcm((66 * 4) / (i + 1));
+			
+			adminCharts.add(adminChart);
+		}
 		
-		adminCharts.add(adminChart);
 		
 		System.out.println("RAN");
 	}
 	
-	public String goToResults() {
+	public void loadUsers(int assID) {
 		
+		setAdminCharts(adminDao.readAllTables(assID));
+	}
+	
+	public String goToResults(int assID) {
+		
+		this.assessmentID = assID;
+		//loadUsers(assID);
 		loadTestValues();
+		
+		return "results";
+	}
+	
+	public String loadUserResults(int userID) {
+		
+		setFactorResults(adminDao.readAllCharts(userID, assessmentID));
+		System.out.println("ID: " + userID);
 		
 		return "results";
 	}
@@ -73,5 +102,29 @@ public class ResultsController implements Serializable{
 
 	public void setAdminCharts(List<AdminChartDTO> adminCharts) {
 		this.adminCharts = adminCharts;
+	}
+
+	public List<FactorResultDTO> getFactorResults() {
+		return factorResults;
+	}
+
+	public void setFactorResults(List<FactorResultDTO> factorResults) {
+		this.factorResults = factorResults;
+	}
+
+	public FactorResultDTO getFactorResult() {
+		return factorResult;
+	}
+
+	public void setFactorResult(FactorResultDTO factorResult) {
+		this.factorResult = factorResult;
+	}
+
+	public int getAssessmentID() {
+		return assessmentID;
+	}
+
+	public void setAssessmentID(int assessmentID) {
+		this.assessmentID = assessmentID;
 	}
 }

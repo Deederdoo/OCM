@@ -14,20 +14,27 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import com.orgfitech.model.AdminChartDTO;
+import com.orgfitech.model.FactorResultDTO;
 
-public class AdminChartDaoImpl implements AdminChartDao, Serializable{
+public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
-	private static final String READ_ALL = "select * from survey where orgid = "; //------------------TODO
+	private static final String READ_ALL_TABLE = "select person.userid, person.firstname, person.lastname, person.department, person_survey.pcm "
+			+ "from person, person_survey where surveyid = (?);";
+
+	private static final String READ_ALL_CHART = "select factor_answer.factorpcm, factor.details "
+			+ "from factor_answer, factor where factor_answer.userid = (?) and factor.surveyid = (?);";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
 
 	protected Connection conn;
 
-	protected PreparedStatement readAllPstmt;
+	protected PreparedStatement readAllTablesPstmt;
+
+	protected PreparedStatement readAllChartsPstmt;
 
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
@@ -35,7 +42,9 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable{
 
 			conn = assDS.getConnection();
 
-			readAllPstmt = conn.prepareStatement(READ_ALL);
+			readAllTablesPstmt = conn.prepareStatement(READ_ALL_TABLE);
+
+			readAllChartsPstmt = conn.prepareStatement(READ_ALL_CHART);
 
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
@@ -47,25 +56,57 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable{
 	protected void closeConnectionAndStatements() {
 		try {
 
-			readAllPstmt.close();
+			readAllTablesPstmt.close();
+
+			readAllChartsPstmt.close();
 
 			conn.close();
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
 		}
 	}
-	
-	@Override
-	public List<AdminChartDTO> readAllCharts() {
-		
-		List<AdminChartDTO> data = new ArrayList<>();
+
+	public List<FactorResultDTO> readAllCharts(int userID, int assID) {
+
+		List<FactorResultDTO> data = new ArrayList<>();
 		
 		try {
-			ResultSet rs = readAllPstmt.executeQuery();
+
+			readAllChartsPstmt.setInt(1, userID);
+			readAllChartsPstmt.setInt(2, assID);
+			ResultSet rs = readAllChartsPstmt.executeQuery();
+
+			while (rs.next()) {
+				FactorResultDTO fr = new FactorResultDTO();
+				fr.setFactorPCM(rs.getInt("factorpcm"));
+				fr.setDetails(rs.getString("details"));
+
+				data.add(fr);
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			System.out.println("something went wrong getting .......: ");
+		}
+
+		return data;
+	}
+
+	public List<AdminChartDTO> readAllTables(int assID) {
+
+		List<AdminChartDTO> data = new ArrayList<>();
+
+		try {
+
+			readAllTablesPstmt.setInt(1, assID);
+			ResultSet rs = readAllTablesPstmt.executeQuery();
 
 			while (rs.next()) {
 				AdminChartDTO ac = new AdminChartDTO();
-				ac.setId(rs.getInt("userid"));
+				ac.setUserID(rs.getInt("userid"));
 				ac.setFirstName(rs.getString("firstname"));
 				ac.setLastName(rs.getString("lastname"));
 				ac.setDepartment(rs.getString("department"));
@@ -83,8 +124,7 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable{
 		} catch (SQLException e) {
 			System.out.println("something went wrong getting .......: ");
 		}
-		
+
 		return data;
 	}
-
 }
