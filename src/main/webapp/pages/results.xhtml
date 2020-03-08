@@ -24,7 +24,7 @@ html {
 	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
 }
 
-table {
+#tablecontainer table {
 	border: solid 1px #DDEEEE;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -56,21 +56,6 @@ table tr {
 	background-color: #c9c9c9;
 }
 
-input[type=submit] {
-	background-color: #42a7ad;
-	color: white;
-	font-family: "Cairo Bold", sans-serif;
-	font-size: 24px;
-	border-radius: 26px;
-	padding: 10px 32px;
-	border: 0px;
-	float: right;
-}
-
-input[type=submit]:hover {
-	background-color: #4e42ad;
-}
-
 #foot {
 	position: fixed;
 	bottom: 5%;
@@ -82,14 +67,28 @@ input[type=submit]:hover {
 
 #barcontainer{
 	margin: 0 auto;
-	padding:20px;
-	width:70%;
+	padding-top: 2%;
+	padding-bottom: 15px;
+	width:60%;
+}
+
+#top{
+	margin: 0 auto;
+	width:85%;
+	
+}
+
+#top table{
+	width: 5%;
+	background-color: hsla(120, 60%, 70%, 0.3);
 }
 
 #tablecontainer{
 	margin: 0 auto;
 	padding:20px;
 	width:90%;
+	height: 400px;
+	overflow: auto;
 }
 
 </style>
@@ -99,21 +98,21 @@ input[type=submit]:hover {
 	<div id="barcontainer">
 	
 		<div id="top">  
-			<p:chart type="bar" model="#{adminBarChart.model}"/>
+			<p:barChart model="#{adminBarChart.model}"/>
 		</div>
 		
 	</div>
 	
 	<div id="tablecontainer">
 	
-		<div id="bottom">
+		<div id="bottom" >
 			<h:form>
 				<table>
 					<h:dataTable id="data1" value="#{resultsController.adminCharts}" var="ad" styleClass="table-hover">
 					
 						<h:column>
 							<f:facet name="header">ID</f:facet>
-							<h:outputText type="text" value="#{ad.id}"/>
+							<h:outputText type="text" value="#{ad.userID}"/>
 						</h:column>
 						
 						<h:column>
@@ -146,12 +145,32 @@ input[type=submit]:hover {
 							<h:outputText type="text" value="#{ad.pcm}"/>
 						</h:column>
 						
+						<h:column>
+							<f:facet name="header">View</f:facet>
+							<h:commandButton value="View" action="#{resultsController.loadUserResults(ad.userID)}"/>
+						</h:column>
+						
 					</h:dataTable>
 				</table>
 			</h:form>
 		</div>
 	
 	</div>
+	
+	<h:outputScript>
+    	function chartExtention(){
+    		//this = chart widget instance
+        	//this.cfg = options
+        	//this.cfg.axes.xaxis.tickOptions.showGridline = false;
+        	//this.cfg.axes.yaxis.tickOptions.showGridline = false;
+        	//this.cfg.textColor.Series1.color = blue;
+        	this.cfg.axesDefaults = {
+    			tickOptions: {
+       				fontFamily: 'Cairo Regular'
+			    }
+			};
+    	}
+	</h:outputScript>
 
 </h:body>
 </html>

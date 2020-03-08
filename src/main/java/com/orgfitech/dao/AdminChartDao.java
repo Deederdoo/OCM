@@ -3,8 +3,11 @@ package com.orgfitech.dao;
 import java.util.List;
 
 import com.orgfitech.model.AdminChartDTO;
+import com.orgfitech.model.FactorResultDTO;
 
 public interface AdminChartDao {
 
-	public List<AdminChartDTO> readAllCharts();
+	public List<AdminChartDTO> readAllTables(int assID);
+	
+	public List<FactorResultDTO> readAllCharts(int userID, int assID);
 }

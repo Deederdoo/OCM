@@ -15,6 +15,7 @@ public class FactorResultDTO implements Serializable {
     private int factorRank;
     private int factorPCM;
     private int factorID;
+    private String details;
     
     public int getFactorAnswerID() {
         return factorAnswerID;
@@ -53,11 +54,15 @@ public class FactorResultDTO implements Serializable {
         this.factorID = factorID;
     }
     
-    @Override
+    public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	@Override
     public String toString() {
         return "FactorResultDTO [factorAnswerID=" + factorAnswerID + ", userID=" + userID + ", surveyID=" + surveyID
                 + ", factorRank=" + factorRank + ", factorPCM=" + factorPCM + ", factorID=" + factorID + "]";
     }
-    
-    
 }
