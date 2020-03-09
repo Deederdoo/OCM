@@ -69,18 +69,24 @@ table tr {
 	margin: 0 auto;
 	padding-top: 2%;
 	padding-bottom: 15px;
-	width:60%;
+	width:80%;
 }
 
 #top{
 	margin: 0 auto;
-	width:85%;
+	width:90%;
+	background-color: #ffffff;
 	
 }
 
-#top table{
-	width: 5%;
-	background-color: hsla(120, 60%, 70%, 0.3);
+#hori{
+	display: inline-block;
+	width: 50%;
+}
+
+#vert{
+	display: inline-block;
+	width: 48%;
 }
 
 #tablecontainer{
@@ -97,8 +103,16 @@ table tr {
 
 	<div id="barcontainer">
 	
-		<div id="top">  
-			<p:barChart model="#{adminBarChart.model}"/>
+		<div id="top">
+		
+			<div id="hori">
+				<p:barChart model="#{adminHoriBarChart.hbarModel}"/>
+			</div>
+			
+			<div id="vert">
+				<p:barChart model="#{adminBarChart.model}"/>
+			</div>
+			
 		</div>
 		
 	</div>
@@ -147,7 +161,14 @@ table tr {
 						
 						<h:column>
 							<f:facet name="header">View</f:facet>
-							<h:commandButton value="View" action="#{resultsController.loadUserResults(ad.userID)}"/>
+							<h:commandButton value="View" action=" "/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">TESTView</f:facet>
+							<h:commandButton value="TEST" action="#{adminBarChart.createModel(ad.pcm)}">
+								<f:actionListener binding="#{adminHoriBarChart.updateModel()}" />
+							</h:commandButton>
 						</h:column>
 						
 					</h:dataTable>
@@ -156,21 +177,6 @@ table tr {
 		</div>
 	
 	</div>
-	
-	<h:outputScript>
-    	function chartExtention(){
-    		//this = chart widget instance
-        	//this.cfg = options
-        	//this.cfg.axes.xaxis.tickOptions.showGridline = false;
-        	//this.cfg.axes.yaxis.tickOptions.showGridline = false;
-        	//this.cfg.textColor.Series1.color = blue;
-        	this.cfg.axesDefaults = {
-    			tickOptions: {
-       				fontFamily: 'Cairo Regular'
-			    }
-			};
-    	}
-	</h:outputScript>
 
 </h:body>
 </html>

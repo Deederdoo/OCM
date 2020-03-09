@@ -3,6 +3,7 @@ package com.orgfitech.jsf;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -20,6 +21,8 @@ public class ResultsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	protected int assessmentID;
+	
+	Random rand = new Random();
 	
 	@Inject
     protected ExternalContext externalContext;
@@ -55,7 +58,7 @@ public class ResultsController implements Serializable{
 			adminChart.setDepartment("Shipping");
 			adminChart.setGender("Other");
 			adminChart.setAgeGroup("");
-			adminChart.setPcm((66 * 4) / (i + 1));
+			adminChart.setPcm(rand.nextInt(101));
 			
 			adminCharts.add(adminChart);
 		}
