@@ -94,6 +94,4 @@ public class FactorController implements Serializable {
 			factorScore.put(i, factors.get(i).getFactorScore());
 		}
 	}
-	
-	
 }

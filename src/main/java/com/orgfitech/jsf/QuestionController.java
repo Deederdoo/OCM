@@ -52,6 +52,16 @@ public class QuestionController implements Serializable{
 	public void setQuestion(QuestionDTO question) {
 		this.question = question;
 	}
+	
+	public void loadQuestionsByAssID(int assID) {
+		setQuestions(questionDao.readAllQuestionsByAssID(assID));
+	}
+	
+	public String displayQuestionsByID(int assID) {
+		loadQuestionsByAssID(assID);
+		
+		return "generaluser_questions";
+	}
 
 	public void loadQuestions() {
 		setQuestions(questionDao.readAllQuestions());

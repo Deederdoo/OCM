@@ -1,4 +1,3 @@
-
 USE ocm;
 
 CREATE TABLE SURVEY (
@@ -7,7 +6,7 @@ CREATE TABLE SURVEY (
     DateCreated     timestamp default current_timestamp,
     IsLegacy        TINYINT(1) NOT NULL,
     AvgPCM          int(10),
-    OrgId			int(10) NOT NULL,
+    OrgId			int(10),
     CONSTRAINT surveyid_pk PRIMARY KEY (SurveyID)
 );
 
