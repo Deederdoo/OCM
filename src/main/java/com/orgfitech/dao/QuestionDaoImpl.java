@@ -19,6 +19,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
+	
+	private static final String READ_BY_ASS_ID = "select * from question where surveyid = (?)";
 
 	private static final String READ_ALL = "select * from question";
 	
@@ -31,6 +33,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 
 	protected Connection conn;
 
+	protected PreparedStatement readAllassIDPstmt;
+	
 	protected PreparedStatement readAllPstmt;
 
 	// protected PreparedStatement readByIdPstmt;
@@ -43,6 +47,9 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 		try {
 
 			conn = qDS.getConnection();
+			
+			readAllassIDPstmt = conn.prepareStatement(READ_BY_ASS_ID);
+			
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D
@@ -62,6 +69,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			readAllassIDPstmt.close();
+			
 			readAllPstmt.close();
 			// readByIdPstmt.close();
 			createPstmt.close();
@@ -72,6 +81,35 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
 		}
+	}
+	
+	public List<QuestionDTO> readAllQuestionsByAssID(int assID) {
+		
+		List<QuestionDTO> question = new ArrayList<>();
+		
+		try {
+			readAllassIDPstmt.setInt(1, assID);
+			ResultSet rs = readAllassIDPstmt.executeQuery();
+
+			while (rs.next()) {
+				QuestionDTO newQ = new QuestionDTO();
+				newQ.setQuestionID(rs.getInt("questionid"));
+				newQ.setFactorID(rs.getInt("idfac"));
+				newQ.setDetails(rs.getString("details"));
+
+				question.add(newQ);
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("something went wrong getting .......: ");
+		}
+		
+		return question;
 	}
 
 	public List<QuestionDTO> readAllQuestions() {
@@ -114,5 +152,4 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			e.printStackTrace();
 		}
 	}
-
 }

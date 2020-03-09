@@ -1,6 +1,6 @@
 package com.orgfitech.jsf;
 
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -9,10 +9,8 @@ import com.orgfitech.dao.UserDao;
 import com.orgfitech.model.UserDTO;
 
 @Named("loginController")
-@ViewScoped
+@RequestScoped
 public class LoginController {
-
-    private static final long serialVersionUID = 1L;
 
     @Inject
     protected ExternalContext externalContext;

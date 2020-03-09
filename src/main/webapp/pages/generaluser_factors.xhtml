@@ -75,8 +75,9 @@ input[type=submit]:hover {
 			
 		</table>
 	
-		<h:commandButton value="Submit" action="generaluser_questions">
+		<h:commandButton value="Submit" action="#{questionController.displayQuestionsByID(fac.assessmentID)}">
 			<f:actionListener binding="#{factorController.submitScore()}"/>
+			<f:actionListener binding="" /> this binding needs to call a method that updates the boolean array for the Rendering of the questions and factors // Do something Similar to QuestionDefaultController for QuestionController
 		</h:commandButton>
 	</h:form>
 
