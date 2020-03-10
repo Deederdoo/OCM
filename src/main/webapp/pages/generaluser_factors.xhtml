@@ -5,6 +5,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <h:head>
@@ -13,7 +14,7 @@
 html {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100%;
-	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+	background-color: #456ba1;
 }
 
 table {
@@ -26,7 +27,6 @@ table {
 }
 
 tr {
-	padding-bottom: 5px;
 }
 
 input[type=Text] {
@@ -42,6 +42,8 @@ input[type=submit] {
 	font-family: "Cairo Bold", sans-serif;
 	font-size: 24px;
 	border-radius: 26px;
+	margin-top: 1%;
+	margin-right: 2%;
 	padding: 10px 32px;
 	border: 0px;
 	float: right;
@@ -50,35 +52,76 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: #4e42ad;
 }
+
+#factorQues{
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 24px;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	font-weight: bold;
+}
+
+#foot {
+	position: fixed;
+	bottom: 5%;
+	right: 8%;
+	font-family: "Cairo Regular", sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+#image{
+	border: 0;
+	width: 15%;
+	height: 15%;
+	opacity: 1;
+	display: block;
+ 	margin-left: 1%;
+  	margin-top: -1%;
+  	float: left;
+}
+
 	</style>
 
 </h:head>
 <h:body>
 	<br />
-	<h2>Factors</h2>
+	<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
 	<br />
-	<h:form>
+	<h:form style="width: 65%; margin: 0 auto;">
+	
+	<div style="height: calc(100vh - 200px); overflow: auto; margin-left: -20%; margin-top: 3%">
 	
 		<table>
 				
 				<h:dataTable value="#{factorController.factors}" var="fac">
 					<h:column>
-						<h:outputText value="#{fac.factorID}"/>
+						<h:column>
+							<div id="factorQues">
+								<h:outputText value="Factor #{fac.factorID}.  "/>
+								<h:outputText value="#{fac.details}"/>
+							</div>
+						</h:column>
+						<h:column>
+							<h:panelGrid columns="1" style="margin-bottom: 10px; float: left">
+						        <h:outputText id="output" value="#{fac.factorScore} " style="font-weight: bold; font-size: 24px; color: #ffe0bf" />
+	        					<h:inputHidden id="fa1" value="#{fac.factorScore}" />
+						        <p:slider for="fa1" display="output" step="1" maxValue="10" displayTemplate="{value}" style="width: 200px; background-color: #405891; border-style: outset; border-color: #f6f9f9; border-width: 2px;"/>
+						        <h:outputText type="text" value=" __| __| __| __| __| __| __| __| __| "/>
+						    </h:panelGrid>
+						</h:column>	
 					</h:column>
-					<h:column>
-						<h:outputText value="#{fac.details}"/>
-					</h:column>
-					<h:column>
-						<h:inputText value="#{fac.factorScore}"/>
-					</h:column>	
 				</h:dataTable>
 			
 		</table>
+		
+		</div>
 	
 		<h:commandButton value="Submit" action="#{questionController.displayQuestionsByID(factorController.factors[0].getAssessmentID())}">
 			<f:actionListener binding="#{factorController.submitScore()}"/>
 		</h:commandButton>
 	</h:form>
-
+	<p id="foot"> © Orgfitech </p>
 </h:body>
 </html>

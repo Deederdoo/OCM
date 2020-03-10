@@ -24,6 +24,7 @@ public class UserDTO implements Serializable {
     protected String password;
     protected int accesslevel;
     protected int orgID;
+    protected int pcm;
     
     protected boolean editable;
     //protected int accessstate;
@@ -106,7 +107,15 @@ public class UserDTO implements Serializable {
 		this.orgID = orgID;
 	}
     
-    public void resetPerson() {
+    public int getPcm() {
+		return pcm;
+	}
+
+	public void setPcm(int pcm) {
+		this.pcm = pcm;
+	}
+
+	public void resetPerson() {
         this.firstName = "";
         this.lastName = "";
         this.email ="";
