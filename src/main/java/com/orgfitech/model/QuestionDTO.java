@@ -17,6 +17,8 @@ public class QuestionDTO implements Serializable {
 	private int factorid;
 	
 	private String details;
+	
+	private int score;
 
 	public int getAssessmentId() {
 		return assessmentId;
@@ -50,9 +52,17 @@ public class QuestionDTO implements Serializable {
 		this.details = details;
 	}
 
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	@Override
 	public String toString() {
 
-		return "Factor [ "+ "AssessmentId=" + assessmentId + "QuestionID=" + questionID + ", FactorID=" + factorid + ", Details=" + details + "]";
+		return "Factor [ "+ "AssessmentId=" + assessmentId + "QuestionID=" + questionID + ", FactorID=" + factorid + ", Details=" + details + "SCORE: " + score + "]";
 	}
 }

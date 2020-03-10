@@ -13,12 +13,19 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.FactorController;
 import com.orgfitech.model.QuestionDTO;
 
 public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
+	
+	private static final String INSERT_QUESTION_PERSON_ANSWER = "INSERT INTO PERSON_SURVEY (SurveyID, UserID, PCM) "
+			+ "VALUE (?,?,?);";
+	
+	private static final String INSERT_QUESTION_ANSWER = "INSERT INTO QUESTION_ANSWER (UserID, SurveyID, Score, OrgID) "
+			+ "VALUE (?,?,?,?);";
 	
 	private static final String READ_BY_ASS_ID = "select * from question where surveyid = (?)";
 
@@ -36,11 +43,12 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	protected PreparedStatement readAllassIDPstmt;
 	
 	protected PreparedStatement readAllPstmt;
+	
+	protected PreparedStatement createQuestionPersonPstmt;
 
-	// protected PreparedStatement readByIdPstmt;
+	protected PreparedStatement createAnswerPstmt;
+	
 	protected PreparedStatement createPstmt;
-	// protected PreparedStatement updatePstmt;
-	// protected PreparedStatement deleteByIdPstmt;
 
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
@@ -51,12 +59,12 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			readAllassIDPstmt = conn.prepareStatement(READ_BY_ASS_ID);
 			
 			readAllPstmt = conn.prepareStatement(READ_ALL);
+			
+			createQuestionPersonPstmt = conn.prepareStatement(INSERT_QUESTION_PERSON_ANSWER);
 
-			// TODO - prepare rest of statements for rest of C-R-U-D
-			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
+			createAnswerPstmt = conn.prepareStatement(INSERT_QUESTION_ANSWER);
+			
 			createPstmt = conn.prepareStatement(INSERT_QUESTION);
-			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
-			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
 
 		} catch (Exception e) {
 			System.out.println("TEST: " + readAllPstmt);
@@ -72,10 +80,12 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			readAllassIDPstmt.close();
 			
 			readAllPstmt.close();
-			// readByIdPstmt.close();
+			
+			createQuestionPersonPstmt.close();
+			
+			createAnswerPstmt.close();
+			
 			createPstmt.close();
-			// updatePstmt.close();
-			// deleteByIdPstmt.close();
 
 			conn.close();
 		} catch (Exception e) {
@@ -87,6 +97,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 		
 		List<QuestionDTO> question = new ArrayList<>();
 		
+		System.out.println("ASSID: " + assID);
+		
 		try {
 			readAllassIDPstmt.setInt(1, assID);
 			ResultSet rs = readAllassIDPstmt.executeQuery();
@@ -96,7 +108,7 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 				newQ.setQuestionID(rs.getInt("questionid"));
 				newQ.setFactorID(rs.getInt("idfac"));
 				newQ.setDetails(rs.getString("details"));
-
+				
 				question.add(newQ);
 			}
 			try {
@@ -141,12 +153,39 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	}
 
 	public void createQuestion(int quesId, QuestionDTO question) {
-
+		
 		try {
 			createPstmt.setInt(1, quesId);
 			createPstmt.setInt(2, question.getFactorID());
 			createPstmt.setString(3, question.getDetails());
 			createPstmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createQuestionAnswer(double score) {
+		
+		try {
+			createAnswerPstmt.setInt(1, UserDaoImpl.usersOrgIDMap.get("userID"));
+			createAnswerPstmt.setInt(2, FactorController.genUserAssID.get("guID"));
+			createAnswerPstmt.setDouble(3, score);
+			createAnswerPstmt.setInt(4, UserDaoImpl.usersOrgIDMap.get("userOrgID"));
+			createAnswerPstmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createQuestionPersonAnswer(int score) {
+		
+		try {
+			createQuestionPersonPstmt.setInt(1, FactorController.genUserAssID.get("guID"));
+			createQuestionPersonPstmt.setInt(2, UserDaoImpl.usersOrgIDMap.get("userID"));
+			createQuestionPersonPstmt.setInt(3, score);
+			createQuestionPersonPstmt.execute();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

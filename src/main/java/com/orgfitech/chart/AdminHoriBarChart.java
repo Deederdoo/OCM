@@ -18,6 +18,8 @@ import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
 
+import com.orgfitech.jsf.QuestionController;
+
 @Named("adminHoriBarChart")
 @RequestScoped
 public class AdminHoriBarChart {
@@ -35,13 +37,12 @@ public class AdminHoriBarChart {
 	    hbarDataSet.setLabel("Score");
 	     
 	    List<Number> values = new ArrayList<>();
-	    values.add(0);
-	    values.add(0);
-	    values.add(0);
-	    values.add(0);
-	    values.add(0);
-	    values.add(0);
-	    values.add(0);
+	    
+	    for(int i = 0; i < QuestionController.resultsAVGFactor.size(); i++) {
+	    	
+	    	values.add(QuestionController.resultsAVGFactor.get(i));
+	    }
+	    
 	    hbarDataSet.setData(values);
 	     
 	    List<String> bgColor = new ArrayList<>();

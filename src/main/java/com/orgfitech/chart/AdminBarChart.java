@@ -18,6 +18,8 @@ import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
 
+import com.orgfitech.jsf.QuestionController;
+
 @Named("adminBarChart")
 @RequestScoped
 public class AdminBarChart implements Serializable{
@@ -36,7 +38,7 @@ public class AdminBarChart implements Serializable{
         barDataSet.setLabel("Score");
         
         List<Number> values = new ArrayList<>();
-        values.add(0); //PCM
+        values.add(QuestionController.resultsPCM.get("pcm")); //PCM
         
         barDataSet.setData(values);
          

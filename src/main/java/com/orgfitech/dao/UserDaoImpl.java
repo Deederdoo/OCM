@@ -114,6 +114,7 @@ public class UserDaoImpl implements UserDao, Serializable {
             if(rs.next()) {
             	usersOrgIDMap = new HashMap<>();
             	usersOrgIDMap.put("userOrgID", rs.getInt("orgid"));
+            	usersOrgIDMap.put("userID", rs.getInt("userid"));
                 return true;
             }else {
                 return false;
@@ -139,6 +140,7 @@ public class UserDaoImpl implements UserDao, Serializable {
             if(rs.next()) {
             	usersOrgIDMap = new HashMap<>();
             	usersOrgIDMap.put("userOrgID", rs.getInt("orgid"));
+            	usersOrgIDMap.put("userID", rs.getInt("userid"));
                 return true;
             }else {   
                 return false;
