@@ -76,6 +76,7 @@ CREATE TABLE QUESTION_ANSWER (
     SurveyID            int(10),
     Score               int(10),
     QuestionID          int(10),
+    OrgId				int(10) NOT NULL,
     CONSTRAINT questionid_pk PRIMARY KEY (QuestionAnswerID),
     CONSTRAINT user_id_fk FOREIGN KEY (UserID) REFERENCES PERSON(UserID) ON DELETE CASCADE,
     CONSTRAINT survey_id_fk FOREIGN KEY (SurveyID) REFERENCES SURVEY(SurveyID) ON DELETE CASCADE,

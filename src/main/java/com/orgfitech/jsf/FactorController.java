@@ -20,6 +20,8 @@ public class FactorController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public static Map<Integer, Integer> factorScore;
+	public static Map<String, List<FactorDTO>> factorGenMap;
+	public static Map<String, Integer> genUserAssID;
 	
 	@Inject
 	protected ExternalContext externalContext;
@@ -63,6 +65,11 @@ public class FactorController implements Serializable {
 	public String genUserDisplayFactors(int assID) {
 		genUserLoadFactors(assID);
 		
+		factorGenMap = new HashMap<>();
+		genUserAssID = new HashMap<>();
+		factorGenMap.put("fgMap", factors);
+		genUserAssID.put("guID", assID);
+		
 		return "generaluser_factors";
 	}
 
@@ -77,10 +84,8 @@ public class FactorController implements Serializable {
 			temp.setFactorID(tempFac.get(i).getFactorID());
 			temp.setDetails(tempFac.get(i).getDetails());
 			temp.setAvgFactorPCM(0);
-			System.out.println("TEMPFACTOR: " + temp.toString());
 
 			factorDao.createFactor(temp);
-			System.out.println("PASSED: " + i);
 		}
 	}
 	

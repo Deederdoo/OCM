@@ -59,6 +59,135 @@ input[type=submit]:hover {
 	<br />
 	<h:form>
 	
+		<table>
+		
+			<ui:fragment rendered="#{questionController.boolarray[0]}">
+					<h:column>
+						<h:outputText value="Factor 1: #{questionController.qFactors[0].getDetails()}"/>
+					</h:column>
+				<h:dataTable value="#{questionController.q1}" var="q1">
+					<h:column>
+						<h:outputText type="text" value="#{q1.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q1.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[1]}">
+				<tr><td>Factor 2: </td><td><h:outputText value="#{questionController.qFactors[1].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q2}" var="q2">
+					<h:column>
+						<h:outputText value="#{q2.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q2.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[2]}">
+				<tr><td>Factor 3: </td><td><h:outputText value="#{questionController.qFactors[2].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q3}" var="q3">
+					<h:column>
+						<h:outputText value="#{q3.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q3.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[3]}">
+				<tr><td>Factor 4: </td><td><h:outputText value="#{questionController.qFactors[3].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q4}" var="q4">
+					<h:column>
+						<h:outputText value="#{q4.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q4.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[4]}">
+				<tr><td>Factor 5: </td><td><h:outputText value="#{questionController.qFactors[4].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q5}" var="q5">
+					<h:column>
+						<h:outputText value="#{q5.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q5.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[5]}">
+				<tr><td>Factor 6: </td><td><h:outputText value="#{questionController.qFactors[5].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q6}" var="q6">
+					<h:column>
+						<h:outputText value="#{q6.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q6.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[6]}">
+				<tr><td>Factor 7: </td><td><h:outputText value="#{questionController.qFactors[6].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q7}" var="q7">
+					<h:column>
+						<h:outputText value="#{q7.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q7.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[7]}">
+				<tr><td>Factor 8: </td><td><h:outputText value="#{questionController.qFactors[7].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q8}" var="q8">
+					<h:column>
+						<h:outputText value="#{q8.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q8.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[8]}">
+				<tr><td>Factor 9: </td><td><h:outputText value="#{questionController.qFactors[8].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q9}" var="q9">
+					<h:column>
+						<h:outputText value="#{q9.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q9.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+			<ui:fragment rendered="#{questionController.boolarray[9]}">
+				<tr><td>Factor 10: </td><td><h:outputText value="#{questionController.qFactors[9].getDetails()}"/></td></tr>
+				<h:dataTable value="#{questionController.q10}" var="q10">
+					<h:column>
+						<h:outputText value="#{q10.details}"/>
+					</h:column>
+					<h:column>
+						<h:inputText value="#{q10.score}"/>
+					</h:column>
+				</h:dataTable>
+			</ui:fragment>
+			
+		</table>
+		
+		<h:commandButton value="Submit" action="generaluser_results">
+			<f:actionListener binding="#{questionController.submitQScore()}" />
+		</h:commandButton>
 		
 	</h:form>
 
