@@ -20,7 +20,7 @@
 html {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100%;
-	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+	background-color: #456ba1;
 }
 
 table {
@@ -39,8 +39,10 @@ table td {
 }
 
 table th {
-	border: solid 1px black;
+	border: solid 2px black;
+	font-size: 32px;
 	background-color: #dadada;
+	font-family: "Cairo Bold", sans-serif;
 }
 
 table tr:nth-child(even) {
@@ -48,7 +50,9 @@ table tr:nth-child(even) {
 }
 
 table tr {
+	font-size: 24px;
 	background-color: #ffffff;
+	font-family: "Cairo Bold", sans-serif;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
@@ -75,32 +79,49 @@ input[type=submit]:hover {
 	bottom: 5%;
 	right: 8%;
 	font-family: "Cairo Regular", sans-serif;
-	font-size: 16px;
-	color: white;
+    font-size: 16px;
+    color: white;
 }
+
+#image{
+	border: 0;
+	width: 15%;
+	height: 15%;
+	opacity: 1;
+	display: block;
+ 	margin-left: 1%;
+  	margin-top: -1%;
+  	float: left;
+}
+
 </style>
 
 </h:head>
 <h:body>
 	<br />
-	<h2>Assessments</h2>
+	<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
+	<br />
 	
-		<h:form>
-			<h:dataTable value="#{assessmentController.assessments}" var="ass"
-				styleClass="table-hover">
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{ass.assessmentID}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Assessment Name</f:facet>
-					<h:outputText value="#{ass.assessmentName}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Action Buttons</f:facet>
-					<h:commandLink value="Take Assessment" action="#{factorController.genUserDisplayFactors(ass.assessmentID)}" />
-				</h:column>
-			</h:dataTable>
+		<h:form style="width: 65%; margin: 0 auto;">
+		
+			<div style="height: calc(100vh - 200px); overflow: auto; margin-top: 3%">
+				<h:dataTable value="#{assessmentController.assessments}" var="ass"
+					styleClass="table-hover">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{ass.assessmentID}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Assessment Name</f:facet>
+						<h:outputText value="#{ass.assessmentName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Action Buttons</f:facet>
+						<h:commandLink value="Take Assessment" action="#{factorController.genUserDisplayFactors(ass.assessmentID)}" />
+					</h:column>
+				</h:dataTable>
+			</div>
+			
 		</h:form>
 	<br/>
 
