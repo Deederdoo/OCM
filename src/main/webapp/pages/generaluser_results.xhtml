@@ -92,16 +92,20 @@ table tr {
 </h:head>
 <h:body>
 
+	<h:commandLink action="generaluser_mainpage">
+		<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
+	</h:commandLink>
+
 	<div id="barcontainer">
 	
 		<div id="top">
 		
 			<div id="hori">
-				<p:barChart model="#{adminHoriBarChart.hbarModel}"/>
+				<p:barChart model="#{genHoriBarChart.hbarModel}"/>
 			</div>
 			
 			<div id="vert">
-				<p:barChart model="#{adminBarChart.model}"/>
+				<p:barChart model="#{genBarChart.model}"/>
 			</div>
 			
 		</div>

@@ -2,11 +2,11 @@ package com.orgfitech.model;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named("adminChartDTO")
-@ViewScoped
+@SessionScoped
 public class AdminChartDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

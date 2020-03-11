@@ -20,13 +20,13 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 
 import com.orgfitech.jsf.QuestionController;
 
-@Named("adminHoriBarChart")
+@Named("genHoriBarChart")
 @RequestScoped
-public class AdminHoriBarChart {
+public class GenHoriBarChart {
 
 	HorizontalBarChartModel hbarModel;
 	
-	public AdminHoriBarChart() {
+	public GenHoriBarChart() {
 		
 		hbarModel = new HorizontalBarChartModel();
 	    ChartData data = new ChartData();
@@ -38,9 +38,9 @@ public class AdminHoriBarChart {
 	     
 	    List<Number> values = new ArrayList<>();
 	    
-	    for(int i = 0; i < 7; i++) {
+	    for(int i = 0; i < QuestionController.resultsAVGFactor.size(); i++) {
 	    	
-	    	values.add(rand.nextInt(10));
+	    	values.add(QuestionController.resultsAVGFactor.get(i));
 	    }
 	    
 	    hbarDataSet.setData(values);

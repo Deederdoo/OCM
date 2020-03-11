@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.SessionMap;
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
@@ -17,7 +17,7 @@ import com.orgfitech.dao.UserDao;
 import com.orgfitech.model.UserDTO;
 
 @Named("userController")
-@SessionScoped
+@ApplicationScoped
 public class UserController implements Serializable {
     private static final long serialVersionUID = 1L;
 

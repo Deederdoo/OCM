@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.orgfitech.chart.AdminBarChart;
 import com.orgfitech.dao.AdminChartDao;
 import com.orgfitech.model.AdminChartDTO;
 import com.orgfitech.model.FactorResultDTO;
 
 @Named("resultsController")
-@SessionScoped
+@ApplicationScoped
 public class ResultsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 

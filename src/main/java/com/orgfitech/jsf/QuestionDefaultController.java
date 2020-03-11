@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.orgfitech.dao.AssessmentDao;
-import com.orgfitech.dao.QuestionDao;
 import com.orgfitech.dao.QuestionDefaultDao;
 import com.orgfitech.model.FactorDefaultDTO;
 import com.orgfitech.model.QuestionDefaultDTO;

@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,7 +17,7 @@ import com.orgfitech.dao.UserDaoImpl;
 import com.orgfitech.model.AssessmentDTO;
 
 @Named("assessmentController")
-@SessionScoped
+@ApplicationScoped
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
