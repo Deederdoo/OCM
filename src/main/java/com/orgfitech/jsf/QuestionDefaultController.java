@@ -6,19 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.orgfitech.dao.AssessmentDao;
-import com.orgfitech.dao.QuestionDao;
 import com.orgfitech.dao.QuestionDefaultDao;
 import com.orgfitech.model.FactorDefaultDTO;
 import com.orgfitech.model.QuestionDefaultDTO;
 
 @Named("questionDefaultController")
-@ApplicationScoped
+@SessionScoped
 public class QuestionDefaultController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -172,9 +170,9 @@ public class QuestionDefaultController implements Serializable {
 			
 			try {
 				
-				for(int j = 0; j < toClean.get(i).size(); j++) {
+				for(int j = toClean.get(i).size() - 1; j > 0; j--) {
 					
-					if(toClean.get(i).get(j).getDetails().equals(null) || toClean.get(i).get(j).getDetails().isEmpty()) {
+					if(toClean.get(i).get(j).getDetails().equals(null) || toClean.get(i).get(j).getDetails().isEmpty() || toClean.get(i).get(j).getDetails().equals(" ")){
 						
 						System.out.println("CLEANING...");
 						System.out.println(toClean.get(i).get(j));

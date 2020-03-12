@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.orgfitech.chart;
 
 import java.io.Serializable;
@@ -20,16 +23,20 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 
 import com.orgfitech.jsf.QuestionController;
 
-@Named("adminBarChart")
+/**
+ * @author Deeder
+ *
+ */
+@Named("genBarChart")
 @RequestScoped
-public class AdminBarChart implements Serializable{
+public class GenBarChart implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private BarChartModel model;
 	
 	protected int pcm;
 	
-	public AdminBarChart() {
+	public GenBarChart() {
 		
 		model = new BarChartModel();
         ChartData data = new ChartData();
@@ -38,7 +45,7 @@ public class AdminBarChart implements Serializable{
         barDataSet.setLabel("Score");
         
         List<Number> values = new ArrayList<>();
-        values.add(pcm); //PCM
+        values.add(QuestionController.resultsPCM.get("pcm")); //PCM
         
         barDataSet.setData(values);
          

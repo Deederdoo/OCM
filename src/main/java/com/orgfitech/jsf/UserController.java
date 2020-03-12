@@ -42,7 +42,8 @@ public class UserController implements Serializable {
     }
 
     
-    private void logMsg(String msg) {
+    @SuppressWarnings("unused")
+	private void logMsg(String msg) {
         ((ServletContext)externalContext.getContext()).log(msg);
     }
 
@@ -92,10 +93,16 @@ public class UserController implements Serializable {
    
     
     public String homePage() {
+    	
+    	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    	
         return "mainpage";
     }
     
     public String logOut() {
+    	
+    	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    	
         return "login";
     }
     

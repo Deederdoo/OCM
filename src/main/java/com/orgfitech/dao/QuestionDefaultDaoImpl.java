@@ -57,7 +57,9 @@ public class QuestionDefaultDaoImpl implements QuestionDefaultDao, Serializable{
 	@PreDestroy
 	protected void closeConnectionAndStatements() {
 		try {
-
+			
+			System.out.println("CLOSED 2");
+			
 			readAllPstmt.close();
 			// readByIdPstmt.close();
 			// createPstmt.close();

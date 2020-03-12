@@ -3,11 +3,11 @@ package com.orgfitech.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named("assessmentDTO")
-@ViewScoped
+@SessionScoped
 public class AssessmentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

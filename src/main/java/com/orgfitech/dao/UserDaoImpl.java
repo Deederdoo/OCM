@@ -85,6 +85,7 @@ public class UserDaoImpl implements UserDao, Serializable {
     protected void closeConnectionAndStatements() {
         try {
 
+        	System.out.println("CLOSED 1");
             readAllPstmt.close();
             readByIdPstmt.close();
             createPstmt.close();

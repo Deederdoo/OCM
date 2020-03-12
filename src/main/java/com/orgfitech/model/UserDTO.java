@@ -8,11 +8,11 @@ package com.orgfitech.model;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named("userDTO")
-@ViewScoped
+@RequestScoped
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,8 +29,6 @@ public class UserDTO implements Serializable {
     protected boolean editable;
     //protected int accessstate;
     //protected int accessflag;
-    
-    
         
 
     public int getId() {

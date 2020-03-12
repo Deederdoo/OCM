@@ -11,10 +11,10 @@ import com.orgfitech.model.UserDTO;
 @Named("loginController")
 @RequestScoped
 public class LoginController {
-
+	
     @Inject
     protected ExternalContext externalContext;
-
+    
     protected UserDao userDao;
     protected UserDTO userDTO;
     private String CurrentLoginUser;
@@ -26,17 +26,22 @@ public class LoginController {
     
     
     public String validateLogin(String user, String password){
-       
+    	
+    	System.out.println("Invalidated...");
+    	externalContext.invalidateSession();
+    	
         boolean adminUser=userDao.validateLogin1(user, password);
         boolean commonUser=userDao.validateLogin2(user, password);
         //adminUser = false;
        // commonUser = true;
         setCurrentLoginUser(user);
         if(adminUser) {
-            return "mainpage";
+        	
+            return "mainpage.xhtml?faces-redirect=true";
         }
         if(commonUser) {
-            return "generaluser_mainpage";
+        	
+            return "generaluser_mainpage.xhtml?faces-redirect=true";
         }
         else {
             return "login";

@@ -70,6 +70,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			System.out.println("CLOSED 7");
 			readByNamePstmt.close();
 
 			readAllPstmt.close();

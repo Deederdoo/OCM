@@ -10,7 +10,6 @@ import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.orgfitech.chart.AdminBarChart;
 import com.orgfitech.dao.AdminChartDao;
 import com.orgfitech.model.AdminChartDTO;
 import com.orgfitech.model.FactorResultDTO;

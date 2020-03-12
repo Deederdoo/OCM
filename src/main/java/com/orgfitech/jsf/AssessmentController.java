@@ -19,7 +19,7 @@ import com.orgfitech.model.AssessmentDTO;
 @SessionScoped
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected String assName;
 
 	public static HashMap<Integer, String> assNameMap;
@@ -89,7 +89,6 @@ public class AssessmentController implements Serializable {
 
 	public String displayAssessments() {
 		loadAssessments();
-
 		return "main_assessments";
 	}
 	

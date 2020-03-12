@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,7 +18,7 @@ import com.orgfitech.model.QuestionDTO;
 import com.orgfitech.model.QuestionDefaultDTO;
 
 @Named("questionController")
-@ApplicationScoped
+@SessionScoped
 public class QuestionController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -103,6 +103,8 @@ public class QuestionController implements Serializable {
 		}
 
 		AssessmentController.assIdMap.clear();
+		
+		externalContext.invalidateSession();
 
 		return "main_assessments?faces-redirect=true";
 	}
