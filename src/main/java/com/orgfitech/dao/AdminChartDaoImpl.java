@@ -56,6 +56,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			System.out.println("CLOSED 8");
+			
 			readAllTablesPstmt.close();
 
 			readAllChartsPstmt.close();

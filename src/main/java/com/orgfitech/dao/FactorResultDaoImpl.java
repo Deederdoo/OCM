@@ -62,6 +62,9 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     @PreDestroy
     protected void closeConnectionAndStatements() {
         try {
+        	
+        	System.out.println("CLOSED 4");
+        	
             createFactorResultPstmt.close();
             findUserIdByEmailPstmt.close();
             readFactorResultByUserIdPstmt.close();

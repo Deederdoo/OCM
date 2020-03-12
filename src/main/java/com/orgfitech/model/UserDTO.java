@@ -29,8 +29,6 @@ public class UserDTO implements Serializable {
     protected boolean editable;
     //protected int accessstate;
     //protected int accessflag;
-    
-    
         
 
     public int getId() {

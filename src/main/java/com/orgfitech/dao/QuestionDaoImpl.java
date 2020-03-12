@@ -77,6 +77,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			System.out.println("CLOSED 3");
+			
 			readAllassIDPstmt.close();
 			
 			readAllPstmt.close();

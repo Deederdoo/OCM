@@ -20,6 +20,8 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 	
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
+	private static final String READ_BY_ID = "select * from factor where surveyid = (?);";
+	
 	private static final String READ_ALL = "select * from factor";
 	
 	private static final String INSERT_FACTOR =
@@ -31,12 +33,11 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 
 	protected Connection conn;
 	
+	protected PreparedStatement readByIDPstmt;
+	
 	protected PreparedStatement readAllPstmt;
 
-	// protected PreparedStatement readByIdPstmt;
 	protected PreparedStatement createPstmt;
-	// protected PreparedStatement updatePstmt;
-	// protected PreparedStatement deleteByIdPstmt;
 
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
@@ -44,13 +45,11 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 
 			conn = assDS.getConnection();
 			
+			readByIDPstmt = conn.prepareStatement(READ_BY_ID);
+			
 			readAllPstmt = conn.prepareStatement(READ_ALL);
-
-			// TODO - prepare rest of statements for rest of C-R-U-D
-			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
+			
 			createPstmt = conn.prepareStatement(INSERT_FACTOR);
-			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
-			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
 
 		} catch (Exception e) {
 			System.out.println("TEST: " + readAllPstmt);
@@ -63,11 +62,13 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			System.out.println("CLOSED 6");
+			
+			readByIDPstmt.close();
+			
 			readAllPstmt.close();
-			// readByIdPstmt.close();
+			
 			createPstmt.close();
-			// updatePstmt.close();
-			// deleteByIdPstmt.close();
 
 			conn.close();
 		} catch (Exception e) {
@@ -77,7 +78,29 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 	
 	public List<FactorDTO> readAllFactorsByID(int id){
 		
-		List<FactorDTO> tempFacs = readAllFactors();
+		List<FactorDTO> tempFacs = new ArrayList<>();
+		
+		try {
+			readByIDPstmt.setInt(1, id);
+			ResultSet rs = readByIDPstmt.executeQuery();
+
+			while (rs.next()) {
+				FactorDTO newFac = new FactorDTO();
+				newFac.setFactorID(rs.getInt("idfac"));
+				newFac.setAssessmentID(rs.getInt("surveyid"));
+				newFac.setDetails(rs.getString("details"));
+				newFac.setAvgFactorPCM(rs.getInt("avgfactorpcm"));
+
+				tempFacs.add(newFac);
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			System.out.println("something went wrong getting .......: ");
+		}
 		
 		return tempFacs;
 	}

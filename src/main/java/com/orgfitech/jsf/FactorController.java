@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
@@ -16,7 +15,7 @@ import com.orgfitech.model.FactorDTO;
 import com.orgfitech.model.FactorDefaultDTO;
 
 @Named("factorController")
-@ApplicationScoped
+@SessionScoped
 public class FactorController implements Serializable {
 	private static final long serialVersionUID = 1L;
 

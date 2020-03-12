@@ -58,6 +58,8 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 	protected void closeConnectionAndStatements() {
 		try {
 
+			System.out.println("CLOSED 5");
+			
 			readAllPstmt.close();
 			// readByIdPstmt.close();
 			// createPstmt.close();

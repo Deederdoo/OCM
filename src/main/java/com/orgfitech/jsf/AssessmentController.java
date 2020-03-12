@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,10 +16,10 @@ import com.orgfitech.dao.UserDaoImpl;
 import com.orgfitech.model.AssessmentDTO;
 
 @Named("assessmentController")
-@ApplicationScoped
+@SessionScoped
 public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected String assName;
 
 	public static HashMap<Integer, String> assNameMap;
@@ -90,7 +89,6 @@ public class AssessmentController implements Serializable {
 
 	public String displayAssessments() {
 		loadAssessments();
-
 		return "main_assessments";
 	}
 	
