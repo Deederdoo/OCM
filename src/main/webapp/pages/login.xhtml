@@ -23,26 +23,30 @@
 
 <h:body >
 <br />
-<h:graphicImage id="image" library="images" name="finalLogo_black.png" />
+	<h:graphicImage id="image" library="images" name="branding-03.png" />
 
-<div id="aboutText">
+	<div id="aboutText">
  
 
  
  
-</div>
+	</div>
 	<div id="logcontainer">
 		<h:form>
 			<h:outputLabel  for="username">Username:    </h:outputLabel>
-			<h:inputText type="Text"
-				value="#{userDTO.email}" id="username"
-				name="email" />
+			<h:inputText id="username" type="Text" value="#{userDTO.email}" name="email">
+				<f:validator validatorId="emptyInputValidator"/>
+				<f:validator validatorId="emailValidator"/>
+			</h:inputText>
+			<h:message for="username" style="color:red;" />
 
 <br />
 <br />
 			<h:outputLabel for="password"> Password: </h:outputLabel>
-			<h:inputText type="Text"
-				value="#{userDTO.password}" id="password"></h:inputText>
+			<h:inputText id="password" type="Text" value="#{userDTO.password}">
+				<f:validator validatorId="emptyInputValidator"/>
+			</h:inputText>
+			<h:message for="password" style="color:red;" />
 <br></br>
 <br></br>
 			<div id="lower">

@@ -91,7 +91,7 @@ public class QuestionDefaultController implements Serializable {
 		while(output.size() < 3) {
 			
 			QuestionDefaultDTO temp = new QuestionDefaultDTO();
-			temp.setFactorID(factorId);
+			temp.setFactorID(id);
 			
 			output.add(temp);
 		}

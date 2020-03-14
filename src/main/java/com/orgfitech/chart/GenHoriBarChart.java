@@ -53,6 +53,9 @@ public class GenHoriBarChart {
         bgColor.add("rgba(69, 107, 161, 0.8)");
         bgColor.add("rgba(69, 107, 161, 0.8)");
         bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
 	    hbarDataSet.setBackgroundColor(bgColor);
 	     
 	    List<String> borderColor = new ArrayList<>();
@@ -62,20 +65,22 @@ public class GenHoriBarChart {
         borderColor.add("rgb(10, 2, 0)");
         borderColor.add("rgb(10, 2, 0)");
         borderColor.add("rgb(10, 2, 0)");
-        borderColor.add("rgb(10, 2, 0)");;
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
 	    hbarDataSet.setBorderColor(borderColor);
 	    hbarDataSet.setBorderWidth(1);
 	     
 	    data.addChartDataSet(hbarDataSet);
 	     
 	    List<String> labels = new ArrayList<>();
-	    labels.add("Factor 1");
-	    labels.add("Factor 2");
-	    labels.add("Factor 3");
-	    labels.add("Factor 4");
-	    labels.add("Factor 5");
-	    labels.add("Factor 6");
-	    labels.add("Factor 7");
+	    
+	    for(int i = 0; i < QuestionController.resultsAVGFactor.size(); i++) {
+	    	
+	    	labels.add("Factor " + (i + 1));
+	    }
+	    
 	    data.setLabels(labels);
 	    hbarModel.setData(data);
 	     
