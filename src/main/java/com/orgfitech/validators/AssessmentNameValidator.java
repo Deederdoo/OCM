@@ -10,7 +10,7 @@ import javax.faces.validator.ValidatorException;
 import com.orgfitech.jsf.AssessmentController;
 
 @FacesValidator("assessmentNameValidator")
-public class assessmentNameValidator implements Validator<String>{
+public class AssessmentNameValidator implements Validator<String>{
 	
 	@Override
 	public void validate(FacesContext context, UIComponent component, String value) throws ValidatorException {
