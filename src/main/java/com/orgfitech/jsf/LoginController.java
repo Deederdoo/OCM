@@ -1,5 +1,7 @@
 package com.orgfitech.jsf;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
@@ -10,9 +12,10 @@ import com.orgfitech.model.UserDTO;
 
 @Named("loginController")
 @RequestScoped
-public class LoginController {
-	
-    @Inject
+public class LoginController implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	@Inject
     protected ExternalContext externalContext;
     
     protected UserDao userDao;

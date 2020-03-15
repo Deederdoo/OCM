@@ -1,5 +1,6 @@
 package com.orgfitech.chart;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,8 +23,9 @@ import com.orgfitech.jsf.QuestionController;
 
 @Named("adminHoriBarChart")
 @RequestScoped
-public class AdminHoriBarChart {
-
+public class AdminHoriBarChart implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	HorizontalBarChartModel hbarModel;
 	
 	public AdminHoriBarChart() {

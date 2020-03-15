@@ -1,5 +1,6 @@
 package com.orgfitech.chart;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,16 +23,15 @@ import com.orgfitech.jsf.QuestionController;
 
 @Named("genHoriBarChart")
 @RequestScoped
-public class GenHoriBarChart {
-
+public class GenHoriBarChart implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	HorizontalBarChartModel hbarModel;
 	
 	public GenHoriBarChart() {
 		
 		hbarModel = new HorizontalBarChartModel();
 	    ChartData data = new ChartData();
-	    
-	    Random rand = new Random();
 	    
 	    HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
 	    hbarDataSet.setLabel("Score");
