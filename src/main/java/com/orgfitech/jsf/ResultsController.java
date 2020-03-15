@@ -21,7 +21,7 @@ public class ResultsController implements Serializable{
 
 	protected int assessmentID;
 	
-	Random rand = new Random();
+	protected List<Double> scores;
 	
 	@Inject
     protected ExternalContext externalContext;
@@ -43,39 +43,36 @@ public class ResultsController implements Serializable{
 		this.adminDao = dao;
 	}
 
-	public void loadTestValues() {
-		
-		adminCharts = new ArrayList<>();
-		
-		for(int i = 0; i < 30; i++) {
-			
-			adminChart = new AdminChartDTO();
-			
-			adminChart.setUserID(i + 1);
-			adminChart.setFirstName("John");
-			adminChart.setLastName("Doe");
-			adminChart.setDepartment("Shipping");
-			adminChart.setGender("Other");
-			adminChart.setAgeGroup("");
-			adminChart.setPcm(rand.nextInt(101));
-			
-			adminCharts.add(adminChart);
-		}
-		
-		
-		System.out.println("RAN");
-	}
+//	public void loadTestValues() {
+//		
+//		adminCharts = new ArrayList<>();
+//		
+//		for(int i = 0; i < 30; i++) {
+//			
+//			adminChart = new AdminChartDTO();
+//			
+//			adminChart.setUserID(i + 1);
+//			adminChart.setFirstName("John");
+//			adminChart.setLastName("Doe");
+//			adminChart.setDepartment("Shipping");
+//			adminChart.setGender("Other");
+//			adminChart.setAgeGroup("");
+//			adminChart.setPcm(rand.nextInt(101));
+//			
+//			adminCharts.add(adminChart);
+//		}
+//	}
 	
 	public void loadUsers(int assID) {
 		
 		setAdminCharts(adminDao.readAllTables(assID));
+		setScores(adminDao.readAvgFac(assID));
 	}
 	
 	public String goToResults(int assID) {
 		
 		this.assessmentID = assID;
-		//loadUsers(assID);
-		loadTestValues();
+		loadUsers(assID);
 		
 		return "results";
 	}
@@ -89,7 +86,15 @@ public class ResultsController implements Serializable{
 	}
 	
 	//----------Getters and Setters-------------
-	
+
+	public List<Double> getScores() {
+		return scores;
+	}
+
+	public void setScores(List<Double> scores) {
+		this.scores = scores;
+	}
+
 	public AdminChartDTO getAdminChart() {
 		return adminChart;
 	}

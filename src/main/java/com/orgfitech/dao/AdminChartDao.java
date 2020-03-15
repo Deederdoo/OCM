@@ -7,6 +7,8 @@ import com.orgfitech.model.FactorResultDTO;
 
 public interface AdminChartDao {
 
+	public List<Double> readAvgFac(int assID);
+	
 	public List<AdminChartDTO> readAllTables(int assID);
 	
 	public List<FactorResultDTO> readAllCharts(int userID, int assID);

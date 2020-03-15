@@ -21,8 +21,14 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
-	private static final String READ_ALL_TABLE = "select person.userid, person.firstname, person.lastname, person.department, person_survey.pcm "
-			+ "from person, person_survey where surveyid = (?);";
+	private static final String READ_AVG_FAC = "select score "
+			+ "from question_answer "
+			+ "where surveyid = (?);";
+	
+	private static final String READ_ALL_TABLE = "select * "
+			+ "from person_survey "
+			+ "join person on person_survey.userid = person.userid "
+			+ "where surveyid = (?);";
 
 	private static final String READ_ALL_CHART = "select factor_answer.factorpcm, factor.details "
 			+ "from factor_answer, factor where factor_answer.userid = (?) and factor.surveyid = (?);";
@@ -31,6 +37,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	protected DataSource assDS;
 
 	protected Connection conn;
+	
+	protected PreparedStatement readAvgFacPstmt;
 
 	protected PreparedStatement readAllTablesPstmt;
 
@@ -42,6 +50,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 
 			conn = assDS.getConnection();
 
+			readAvgFacPstmt = conn.prepareStatement(READ_AVG_FAC);
+			
 			readAllTablesPstmt = conn.prepareStatement(READ_ALL_TABLE);
 
 			readAllChartsPstmt = conn.prepareStatement(READ_ALL_CHART);
@@ -58,6 +68,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 
 			System.out.println("CLOSED 8");
 			
+			readAvgFacPstmt.close();
+			
 			readAllTablesPstmt.close();
 
 			readAllChartsPstmt.close();
@@ -66,6 +78,33 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
 		}
+	}
+	
+	public List<Double> readAvgFac(int assID){
+		
+		List<Double> tempList = new ArrayList<>();
+		
+		try {
+			
+			readAvgFacPstmt.setInt(1, assID);
+			ResultSet rs = readAvgFacPstmt.executeQuery();
+
+			while (rs.next()) {
+				double tempDub;
+				tempDub = (rs.getDouble("score"));
+
+				tempList.add(tempDub);
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			System.out.println("something went wrong getting .......: ");
+		}
+		
+		return tempList;
 	}
 
 	public List<FactorResultDTO> readAllCharts(int userID, int assID) {

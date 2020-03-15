@@ -31,17 +31,10 @@ public class AdminHoriBarChart {
 		hbarModel = new HorizontalBarChartModel();
 	    ChartData data = new ChartData();
 	    
-	    Random rand = new Random();
-	    
 	    HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
 	    hbarDataSet.setLabel("Score");
 	     
 	    List<Number> values = new ArrayList<>();
-	    
-	    for(int i = 0; i < 7; i++) {
-	    	
-	    	values.add(rand.nextInt(10));
-	    }
 	    
 	    hbarDataSet.setData(values);
 	     
@@ -111,27 +104,27 @@ public class AdminHoriBarChart {
 	    hbarModel.setOptions(options);
 	}
 	
-	public void updateModel() {
+	public void updateModel(List<Double> usrScore) {
 		
 	    ChartData data = new ChartData();
-	    
-	    Random rand = new Random();
 	    
 	    HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
 	    hbarDataSet.setLabel("Score");
 	     
 	    List<Number> values = new ArrayList<>();
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
-	    values.add(rand.nextInt(11));
+	    
+	    for(int i = 0; i < usrScore.size(); i++) {
+	    	
+	    	values.add(usrScore.get(i));
+	    }
+	    
 	    hbarDataSet.setData(values);
 	     
 	    List<String> bgColor = new ArrayList<>();
 	    bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
+        bgColor.add("rgba(69, 107, 161, 0.8)");
         bgColor.add("rgba(69, 107, 161, 0.8)");
         bgColor.add("rgba(69, 107, 161, 0.8)");
         bgColor.add("rgba(69, 107, 161, 0.8)");
@@ -147,20 +140,22 @@ public class AdminHoriBarChart {
         borderColor.add("rgb(10, 2, 0)");
         borderColor.add("rgb(10, 2, 0)");
         borderColor.add("rgb(10, 2, 0)");
-        borderColor.add("rgb(10, 2, 0)");;
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
+        borderColor.add("rgb(10, 2, 0)");
 	    hbarDataSet.setBorderColor(borderColor);
 	    hbarDataSet.setBorderWidth(1);
 	     
 	    data.addChartDataSet(hbarDataSet);
 	     
 	    List<String> labels = new ArrayList<>();
-	    labels.add("Factor 1");
-	    labels.add("Factor 2");
-	    labels.add("Factor 3");
-	    labels.add("Factor 4");
-	    labels.add("Factor 5");
-	    labels.add("Factor 6");
-	    labels.add("Factor 7");
+	    
+	    for(int i = 0; i < usrScore.size(); i++) {
+	    	
+	    	labels.add("Factor " + (i + 1));
+	    }
+	    
 	    data.setLabels(labels);
 	    this.hbarModel.setData(data);
 	     

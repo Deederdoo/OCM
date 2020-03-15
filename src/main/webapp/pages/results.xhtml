@@ -161,13 +161,8 @@ table tr {
 						
 						<h:column>
 							<f:facet name="header">View</f:facet>
-							<h:commandButton value="View" action=" "/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">TESTView</f:facet>
-							<h:commandButton value="TEST" action="#{adminBarChart.createModel(ad.pcm)}">
-								<f:actionListener binding="#{adminHoriBarChart.updateModel()}" />
+							<h:commandButton value="View" action="#{adminBarChart.createModel(ad.pcm)}">
+								<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores)}" />
 							</h:commandButton>
 						</h:column>
 						

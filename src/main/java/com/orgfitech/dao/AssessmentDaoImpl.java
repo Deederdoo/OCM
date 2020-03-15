@@ -28,11 +28,15 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			+ "VALUES (?,?,?,?,?);";
 
 	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
+	
+	private static final String GET_FINISHED_ASS = "SELECT SURVEYID FROM PERSON_SURVEY;";
 
 	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
 	protected DataSource assDS;
 
 	protected Connection conn;
+	
+	protected PreparedStatement readFinishedPstmt;
 
 	protected PreparedStatement readByNamePstmt;
 
@@ -49,6 +53,8 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 			conn = assDS.getConnection();
 
+			readFinishedPstmt = conn.prepareStatement(GET_FINISHED_ASS);
+			
 			readByNamePstmt = conn.prepareStatement(GET_ID_BY_NAME);
 
 			readAllPstmt = conn.prepareStatement(READ_ALL);
@@ -71,6 +77,9 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		try {
 
 			System.out.println("CLOSED 7");
+			
+			readFinishedPstmt.close();
+			
 			readByNamePstmt.close();
 
 			readAllPstmt.close();
@@ -108,6 +117,31 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		return temp;
 	}
 
+	public List<Integer> readFinished(){
+		
+		List<Integer> finished = new ArrayList<>();
+		
+		try {
+			ResultSet rs = readFinishedPstmt.executeQuery();
+
+			while (rs.next()) {
+				int id;
+				id = (rs.getInt("surveyid"));
+
+				finished.add(id);
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			System.out.println("something went wrong getting .......: ");
+		}
+		
+		return finished;
+	}
+	
 	public List<AssessmentDTO> readAllAsessments() {
 
 		List<AssessmentDTO> assessments = new ArrayList<>();
