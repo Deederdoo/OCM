@@ -21,6 +21,8 @@ public class AssessmentController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	protected String assName;
+	
+	protected boolean finished;
 
 	public static HashMap<Integer, String> assNameMap;
 
@@ -100,6 +102,35 @@ public class AssessmentController implements Serializable {
 		genUserLoadAssessments();
 		
 		return "generaluser_assessments";
+	}
+	
+	public boolean notTaken(int assID) {
+		
+		List<Integer> tempList = assessmentDao.readFinished();
+		
+		for(int i = 0; i < tempList.size(); i++) {
+			
+			if(tempList.get(i) == assID) {
+				
+				finished(true);
+				
+				return false;
+			}
+		}
+		
+		finished(false);
+		
+		return true;
+	}
+	
+	public boolean getFinished() {
+		
+		return finished;
+	}
+	
+	public void finished(boolean isFinished) {
+		
+		this.finished = isFinished;
 	}
 
 	public int getAssIdByName(String name) {

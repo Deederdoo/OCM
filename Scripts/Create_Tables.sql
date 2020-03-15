@@ -1,3 +1,4 @@
+
 USE ocm;
 
 CREATE TABLE SURVEY (
@@ -74,7 +75,7 @@ CREATE TABLE QUESTION_ANSWER (
     QuestionAnswerID    int(10) NOT NULL AUTO_INCREMENT,
     UserID              int(10),
     SurveyID            int(10),
-    Score               int(10),
+    Score               double(10,2),
     QuestionID          int(10),
     OrgId				int(10) NOT NULL,
     CONSTRAINT questionid_pk PRIMARY KEY (QuestionAnswerID),
