@@ -3,10 +3,11 @@ package com.orgfitech.dao;
 import java.util.List;
 
 import com.orgfitech.model.AssessmentDTO;
+import com.orgfitech.model.UserDTO;
 
 public interface AssessmentDao {
 
-	public List<Integer> readFinished();
+	public List<UserDTO> readFinished();
 	
 	public int getIdByName(String name);
 	

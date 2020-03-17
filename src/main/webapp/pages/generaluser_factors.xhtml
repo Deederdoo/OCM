@@ -87,9 +87,7 @@ input[type=submit]:hover {
 </h:head>
 <h:body>
 	<br />
-	<h:commandLink action="#{generaluser_mainpage}">
-		<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
-	</h:commandLink>
+	<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
 	<br />
 	<h:form style="width: 65%; margin: 0 auto;">
 	
@@ -107,10 +105,11 @@ input[type=submit]:hover {
 						</h:column>
 						<h:column>
 							<h:panelGrid columns="1" style="margin-bottom: 10px; float: left">
-						        <h:outputText id="output" value="#{fac.factorScore} " style="font-weight: bold; font-size: 24px; color: #ffe0bf" />
+						        <h:outputText style="color: #ffe0bf" type="text" value="Least important  &#160; &#160; &#160; Most important"></h:outputText>
 	        					<h:inputHidden id="fa1" value="#{fac.factorScore}" />
 						        <p:slider for="fa1" display="output" step="1" maxValue="10" displayTemplate="{value}" style="width: 200px; background-color: #405891; border-style: outset; border-color: #f6f9f9; border-width: 2px;"/>
 						        <h:outputText type="text" value=" __| __| __| __| __| __| __| __| __| "/>
+						        <h:outputText id="output" value="#{fac.factorScore} " style="font-weight: bold; font-size: 24px; color: #ffe0bf" />
 						    </h:panelGrid>
 						</h:column>	
 					</h:column>

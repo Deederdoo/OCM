@@ -81,10 +81,9 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Firstname']}
-									<h:inputText id="new_firstName" required="true"
-										requiredMessage="#{uiconsts['enter_valid_string']}"
+									<h:inputText id="new_firstName"
 										value="#{userDTO.firstName}">
-										<f:validateRegex pattern="^.{0,30}$" />
+										<f:validator validatorId="emptyInputValidator"/>
 									</h:inputText> </span>
 							</div>
 							<h:message for="new_firstName" style="color:red" />
@@ -94,10 +93,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Lastname']}
-									<h:inputText id="new_lastName" required="true"
-										requiredMessage="#{uiconsts['enter_valid_string']}"
+									<h:inputText id="new_lastName"
 										value="#{userDTO.lastName}">
-										<f:validateRegex pattern="^.{0,30}$" />
 									</h:inputText> </span>
 							</div>
 							<h:message for="new_lastName" style="color:red" />
@@ -108,11 +105,10 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-at" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Email']}
-									<h:inputText id="new_email" required="true"
-										requiredMessage="#{uiconsts['enter_valid_string']}"
+									<h:inputText id="new_email"
 										value="#{userDTO.email}">
-
-										<f:validateRegex pattern=".+@.+" />
+										<f:validator validatorId="emptyInputValidator"/>
+										<f:validator validatorId="emailValidator"/>
 									</h:inputText> </span>
 							</div>
 							<h:message for="new_email" style="color:red" />
@@ -123,11 +119,9 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-landmark" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Department']}
-									<h:inputText id="new_department" required="true"
-										requiredMessage="#{uiconsts['enter_valid_string']}"
+									<h:inputText id="new_department"
 										value="#{userDTO.department}">
-
-										<f:validateRegex pattern="^.{0,100}$" />
+										<f:validator validatorId="emptyInputValidator"/>
 									</h:inputText> </span>
 							</div>
 							<h:message for="new_department" style="color:red" />
@@ -136,11 +130,10 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-transparent border-0"><i
 									class="fa fa-lock" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Password']}
-									<h:inputText id="new_password" required="true"
-										requiredMessage="#{uiconsts['enter_valid_string']}"
+									<h:inputText id="new_password"
 										value="#{userDTO.password}">
 
-										<f:validateRegex pattern="^.{8,20}$" />
+										<f:validator validatorId="emptyInputValidator"/>
 
 									</h:inputText> </span>
 							</div>
@@ -153,6 +146,7 @@
 									class="fa fa-eye" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Access']}
 									<h:inputText id="new_accessLevel"
 										value="#{userDTO.accesslevel}">
+										<f:validator validatorId="accessLevelValidator"/>
 									</h:inputText> </span>
 							</div>
 						</div>
@@ -161,7 +155,7 @@
 
 					<h:panelGrid id="actions" columns="4" cellpadding="10">
 						<h:commandLink value="Submit"
-							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password)}" />
+							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password, userDTO.accesslevel)}" />
 
 						<h:commandLink value="Dismiss"
 							action="#{userController.hideAddPage}" immediate="true" />

@@ -20,14 +20,14 @@ public class UserDTO implements Serializable {
     protected String firstName;
     protected String lastName;
     protected String email;
-    protected String department;
+    protected String department = "default";
     protected String password;
-    protected int accesslevel;
+    protected int accesslevel = 2;
     protected int orgID;
     protected int pcm;
     
     protected boolean editable;
-    //protected int accessstate;
+    protected int accessstate;
     //protected int accessflag;
         
 
@@ -117,18 +117,18 @@ public class UserDTO implements Serializable {
         this.firstName = "";
         this.lastName = "";
         this.email ="";
-        this.department="";
+        this.department="default";
         this.password="";
-        this.accesslevel=0;
+        this.accesslevel=2;
     }
     
-   // public int getAccessstate() {
-      //  return accessstate;
-   // }
+    public int getAccessstate() {
+        return accessstate;
+    }
     
-    //public void setAccessstate(int accessstate) {
-      //  this.accessstate = accessstate;
-    //} 
+    public void setAccessstate(int accessstate) {
+        this.accessstate = accessstate;
+    } 
     
     //public int getAccessflag() {
         //return accessflag;

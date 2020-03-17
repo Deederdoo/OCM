@@ -34,9 +34,10 @@ public class UserDaoImpl implements UserDao, Serializable {
     private static final String READ_ALL =  "select * from person";
     private static final String READ_USER_BY_ID = "select * from person where id = ?";
     private static final String DELETE_USER_BY_ID = "delete from person where userid = ?";
-    private static final String INSERT_USER = "insert into person values(Null,?,?,?,?,?,2,0,1)";
+    private static final String INSERT_USER = "insert into person (firstname, lastname, email, department, pass, access_level, assess_status, pass_flag, orgid) "
+    		+ "values (?,?,?,?,?,?,0,1,?);";
     private static final String UPDATE_USER_ALL_FIELDS = 
-            "update person set FirstName=?, LastName=?, Email=?, Department=?, pass=? where UserID = ?";
+            "update person set FirstName=?, LastName=?, Email=?, Department=?, pass=?, access_level=? where UserID = ?";
 
     private static final String SEARCH_LOGIN_LEVEL1 = "select * from person where email=? and pass=? and access_level=1";
     private static final String SEARCH_LOGIN_LEVEL2 = "select * from person where email=? and pass=? and access_level=2";
@@ -204,8 +205,8 @@ public class UserDaoImpl implements UserDao, Serializable {
         }
 
     }
-
-    public UserDTO createUser(String firstname, String lastname, String email, String department, String password) {
+    
+    public UserDTO createUser(String firstname, String lastname, String email, String department, String password, int accessLevel) {
 
         try {
             conn = userDS.getConnection();
@@ -215,13 +216,15 @@ public class UserDaoImpl implements UserDao, Serializable {
             createPstmt.setString(3, email);
             createPstmt.setString(4, department);
             createPstmt.setString(5, password);
-            // createPstmt.setString(6, person.getAccesslevel());
+            createPstmt.setInt(6, accessLevel);
+            createPstmt.setInt(7, usersOrgIDMap.get("userOrgID"));
 
             createPstmt.executeUpdate();
 
         }
         catch(SQLException e) {
             System.out.println("something went wrong accessing database:");
+            e.printStackTrace();
         }
 
         return null;
@@ -249,10 +252,8 @@ public class UserDaoImpl implements UserDao, Serializable {
             updatePstmt.setString(3, user.getEmail());
             updatePstmt.setString(4, user.getDepartment());
             updatePstmt.setString(5, user.getPassword());
-            updatePstmt.setInt(6, user.getId());
-            // createPstmt.setString(6, user.getAccesslevel());
-
-
+            updatePstmt.setInt(6, user.getAccesslevel());
+            updatePstmt.setInt(7, user.getId());
             updatePstmt.executeUpdate();
 
         }
