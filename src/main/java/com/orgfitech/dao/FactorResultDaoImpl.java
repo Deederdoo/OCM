@@ -14,9 +14,8 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
-import com.orgfitech.model.FactorDefaultDTO;
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.FactorResultDTO;
-import com.orgfitech.model.UserDTO;
 
 public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     private static final long serialVersionUID = 1L;
@@ -29,8 +28,7 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     private static final String INSERT_FACTOR_RESULT =
             "INSERT INTO FACTOR_ANSWER (UserID, SurveyID, FactorRank, FactorPCM, FactorID) "
             + "VALUES (?,?,?,?,?);";
-    @Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-    protected DataSource assDS;
+    
     protected Connection conn;
     protected PreparedStatement readFactorResultByUserIdPstmt;
     protected PreparedStatement findUserIdByEmailPstmt;
@@ -49,7 +47,8 @@ public class FactorResultDaoImpl implements FactorResultDao, Serializable {
     @PostConstruct
     protected void buildConnectionAndStatements() {
         try {
-            conn = assDS.getConnection();
+        	
+        	conn = ConnectionManager.INSTANCE.getConnection();
             findUserIdByEmailPstmt = conn.prepareStatement(FIND_USER_ID_BY_EMAIL);
             readFactorResultByUserIdPstmt = conn.prepareStatement(READ_FACTOR_RESULT_BY_USER_ID);
             createFactorResultPstmt = conn.prepareStatement(INSERT_FACTOR_RESULT);

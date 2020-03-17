@@ -22,14 +22,13 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.UserDTO;
 
 public class UserDaoImpl implements UserDao, Serializable {
     private static final long serialVersionUID = 1L;
     
     public static Map<String, Integer> usersOrgIDMap;
-
-    private static final String USER_DS_JNDI =  "java:comp/env/jdbc/ocm";
 
     private static final String READ_ALL =  "select * from person";
     private static final String READ_USER_BY_ID = "select * from person where id = ?";
@@ -42,13 +41,7 @@ public class UserDaoImpl implements UserDao, Serializable {
     private static final String SEARCH_LOGIN_LEVEL1 = "select * from person where email=? and pass=? and access_level=1";
     private static final String SEARCH_LOGIN_LEVEL2 = "select * from person where email=? and pass=? and access_level=2";
 
-
-    @Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-    protected DataSource userDS;
-
     protected Connection conn;
-
-
     protected PreparedStatement readAllPstmt;
     protected PreparedStatement readByIdPstmt;
     protected PreparedStatement createPstmt;
@@ -62,8 +55,8 @@ public class UserDaoImpl implements UserDao, Serializable {
     @PostConstruct
     protected void buildConnectionAndStatements() {
         try {
-
-            conn = userDS.getConnection();
+        	
+            conn = ConnectionManager.INSTANCE.getConnection();
             readAllPstmt = conn.prepareStatement(READ_ALL);
             readByIdPstmt = conn.prepareStatement(READ_USER_BY_ID);
             createPstmt = conn.prepareStatement(INSERT_USER);
@@ -108,7 +101,6 @@ public class UserDaoImpl implements UserDao, Serializable {
     public boolean validateLogin1(String user, String password) {
 
         try {
-            conn = userDS.getConnection();
             searchLogin1stmt.setString(1, user);
             searchLogin1stmt.setString(2, password); 
             ResultSet rs = searchLogin1stmt.executeQuery();
@@ -134,7 +126,6 @@ public class UserDaoImpl implements UserDao, Serializable {
 
         ResultSet rs;  
         try {
-            conn = userDS.getConnection();
             searchLogin2stmt.setString(1, user);
             searchLogin2stmt.setString(2, password); 
             rs = searchLogin2stmt.executeQuery();
@@ -193,7 +184,6 @@ public class UserDaoImpl implements UserDao, Serializable {
      */
     public void deleteUserById(int userId){
         try {
-            conn = userDS.getConnection();
             deleteByIdPstmt = conn.prepareStatement(DELETE_USER_BY_ID);
             deleteByIdPstmt.setString(1, String.valueOf(userId));
 
@@ -209,7 +199,6 @@ public class UserDaoImpl implements UserDao, Serializable {
     public UserDTO createUser(String firstname, String lastname, String email, String department, String password, int accessLevel) {
 
         try {
-            conn = userDS.getConnection();
 
             createPstmt.setString(1, firstname);
             createPstmt.setString(2, lastname); 
@@ -245,7 +234,6 @@ public class UserDaoImpl implements UserDao, Serializable {
     public void updateUser(UserDTO user) {
 
         try {
-            conn = userDS.getConnection();
 
             updatePstmt.setString(1, user.getFirstName());
             updatePstmt.setString(2, user.getLastName()); 

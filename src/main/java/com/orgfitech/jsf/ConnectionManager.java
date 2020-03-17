@@ -13,32 +13,30 @@ import javax.sql.DataSource;
 public enum ConnectionManager {
 
 	INSTANCE;
-	
-	
-    private DataSource ds = null;
-    private Lock connectionLock = new ReentrantLock();
 
-    ConnectionManager() {
-      try {
-         final Context initCtx = new InitialContext();
-         final Context envCtx = (Context) initCtx.lookup("java:comp/env/jdbc/ocm");
-         ds = (DataSource) envCtx.lookup("jdbc/ocm");
-      } catch (NamingException e) {
-         e.printStackTrace();
-      }
-    }
+	private DataSource ds;
+	private Lock connectionLock = new ReentrantLock();
 
-   public Connection getConnection() throws SQLException {
-      if(ds == null) return null;
+	ConnectionManager() {
 
-      Connection conn = null;
-      connectionLock.lock();
-      try {
-          conn = ds.getConnection();
-      } finally {
-          connectionLock.unlock();
-      }
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ocm");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
-      return conn;
-   }
+	public Connection getConnection() throws SQLException {
+		
+		Connection conn = null;
+		connectionLock.lock();
+		try {
+			conn = ds.getConnection();
+		} finally {
+			connectionLock.unlock();
+		}
+
+		return conn;
+	}
 }

@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.AdminChartDTO;
 import com.orgfitech.model.FactorResultDTO;
 
@@ -33,9 +34,6 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	private static final String READ_ALL_CHART = "select factor_answer.factorpcm, factor.details "
 			+ "from factor_answer, factor where factor_answer.userid = (?) and factor.surveyid = (?);";
 
-	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource assDS;
-
 	protected Connection conn;
 	
 	protected PreparedStatement readAvgFacPstmt;
@@ -48,7 +46,7 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 
-			conn = assDS.getConnection();
+			conn = ConnectionManager.INSTANCE.getConnection();
 
 			readAvgFacPstmt = conn.prepareStatement(READ_AVG_FAC);
 			

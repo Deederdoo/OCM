@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.FactorDefaultDTO;
 
 public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
@@ -21,9 +22,6 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
 	private static final String READ_ALL = "select * from factor_default";
-
-	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource assDS;
 
 	protected Connection conn;
 
@@ -38,7 +36,7 @@ public class FactorDefaultDaoImpl implements FactorDefaultDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 
-			conn = assDS.getConnection();
+			conn = ConnectionManager.INSTANCE.getConnection();
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 
 			// TODO - prepare rest of statements for rest of C-R-U-D

@@ -30,8 +30,6 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
 	
 	private static final String GET_FINISHED_ASS = "SELECT SURVEYID, USERID FROM PERSON_SURVEY;";
-	
-	protected ConnectionManager manager;
 
 	protected Connection conn;
 	
@@ -50,7 +48,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 			
-			conn = manager.getConnection();
+			conn = ConnectionManager.INSTANCE.getConnection();
 			
 			readFinishedPstmt = conn.prepareStatement(GET_FINISHED_ASS);
 			
