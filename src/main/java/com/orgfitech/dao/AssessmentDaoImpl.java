@@ -15,12 +15,12 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.AssessmentDTO;
+import com.orgfitech.model.UserDTO;
 
 public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 
 	private static final String READ_ALL = "select * from survey where orgid = (?)";
 
@@ -29,10 +29,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
 	
-	private static final String GET_FINISHED_ASS = "SELECT SURVEYID FROM PERSON_SURVEY;";
-
-	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource assDS;
+	private static final String GET_FINISHED_ASS = "SELECT SURVEYID, USERID FROM PERSON_SURVEY;";
 
 	protected Connection conn;
 	
@@ -50,8 +47,8 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
 		try {
-
-			conn = assDS.getConnection();
+			
+			conn = ConnectionManager.INSTANCE.getConnection();
 			
 			readFinishedPstmt = conn.prepareStatement(GET_FINISHED_ASS);
 			
@@ -115,18 +112,19 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 		return temp;
 	}
 
-	public List<Integer> readFinished(){
+	public List<UserDTO> readFinished(){
 		
-		List<Integer> finished = new ArrayList<>();
+		List<UserDTO> finished = new ArrayList<>();
 		
 		try {
 			ResultSet rs = readFinishedPstmt.executeQuery();
 
 			while (rs.next()) {
-				int id;
-				id = (rs.getInt("surveyid"));
-
-				finished.add(id);
+				UserDTO temp = new UserDTO();
+				temp.setAccessstate(rs.getInt("surveyid"));
+				temp.setId(rs.getInt("userid"));
+				
+				finished.add(temp);
 			}
 			try {
 				rs.close();

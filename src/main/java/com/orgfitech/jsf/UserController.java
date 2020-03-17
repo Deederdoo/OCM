@@ -142,9 +142,9 @@ public class UserController implements Serializable {
         return "users";
     }
  
- public String addNewUser(String firstname, String lastname, String email, String department, String password) {
+ public String addNewUser(String firstname, String lastname, String email, String department, String password, int accessLevel) {
        
-     userDao.createUser(firstname, lastname, email, department, password);
+     userDao.createUser(firstname, lastname, email, department, password, accessLevel);
      newUser.resetPerson();
      return "users?faces-redirect=true";
  }

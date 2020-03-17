@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.FactorDTO;
 
 public class FactorDaoImpl implements FactorDao, Serializable {
@@ -28,9 +29,6 @@ public class FactorDaoImpl implements FactorDao, Serializable {
     		"INSERT INTO FACTOR (SURVEYID, IDFAC, DETAILS, AVGFACTORPCM) "
     		+ "VALUES (?,?,?,?);";
 
-	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource assDS;
-
 	protected Connection conn;
 	
 	protected PreparedStatement readByIDPstmt;
@@ -43,7 +41,7 @@ public class FactorDaoImpl implements FactorDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 
-			conn = assDS.getConnection();
+			conn = ConnectionManager.INSTANCE.getConnection();
 			
 			readByIDPstmt = conn.prepareStatement(READ_BY_ID);
 			

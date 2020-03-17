@@ -29,7 +29,7 @@ public interface UserDao {
      * 
      * @param employee
      */
-    public UserDTO createUser(String firstname, String lastname, String email, String department, String password);
+    public UserDTO createUser(String firstname, String lastname, String email, String department, String password, int accessLevel);
 
     /**
      * readEmployee method

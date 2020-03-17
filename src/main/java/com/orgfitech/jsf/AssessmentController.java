@@ -14,6 +14,7 @@ import javax.inject.Named;
 import com.orgfitech.dao.AssessmentDao;
 import com.orgfitech.dao.UserDaoImpl;
 import com.orgfitech.model.AssessmentDTO;
+import com.orgfitech.model.UserDTO;
 
 @Named("assessmentController")
 @SessionScoped
@@ -106,11 +107,11 @@ public class AssessmentController implements Serializable {
 	
 	public boolean notTaken(int assID) {
 		
-		List<Integer> tempList = assessmentDao.readFinished();
+		List<UserDTO> tempList = assessmentDao.readFinished();
 		
 		for(int i = 0; i < tempList.size(); i++) {
 			
-			if(tempList.get(i) == assID) {
+			if(tempList.get(i).getAccessstate() == assID && tempList.get(i).getId() == UserDaoImpl.usersOrgIDMap.get("userID")) {
 				
 				finished(true);
 				
