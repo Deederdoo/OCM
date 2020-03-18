@@ -27,9 +27,11 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM, ORGID) "
 			+ "VALUES (?,?,?,?,?);";
 
-	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY " + "WHERE SURVEYNAME = (?);";
+	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY WHERE SURVEYNAME = (?);";
 	
 	private static final String GET_FINISHED_ASS = "SELECT SURVEYID, USERID FROM PERSON_SURVEY;";
+	
+	private static final String DELETE_ASSESSMENT = "DELETE FROM SURVEY WHERE SURVEYID = (?);";
 
 	protected Connection conn;
 	
@@ -38,11 +40,10 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	protected PreparedStatement readByNamePstmt;
 
 	protected PreparedStatement readAllPstmt;
-
-	// protected PreparedStatement readByIdPstmt;
+	
 	protected PreparedStatement createPstmt;
-	// protected PreparedStatement updatePstmt;
-	// protected PreparedStatement deleteByIdPstmt;
+	
+	protected PreparedStatement deleteByIdPstmt;
 
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
@@ -55,15 +56,12 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			readByNamePstmt = conn.prepareStatement(GET_ID_BY_NAME);
 
 			readAllPstmt = conn.prepareStatement(READ_ALL);
-
-			// TODO - prepare rest of statements for rest of C-R-U-D
-			// readByIdPstmt = conn.prepareStatement(READ_EMPLOYEE_BY_ID);
+			
 			createPstmt = conn.prepareStatement(INSERT_ASSESSMENT);
-			// updatePstmt = conn.prepareStatement(UPDATE_EMPLOYEE_ALL_FIELDS);
-			// deleteByIdPstmt = conn.prepareStatement(DELETE_EMPLOYEE_BY_ID);
+			
+			deleteByIdPstmt = conn.prepareStatement(DELETE_ASSESSMENT);
 
 		} catch (Exception e) {
-			System.out.println("TEST: " + readAllPstmt);
 			System.out.println("something went wrong getting connection from database: ");
 			e.printStackTrace();
 		}
@@ -82,6 +80,8 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			readAllPstmt.close();
 			
 			createPstmt.close();
+			
+			deleteByIdPstmt.close();
 
 			conn.close();
 		} catch (Exception e) {
@@ -90,8 +90,6 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 	}
 
 	public int getIdByName(String name) {
-
-		System.out.println("GETNAMEID NAME: " + name);
 
 		int temp = -1;
 
@@ -178,6 +176,17 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			createPstmt.setDouble(4, assessment.getAvgPCM());
 			createPstmt.setInt(5, assessment.getOrgID());
 			createPstmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteAssessmentById(int id) {
+		
+		try {
+			deleteByIdPstmt.setInt(1, id);
+			deleteByIdPstmt.execute();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

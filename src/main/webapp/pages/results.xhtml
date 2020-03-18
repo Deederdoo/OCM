@@ -97,9 +97,26 @@ table tr {
 	overflow: auto;
 }
 
+#image{
+	border: 0;
+	width: 15%;
+	height: 15%;
+	opacity: 1;
+	display: block;
+ 	margin-left: 1%;
+  	margin-top: -1%;
+  	float: left;
+}
+
 </style>
 </h:head>
 <h:body>
+
+		<h:form>
+			<h:commandLink action="#{orgfitechController.navigatePages(1)}" >
+				<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
+			</h:commandLink>
+		</h:form>
 
 	<div id="barcontainer">
 	
