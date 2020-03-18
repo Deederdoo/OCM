@@ -16,6 +16,13 @@
 
 <h:head>
 
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous" />
+		<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+			rel="stylesheet" crossorigin="anonymous" />
+
 	<style>
 html {
 	-webkit-font-smoothing: antialiased;
@@ -106,6 +113,10 @@ input[type=submit]:hover {
 		<h:column>
 			<f:facet name="header">Action Buttons</f:facet>
 			<h:commandLink value="View Results" action="#{resultsController.goToResults(ass.assessmentID)}" />
+			<h:commandLink action="#{assessmentController.deleteAssessmentById(ass.assessmentID)}"
+							immediate="true" style="margin-left:10%;">
+							<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
+			</h:commandLink>
 		</h:column>
 	</h:dataTable>
 

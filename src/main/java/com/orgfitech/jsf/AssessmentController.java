@@ -157,4 +157,11 @@ public class AssessmentController implements Serializable {
 		assIdMap.clear();
 		assIdMap.put("assId", getAssIdByName(assName));
 	}
+	
+	public String deleteAssessmentById(int id) {
+		
+		assessmentDao.deleteAssessmentById(id);
+		
+		return "main_assessments.xhtml?faces-redirect=true";
+	}
 }

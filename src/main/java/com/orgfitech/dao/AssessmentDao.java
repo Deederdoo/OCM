@@ -14,4 +14,6 @@ public interface AssessmentDao {
 	public List<AssessmentDTO> readAllAsessments();
 	
 	public void createAssessment(AssessmentDTO assessment);
+	
+	public void deleteAssessmentById(int id);
 }
