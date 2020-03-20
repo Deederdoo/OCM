@@ -34,6 +34,8 @@ CREATE TABLE PERSON_SURVEY (
     SurveyID        int(10),
     UserID          int(10),
     PCM             int(10),
+    GENDER			varchar(10),
+    AGE_GROUP		varchar(15),
     CONSTRAINT surveyid_fk FOREIGN KEY (SurveyID) REFERENCES SURVEY(SurveyID) ON DELETE CASCADE,
     CONSTRAINT userid_fk FOREIGN KEY (UserID) REFERENCES PERSON(UserID) ON DELETE CASCADE
 );

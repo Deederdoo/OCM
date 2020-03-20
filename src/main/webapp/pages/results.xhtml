@@ -21,7 +21,7 @@
 html {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100%;
-	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+	background-image: linear-gradient(to bottom right, #456ba1, #4693B8, #42a7ad);
 }
 
 #tablecontainer table {
@@ -68,14 +68,14 @@ table tr {
 #barcontainer{
 	margin: 0 auto;
 	padding-top: 2%;
-	padding-bottom: 15px;
-	width:80%;
+	padding-bottom: 2%;
+	width:85%;
 }
 
 #top{
 	margin: 0 auto;
 	width:90%;
-	background-color: #ffffff;
+	background-color: #ebf4ff;
 	
 }
 
@@ -91,7 +91,7 @@ table tr {
 
 #tablecontainer{
 	margin: 0 auto;
-	padding:20px;
+	margin:20px;
 	width:90%;
 	height: 400px;
 	overflow: auto;
@@ -106,6 +106,11 @@ table tr {
  	margin-left: 1%;
   	margin-top: -1%;
   	float: left;
+}
+
+#comparer{
+	float:right;
+	margin:3%;
 }
 
 </style>
@@ -177,14 +182,35 @@ table tr {
 						</h:column>
 						
 						<h:column>
-							<f:facet name="header">View</f:facet>
+							<f:facet name="header">Individual View</f:facet>
 							<h:commandButton value="View" action="#{adminBarChart.createModel(ad.pcm)}">
-								<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores)}" />
+								<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores, ad.userID)}" />
 							</h:commandButton>
 						</h:column>
 						
+						<h:column>
+							<f:facet name="header">Compare</f:facet>
+        					<h:selectBooleanCheckbox value="#{ad.select}" />
+    					</h:column>
+						
 					</h:dataTable>
 				</table>
+				
+				<br/>
+				
+			<div id="comparer">
+				<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}">
+					<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
+					<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
+				</h:commandButton>
+			<br/>
+				<p:selectOneMenu value="#{compareController.selectedItem}" style="width:100%">
+				<f:selectItem itemLabel="Department" itemDisabled="true" noSelectionOption="true" />
+					<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
+	                <f:selectItems value="#{compareController.dropDownItems}" />
+            	</p:selectOneMenu>
+			</div>
+			
 			</h:form>
 		</div>
 	

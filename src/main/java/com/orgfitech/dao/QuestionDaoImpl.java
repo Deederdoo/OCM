@@ -10,19 +10,17 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 
+import com.orgfitech.jsf.CompareController;
+import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.jsf.FactorController;
 import com.orgfitech.model.QuestionDTO;
 
 public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
 	
-	private static final String INSERT_QUESTION_PERSON_ANSWER = "INSERT INTO PERSON_SURVEY (SurveyID, UserID, PCM) "
-			+ "VALUE (?,?,?);";
+	private static final String INSERT_QUESTION_PERSON_ANSWER = "INSERT INTO PERSON_SURVEY (SurveyID, UserID, PCM, GENDER, AGE_GROUP) "
+			+ "VALUE (?,?,?,?,?);";
 	
 	private static final String INSERT_QUESTION_ANSWER = "INSERT INTO QUESTION_ANSWER (UserID, SurveyID, Score, OrgID) "
 			+ "VALUE (?,?,?,?);";
@@ -34,9 +32,6 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	private static final String INSERT_QUESTION =
     		"INSERT INTO QUESTION (SURVEYID, IDFAC, DETAILS) "
     		+ "VALUES (?,?,?);";
-
-	@Resource(name = "jdbc/ocm", lookup = USER_DS_JNDI)
-	protected DataSource qDS;
 
 	protected Connection conn;
 
@@ -54,7 +49,7 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 	protected void buildConnectionAndStatements() {
 		try {
 
-			conn = qDS.getConnection();
+			conn = ConnectionManager.INSTANCE.getConnection();
 			
 			readAllassIDPstmt = conn.prepareStatement(READ_BY_ASS_ID);
 			
@@ -187,6 +182,8 @@ public class QuestionDaoImpl implements QuestionDao, Serializable {
 			createQuestionPersonPstmt.setInt(1, FactorController.genUserAssID.get("guID"));
 			createQuestionPersonPstmt.setInt(2, UserDaoImpl.usersOrgIDMap.get("userID"));
 			createQuestionPersonPstmt.setInt(3, score);
+			createQuestionPersonPstmt.setString(4, CompareController.dropDownMap.get("gender"));
+			createQuestionPersonPstmt.setString(5, CompareController.dropDownMap.get("ageGroup"));
 			createQuestionPersonPstmt.execute();
 			
 		} catch (Exception e) {

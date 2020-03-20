@@ -16,13 +16,12 @@ import javax.sql.DataSource;
 import com.orgfitech.jsf.ConnectionManager;
 import com.orgfitech.model.AdminChartDTO;
 import com.orgfitech.model.FactorResultDTO;
+import com.orgfitech.model.UserDTO;
 
 public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final String USER_DS_JNDI = "java:comp/env/jdbc/ocm";
-
-	private static final String READ_AVG_FAC = "select score "
+	private static final String READ_AVG_FAC = "select score, userid "
 			+ "from question_answer "
 			+ "where surveyid = (?);";
 	
@@ -78,9 +77,9 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 		}
 	}
 	
-	public List<Double> readAvgFac(int assID){
+	public List<UserDTO> readAvgFac(int assID){
 		
-		List<Double> tempList = new ArrayList<>();
+		List<UserDTO> tempList = new ArrayList<>();
 		
 		try {
 			
@@ -88,10 +87,11 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 			ResultSet rs = readAvgFacPstmt.executeQuery();
 
 			while (rs.next()) {
-				double tempDub;
-				tempDub = (rs.getDouble("score"));
+				UserDTO tempDTO = new UserDTO();
+				tempDTO.setId(rs.getInt("userid"));
+				tempDTO.setScore(rs.getDouble("score"));
 
-				tempList.add(tempDub);
+				tempList.add(tempDTO);
 			}
 			try {
 				rs.close();
@@ -149,8 +149,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 				ac.setFirstName(rs.getString("firstname"));
 				ac.setLastName(rs.getString("lastname"));
 				ac.setDepartment(rs.getString("department"));
-				ac.setGender("Not Yet Implemented");
-				ac.setAgeGroup("Not Yet Implemented");
+				ac.setGender(rs.getString("gender"));
+				ac.setAgeGroup(rs.getString("age_group"));
 				ac.setPcm(rs.getInt("pcm"));
 
 				data.add(ac);

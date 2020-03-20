@@ -13,6 +13,7 @@ import javax.inject.Named;
 import com.orgfitech.dao.AdminChartDao;
 import com.orgfitech.model.AdminChartDTO;
 import com.orgfitech.model.FactorResultDTO;
+import com.orgfitech.model.UserDTO;
 
 @Named("resultsController")
 @SessionScoped
@@ -21,7 +22,7 @@ public class ResultsController implements Serializable{
 
 	protected int assessmentID;
 	
-	protected List<Double> scores;
+	protected List<UserDTO> scores;
 	
 	@Inject
     protected ExternalContext externalContext;
@@ -87,11 +88,11 @@ public class ResultsController implements Serializable{
 	
 	//----------Getters and Setters-------------
 
-	public List<Double> getScores() {
+	public List<UserDTO> getScores() {
 		return scores;
 	}
 
-	public void setScores(List<Double> scores) {
+	public void setScores(List<UserDTO> scores) {
 		this.scores = scores;
 	}
 

@@ -17,6 +17,7 @@ public class AdminChartDTO implements Serializable{
 	private String gender;
 	private String ageGroup;
 	private int pcm;
+	private boolean select;
 	
 	
 	public int getUserID() {
@@ -60,5 +61,11 @@ public class AdminChartDTO implements Serializable{
 	}
 	public void setPcm(int pcm) {
 		this.pcm = pcm;
+	}
+	public boolean isSelect() {
+		return select;
+	}
+	public void setSelect(boolean select) {
+		this.select = select;
 	}
 }
