@@ -67,8 +67,8 @@ table tr {
 
 #barcontainer{
 	margin: 0 auto;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	padding-top: 1%;
+	padding-bottom: 1%;
 	width:85%;
 }
 
@@ -91,7 +91,6 @@ table tr {
 
 #tablecontainer{
 	margin: 0 auto;
-	margin:20px;
 	width:90%;
 	height: 400px;
 	overflow: auto;
@@ -110,7 +109,7 @@ table tr {
 
 #comparer{
 	float:right;
-	margin:3%;
+	padding-right: 6%;
 }
 
 </style>
@@ -139,82 +138,81 @@ table tr {
 		
 	</div>
 	
-	<div id="tablecontainer">
-	
-		<div id="bottom" >
-			<h:form>
-				<table>
-					<h:dataTable id="data1" value="#{resultsController.adminCharts}" var="ad" styleClass="table-hover">
-					
-						<h:column>
-							<f:facet name="header">ID</f:facet>
-							<h:outputText type="text" value="#{ad.userID}"/>
-						</h:column>
+	<h:form>
+		<div id="comparer">
+			<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}">
+				<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
+				<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
+			</h:commandButton>
 						
-						<h:column>
-							<f:facet name="header">First Name</f:facet>
-							<h:outputText type="text" value="#{ad.firstName}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Last Name</f:facet>
-							<h:outputText type="text" value="#{ad.lastName}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Department</f:facet>
-							<h:outputText type="text" value="#{ad.department}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Gender</f:facet>
-							<h:outputText type="text" value="#{ad.gender}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Age Group</f:facet>
-							<h:outputText type="text" value="#{ad.ageGroup}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">PCM</f:facet>
-							<h:outputText type="text" value="#{ad.pcm}"/>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Individual View</f:facet>
-							<h:commandButton value="View" action="#{adminBarChart.createModel(ad.pcm)}">
-								<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores, ad.userID)}" />
-							</h:commandButton>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">Compare</f:facet>
-        					<h:selectBooleanCheckbox value="#{ad.select}" />
-    					</h:column>
-						
-					</h:dataTable>
-				</table>
-				
-				<br/>
-				
-			<div id="comparer">
-				<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}">
-					<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
-					<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
-				</h:commandButton>
-			<br/>
-				<p:selectOneMenu value="#{compareController.selectedItem}" style="width:100%">
+			<p:selectOneMenu value="#{compareController.selectedItem}" >
 				<f:selectItem itemLabel="Department" itemDisabled="true" noSelectionOption="true" />
-					<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
-	                <f:selectItems value="#{compareController.dropDownItems}" />
-            	</p:selectOneMenu>
-			</div>
+				<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
+				<f:selectItems value="#{compareController.dropDownItems}" />
+			</p:selectOneMenu>
+		</div>
+	</h:form>
+	
+			<h:form>
+			
+				<div id="tablecontainer">
+			
+					<table>
+						<h:dataTable id="data1" value="#{resultsController.adminCharts}" var="ad" styleClass="table-hover">
+						
+							<h:column>
+								<f:facet name="header">ID</f:facet>
+								<h:outputText type="text" value="#{ad.userID}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">First Name</f:facet>
+								<h:outputText type="text" value="#{ad.firstName}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Last Name</f:facet>
+								<h:outputText type="text" value="#{ad.lastName}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Department</f:facet>
+								<h:outputText type="text" value="#{ad.department}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Gender</f:facet>
+								<h:outputText type="text" value="#{ad.gender}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Age Group</f:facet>
+								<h:outputText type="text" value="#{ad.ageGroup}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">PCM</f:facet>
+								<h:outputText type="text" value="#{ad.pcm}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Individual View</f:facet>
+								<h:commandButton value="View" action="#{adminBarChart.createModel(ad.pcm)}">
+									<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores, ad.userID)}" />
+								</h:commandButton>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Compare</f:facet>
+	        					<h:selectBooleanCheckbox value="#{ad.select}" />
+	    					</h:column>
+							
+						</h:dataTable>
+					</table>
+				
+				</div>
 			
 			</h:form>
-		</div>
-	
-	</div>
 
 </h:body>
 </html>
