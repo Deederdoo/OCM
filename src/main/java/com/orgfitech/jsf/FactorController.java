@@ -70,7 +70,7 @@ public class FactorController implements Serializable {
 		factorGenMap.put("fgMap", factors);
 		genUserAssID.put("guID", assID);
 		
-		return "generaluser_factors";
+		return "generaluser_type";
 	}
 
 	public void createFactors() {

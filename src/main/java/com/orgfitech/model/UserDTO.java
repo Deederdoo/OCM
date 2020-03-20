@@ -25,6 +25,7 @@ public class UserDTO implements Serializable {
     protected int accesslevel = 2;
     protected int orgID;
     protected int pcm;
+    protected double score;
     
     protected boolean editable;
     protected int accessstate;
@@ -137,6 +138,14 @@ public class UserDTO implements Serializable {
     //public void setAccessflag(int accessflag) {
         //this.accessflag = accessflag;
     //} 
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
 
 	@Override
     public int hashCode() {
