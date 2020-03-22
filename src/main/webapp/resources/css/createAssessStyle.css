@@ -1,0 +1,29 @@
+  html {
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+  table {
+          border: solid 1px #DDEEEE;
+          border-collapse: collapse;
+          border-spacing: 0;
+          table-layout: auto;
+          width: 95%;
+        }
+        table td {
+          border: solid 1px #DDEEEE;
+        }
+        table th {
+          border: solid 1px black;
+          background-color: #d8d8d8;
+        }
+        table tr:nth-child(even) {
+          background: #f2f2f2;
+        }
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+          background-color: #f0f0e0;
+        }
+        caption {
+          white-space: nowrap;
+          caption-side: bottom;
+        }

@@ -14,22 +14,19 @@
 <h:head>
     <title>#{uiconsts['viewTitle']}</title>
 
-<h:outputStylesheet name="css/newStyle.css" />
+    <h:outputStylesheet name="css/genUserMainStyle.css" />
     
 </h:head>
 
 <h:body >
 <br />
-<h:graphicImage id="image" library="images" name="finalLogo_black.png" />
 
-<div id="aboutText">
-</div>
-    <div id="logcontainer">
+    <div id="usercontainer">
         <h:form>
             <h:commandButton id="startAssessment" value="View Assessments" action="#{assessmentController.displayGenAssessments()}"/>
             
-            
-            <div id="lower">
+            <br />
+            <div id="logcontainer">
                 <h:commandButton  id="Button" value="Logout" action="#{userController.logOut}" />
             </div>
 
