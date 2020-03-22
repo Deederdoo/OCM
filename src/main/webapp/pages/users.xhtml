@@ -42,16 +42,12 @@
 		rel="stylesheet" crossorigin="anonymous" />
 
 	<!-- misc style tweaks: table hover color (you can change/add to this if you like), make Id column smaller -->
-	<style>
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-	background-color: #f0f0e0;
-}
-</style>
+<h:outputStylesheet name="css/userStyle.css" />
 </h:head>
 
 
 <!-- view body  -->
-<h:body style="background-color:#00BFFF;">
+<h:body style="background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);">
 
 
 	<div class="container-fluid">
@@ -70,7 +66,7 @@
 		<div id="main" role="main" class="main col-12">
 			<h:form id="addUser">
 
-				<h:commandLink action="#{userController.showAddPage()}" immediate="true">
+				<h:commandLink style="color:white;" action="#{userController.showAddPage()}" immediate="true">
 					<i class="fa fa-user-plus" />&#xa0;<h:outputText value="Add User" />
 				</h:commandLink>
 
@@ -154,10 +150,10 @@
 					</h:panelGrid>
 
 					<h:panelGrid id="actions" columns="4" cellpadding="10">
-						<h:commandLink value="Submit"
-							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password, userDTO.accesslevel)}" />
+						<h:commandLink style="color:white;" value="Submit"
+							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password)}" />
 
-						<h:commandLink value="Dismiss"
+						<h:commandLink value="Dismiss" style="color:white;"
 							action="#{userController.hideAddPage}" immediate="true" />
 					</h:panelGrid>
 				</h:panelGroup>
@@ -257,13 +253,13 @@
 					<h:column>
 						<f:facet name="header">Edit</f:facet>
 
-						<h:commandLink action="#{userController.editUser(p)}"
+						<h:commandLink style="color:black;" action="#{userController.editUser(p)}"
 							rendered="#{not p.editable}">
 							<i class="fa fa-edit" />&#xa0;<h:outputText value="Edit" />
 						</h:commandLink>
               &#xa0;
                             
-                        <h:commandLink value="Save"
+                        <h:commandLink style="color:black;" value="Save"
 							action="#{userController.updateUser(p)}" rendered="#{p.editable}" />
 	
 							 
@@ -274,14 +270,14 @@
 
 					<h:column>
 						<f:facet name="header">Action</f:facet>
-						<h:commandLink action="#{userController.deleteUser(p.id)}"
+						<h:commandLink style="color:black;" action="#{userController.deleteUser(p.id)}"
 							immediate="true" rendered="#{not p.editable}">
 							<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
 						</h:commandLink>
               &#xa0;
               
               
-                        <h:commandLink
+                        <h:commandLink style="color:black;"
 							action="#{userController.cancelUpdateUser(p)}" immediate="true"
 							rendered="#{p.editable}">
 							<i class="fa fa-undo" />&#xa0;<h:outputText value="Dismiss" />
