@@ -151,7 +151,7 @@
 
 					<h:panelGrid id="actions" columns="4" cellpadding="10">
 						<h:commandLink style="color:white;" value="Submit"
-							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password)}" />
+							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password,userDTO.accesslevel)}" />
 
 						<h:commandLink value="Dismiss" style="color:white;"
 							action="#{userController.hideAddPage}" immediate="true" />
