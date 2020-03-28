@@ -32,83 +32,9 @@ public class AdminHoriBarChart implements Serializable {
 	public AdminHoriBarChart() {
 
 		hbarModel = new HorizontalBarChartModel();
-		ChartData data = new ChartData();
-
-		HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
-		hbarDataSet.setLabel("Score");
-
-		List<Number> values = new ArrayList<>();
-
-		hbarDataSet.setData(values);
-
-		List<String> bgColor = new ArrayList<>();
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		hbarDataSet.setBackgroundColor(bgColor);
-
-		List<String> borderColor = new ArrayList<>();
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		borderColor.add("rgb(10, 2, 0)");
-		;
-		hbarDataSet.setBorderColor(borderColor);
-		hbarDataSet.setBorderWidth(1);
-
-		data.addChartDataSet(hbarDataSet);
-
-		List<String> labels = new ArrayList<>();
-		labels.add("Factor 1");
-		labels.add("Factor 2");
-		labels.add("Factor 3");
-		labels.add("Factor 4");
-		labels.add("Factor 5");
-		labels.add("Factor 6");
-		labels.add("Factor 7");
-		data.setLabels(labels);
-		hbarModel.setData(data);
-
-		// Options
-		BarChartOptions options = new BarChartOptions();
-		CartesianScales cScales = new CartesianScales();
-		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
-		CartesianLinearTicks ticks = new CartesianLinearTicks();
-		ticks.setBeginAtZero(true);
-		ticks.setMax(10);
-		linearAxes.setTicks(ticks);
-		cScales.addXAxesData(linearAxes);
-		options.setScales(cScales);
-
-		Title title = new Title();
-		title.setDisplay(true);
-		title.setText("PCM Factor Average Score");
-		title.setFontSize(24);
-		title.setFontFamily("Cairo Regular");
-		title.setFontColor("black");
-		options.setTitle(title);
-
-		Legend legend = new Legend();
-		legend.setDisplay(false);
-		legend.setPosition("top");
-		LegendLabel legendLabels = new LegendLabel();
-		legendLabels.setFontStyle("bold");
-		legendLabels.setFontColor("#2980B9");
-		legendLabels.setFontSize(24);
-		legend.setLabels(legendLabels);
-		options.setLegend(legend);
-
-		hbarModel.setOptions(options);
 	}
 
-	public void updateModel(List<UserDTO> usrScore, int id) {
+	public void updateModel(List<UserDTO> usrScore, List<String> facLabels, int id) {
 
 		ChartData data = new ChartData();
 
@@ -156,18 +82,7 @@ public class AdminHoriBarChart implements Serializable {
 
 		data.addChartDataSet(hbarDataSet);
 
-		List<String> labels = new ArrayList<>();
-		int count = 0;
-
-		for (int i = 0; i < usrScore.size(); i++) {
-
-			if (usrScore.get(i).getId() == id) {
-				count++;
-				labels.add("Factor " + (count));
-			}
-		}
-
-		data.setLabels(labels);
+		data.setLabels(facLabels);
 		this.hbarModel.setData(data);
 
 		// Options

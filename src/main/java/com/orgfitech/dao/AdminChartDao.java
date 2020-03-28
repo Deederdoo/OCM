@@ -13,4 +13,6 @@ public interface AdminChartDao {
 	public List<AdminChartDTO> readAllTables(int assID);
 	
 	public List<FactorResultDTO> readAllCharts(int userID, int assID);
+	
+	public List<String> readFactorLabels(int assID);
 }

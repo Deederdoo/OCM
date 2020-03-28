@@ -20,9 +20,15 @@ import com.orgfitech.model.UserDTO;
 public class ResultsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	protected boolean toggleGauge = true;
+	
+	protected boolean toggleBar = false;
+	
 	protected int assessmentID;
 	
 	protected List<UserDTO> scores;
+	
+	protected List<String> factorLabels;
 	
 	@Inject
     protected ExternalContext externalContext;
@@ -43,31 +49,12 @@ public class ResultsController implements Serializable{
 	public ResultsController(AdminChartDao dao) {
 		this.adminDao = dao;
 	}
-
-//	public void loadTestValues() {
-//		
-//		adminCharts = new ArrayList<>();
-//		
-//		for(int i = 0; i < 30; i++) {
-//			
-//			adminChart = new AdminChartDTO();
-//			
-//			adminChart.setUserID(i + 1);
-//			adminChart.setFirstName("John");
-//			adminChart.setLastName("Doe");
-//			adminChart.setDepartment("Shipping");
-//			adminChart.setGender("Other");
-//			adminChart.setAgeGroup("");
-//			adminChart.setPcm(rand.nextInt(101));
-//			
-//			adminCharts.add(adminChart);
-//		}
-//	}
 	
 	public void loadUsers(int assID) {
 		
 		setAdminCharts(adminDao.readAllTables(assID));
 		setScores(adminDao.readAvgFac(assID));
+		setFactorLabels(adminDao.readFactorLabels(assID));
 	}
 	
 	public String goToResults(int assID) {
@@ -86,7 +73,51 @@ public class ResultsController implements Serializable{
 		return "results";
 	}
 	
+	public void toggle(boolean type) {
+		
+		if(type) {
+			
+			if(!toggleGauge) {
+				
+				setToggleBar(!isToggleBar());
+				setToggleGauge(!isToggleGauge());
+			}
+			
+		}else {
+			
+			if(!toggleBar) {
+				
+				setToggleBar(!isToggleBar());
+				setToggleGauge(!isToggleGauge());
+			}
+		}
+	}
+	
 	//----------Getters and Setters-------------
+
+	public List<String> getFactorLabels() {
+		return factorLabels;
+	}
+
+	public void setFactorLabels(List<String> factorLabels) {
+		this.factorLabels = factorLabels;
+	}
+
+	public boolean isToggleGauge() {
+		return toggleGauge;
+	}
+
+	public void setToggleGauge(boolean toggleGauge) {
+		this.toggleGauge = toggleGauge;
+	}
+
+	public boolean isToggleBar() {
+		return toggleBar;
+	}
+
+	public void setToggleBar(boolean toggleBar) {
+		this.toggleBar = toggleBar;
+	}
 
 	public List<UserDTO> getScores() {
 		return scores;
