@@ -21,9 +21,11 @@
 </h:head>
 <h:body>
 	<br />
-	<h:commandLink action="generaluser_mainpage">
-		<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
-	</h:commandLink>
+	<h:form>
+			<h:commandLink action="#{orgfitechController.navigatePages(2)}" >
+				<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
+			</h:commandLink>
+		</h:form>
 	<br />
 	
 		<h:form style="width: 65%; margin: 0 auto;">

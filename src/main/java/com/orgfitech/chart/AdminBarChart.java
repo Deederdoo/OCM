@@ -260,36 +260,36 @@ public class AdminBarChart implements Serializable {
 		this.model.setData(data);
 
 		// Options
-		BarChartOptions options = new BarChartOptions();
-		CartesianScales cScales = new CartesianScales();
-		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
-		CartesianLinearTicks ticks = new CartesianLinearTicks();
-		ticks.setBeginAtZero(true);
-		ticks.setMax(100);
-		linearAxes.setTicks(ticks);
-		cScales.addXAxesData(linearAxes);
-		options.setScales(cScales);
+//		BarChartOptions options = new BarChartOptions();
+//		CartesianScales cScales = new CartesianScales();
+//		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
+//		CartesianLinearTicks ticks = new CartesianLinearTicks();
+//		ticks.setMax(100);
+//		ticks.setBeginAtZero(true);
+//		linearAxes.setTicks(ticks);
+//		cScales.addXAxesData(linearAxes);
+//		options.setScales(cScales);
 
-		Title title = new Title();
-		title.setDisplay(true);
-
-		title.setText(titleValue);
-		title.setFontSize(24);
-		title.setFontFamily("Cairo Regular");
-		title.setFontColor("black");
-		options.setTitle(title);
-
-		Legend legend = new Legend();
-		legend.setDisplay(false);
-		legend.setPosition("top");
-		LegendLabel legendLabels = new LegendLabel();
-		legendLabels.setFontStyle("bold");
-		legendLabels.setFontColor("#2980B9");
-		legendLabels.setFontSize(24);
-		legend.setLabels(legendLabels);
-		options.setLegend(legend);
-
-		this.model.setOptions(options);
+//		Title title = new Title();
+//		title.setDisplay(true);
+//
+//		title.setText(titleValue);
+//		title.setFontSize(24);
+//		title.setFontFamily("Cairo Regular");
+//		title.setFontColor("black");
+//		options.setTitle(title);
+//
+//		Legend legend = new Legend();
+//		legend.setDisplay(false);
+//		legend.setPosition("top");
+//		LegendLabel legendLabels = new LegendLabel();
+//		legendLabels.setFontStyle("bold");
+//		legendLabels.setFontColor("#2980B9");
+//		legendLabels.setFontSize(24);
+//		legend.setLabels(legendLabels);
+//		options.setLegend(legend);
+//
+//		this.model.setOptions(options);
 	}
 
 	public BarChartModel getModel() {

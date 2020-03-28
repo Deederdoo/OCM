@@ -32,6 +32,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 
 	private static final String READ_ALL_CHART = "select factor_answer.factorpcm, factor.details "
 			+ "from factor_answer, factor where factor_answer.userid = (?) and factor.surveyid = (?);";
+	
+	private static final String READ_FACTOR_LABELS = "select details from factor where surveyid = (?)";
 
 	protected Connection conn;
 	
@@ -40,6 +42,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 	protected PreparedStatement readAllTablesPstmt;
 
 	protected PreparedStatement readAllChartsPstmt;
+	
+	protected PreparedStatement readFactorLabelsPstmt;
 
 	@PostConstruct
 	protected void buildConnectionAndStatements() {
@@ -52,6 +56,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 			readAllTablesPstmt = conn.prepareStatement(READ_ALL_TABLE);
 
 			readAllChartsPstmt = conn.prepareStatement(READ_ALL_CHART);
+			
+			readFactorLabelsPstmt = conn.prepareStatement(READ_FACTOR_LABELS);
 
 		} catch (Exception e) {
 			System.out.println("something went wrong getting connection from database: ");
@@ -70,6 +76,8 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 			readAllTablesPstmt.close();
 
 			readAllChartsPstmt.close();
+			
+			readFactorLabelsPstmt.close();
 
 			conn.close();
 		} catch (Exception e) {
@@ -165,5 +173,31 @@ public class AdminChartDaoImpl implements AdminChartDao, Serializable {
 		}
 
 		return data;
+	}
+
+	@Override
+	public List<String> readFactorLabels(int assID) {
+		
+		List<String> factorLabels = new ArrayList<>();
+		
+		try {
+
+			readFactorLabelsPstmt.setInt(1, assID);
+			ResultSet rs = readFactorLabelsPstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				factorLabels.add(rs.getString("details"));
+			}
+			try {
+				rs.close();
+			} catch (Exception e) {
+				System.out.println("something went wrong getting ...: ");
+			}
+		} catch (SQLException e) {
+			System.out.println("something went wrong getting .......: ");
+		}
+		
+		return factorLabels;
 	}
 }

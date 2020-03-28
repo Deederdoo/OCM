@@ -17,11 +17,11 @@
 
 <h:head>
 
-	<style>
+	<style type="text/css">
 html {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100%;
-	background-image: linear-gradient(to bottom right, #456ba1, #4693B8, #42a7ad);
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
 }
 
 #tablecontainer table {
@@ -29,7 +29,7 @@ html {
 	border-collapse: collapse;
 	border-spacing: 0;
 	table-layout: auto;
-	width: 70%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -48,8 +48,24 @@ table tr:nth-child(even) {
 	background: #f2f2f2;
 }
 
+table tr input[type=submit] {
+background-color: #42a7ad;
+color: white;
+font-family: "Cairo Bold", sans-serif;
+font-size: 18px;
+border-radius: 26px;
+padding: 6px 28px;
+border: 0px;
+
+}
+
+table input[type=submit]:hover {
+background-color: #4e42ad;
+}
+
 table tr {
 	background-color: #ffffff;
+	font-family: "Cairo Regular", sans-serif;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
@@ -67,15 +83,16 @@ table tr {
 
 #barcontainer{
 	margin: 0 auto;
-	padding-top: 1%;
-	padding-bottom: 1%;
 	width:85%;
+	border-style: inset;
+  	border-color: #E3E3E3;
+  	border-width: 7px;
 }
 
 #top{
-	margin: 0 auto;
-	width:90%;
-	background-color: #ebf4ff;
+	
+	width:100%;
+	background-color: #ffffff;
 	
 }
 
@@ -87,11 +104,36 @@ table tr {
 #vert{
 	display: inline-block;
 	width: 48%;
+	border-style: outset;
+  	border-color: #E3E3E3;
+  	border-width: 7px;
+}
+
+.jqplot-meterGauge-label {
+	color: #000000;
+	margin-top: 5px;
+}
+  
+  .jqplot-meterGauge-tick {
+	color: #000000;
+	font-size: 24px;
+}
+
+.jqplot-meterGauge-label{
+	color: #000000;
+	font-size: 32px;
+	margin-top: 40%;
+}
+
+#TabComp{
+	padding-top:1%;
+	margin: 0 auto;
+	width:85%;
 }
 
 #tablecontainer{
-	margin: 0 auto;
-	width:90%;
+	float:left;
+	width:83%;
 	height: 400px;
 	overflow: auto;
 }
@@ -107,9 +149,23 @@ table tr {
   	float: left;
 }
 
-#comparer{
+#comparer {
 	float:right;
-	padding-right: 6%;
+	width: 15%;
+}
+
+#comparer input[type=submit] {
+	background-color: #42a7ad;
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 18px;
+	border-radius: 26px;
+	padding: 10px 24px;
+	border: 0px;
+}
+
+#comparer input[type=submit]:hover {
+background-color: #4e42ad;
 }
 
 </style>
@@ -131,25 +187,27 @@ table tr {
 			</div>
 			
 			<div id="vert">
-				<p:barChart model="#{adminBarChart.model}"/>
+				<p:chart rendered="#{resultsController.toggleGauge}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
+				<p:barChart rendered="#{resultsController.toggleBar}" model="#{adminBarChart.model}"/>
 			</div>
 			
 		</div>
 		
 	</div>
 	
+	<div id="TabComp">
+	
 	<h:form>
 		<div id="comparer">
-			<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}">
-				<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
-				<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
-			</h:commandButton>
-						
-			<p:selectOneMenu value="#{compareController.selectedItem}" >
-				<f:selectItem itemLabel="Department" itemDisabled="true" noSelectionOption="true" />
-				<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
+			<p:selectOneMenu value="#{compareController.selectedItem}" style="margin:2%;">
 				<f:selectItems value="#{compareController.dropDownItems}" />
 			</p:selectOneMenu>
+		
+			<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}" style="margin:2%;">
+				<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
+				<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
+				<f:actionListener binding="#{resultsController.toggle(false)}" />
+			</h:commandButton>
 		</div>
 	</h:form>
 	
@@ -197,15 +255,11 @@ table tr {
 							
 							<h:column>
 								<f:facet name="header">Individual View</f:facet>
-								<h:commandButton value="View" action="#{adminBarChart.createModel(ad.pcm)}">
-									<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores, ad.userID)}" />
+								<h:commandButton value="View" action="#{adminGauge.createGauge(ad.pcm)}">
+									<f:actionListener binding="#{adminHoriBarChart.updateModel(resultsController.scores, resultsController.factorLabels, ad.userID)}" />
+									<f:actionListener binding="#{resultsController.toggle(true)}" />
 								</h:commandButton>
 							</h:column>
-							
-							<h:column>
-								<f:facet name="header">Compare</f:facet>
-	        					<h:selectBooleanCheckbox value="#{ad.select}" />
-	    					</h:column>
 							
 						</h:dataTable>
 					</table>
@@ -213,6 +267,8 @@ table tr {
 				</div>
 			
 			</h:form>
+			
+	</div>
 
 </h:body>
 </html>
