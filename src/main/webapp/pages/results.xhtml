@@ -10,8 +10,6 @@
 
 <f:metadata>
 
-	<f:viewAction action="#{resultsController.loadTestValues}"
-		phase="UPDATE_MODEL_VALUES" />
 
 </f:metadata>
 
@@ -96,6 +94,11 @@ table tr {
 	
 }
 
+#fullvert{
+	margin: 0 auto;
+	width: 48%;
+}
+
 #hori{
 	display: inline-block;
 	width: 50%;
@@ -104,9 +107,6 @@ table tr {
 #vert{
 	display: inline-block;
 	width: 48%;
-	border-style: outset;
-  	border-color: #E3E3E3;
-  	border-width: 7px;
 }
 
 .jqplot-meterGauge-label {
@@ -144,8 +144,8 @@ table tr {
 	height: 15%;
 	opacity: 1;
 	display: block;
- 	margin-left: 1%;
-  	margin-top: -1%;
+ 	margin-left: 2%;
+  	margin-top: 2%;
   	float: left;
 }
 
@@ -174,7 +174,7 @@ background-color: #4e42ad;
 
 		<h:form>
 			<h:commandLink action="#{orgfitechController.navigatePages(1)}" >
-				<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
+				<h:graphicImage id="image" library="images" name="OCM-BW.png" style="width:7%;height:7%;"/>
 			</h:commandLink>
 		</h:form>
 
@@ -183,12 +183,16 @@ background-color: #4e42ad;
 		<div id="top">
 		
 			<div id="hori">
-				<p:barChart model="#{adminHoriBarChart.hbarModel}"/>
+				<p:barChart model="#{adminHoriBarChart.hbarModel}" rendered="#{resultsController.toggleHoriBar}"/>
 			</div>
 			
 			<div id="vert">
 				<p:chart rendered="#{resultsController.toggleGauge}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
 				<p:barChart rendered="#{resultsController.toggleBar}" model="#{adminBarChart.model}"/>
+			</div>
+			
+			<div id="fullvert">
+				<p:chart rendered="#{resultsController.toggleGauge2}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
 			</div>
 			
 		</div>

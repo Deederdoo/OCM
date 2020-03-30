@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+
+</f:metadata>
+
+<h:head>
+	
+<style>
+
+html {
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+}
+
+input[type=submit] {
+background-color: #42a7ad;
+color: white;
+font-family: "Cairo Bold", sans-serif;
+font-size: 24px;
+border-radius: 26px;
+padding: 10px 32px;
+float: right;
+border-style:solid;
+
+}
+
+input[type=submit]:hover {
+background-color: #4e42ad;
+}
+
+#whole{
+	padding:2%;
+	margin: 0 auto;
+	width:90%;
+	height: 90vh;
+}
+
+#imgShell{
+	display: inline-block;
+	padding:2px;
+	float:left;
+	color:cyan;
+	width:70%;
+	height: 89vh;
+}
+
+#buttonShell{
+	display: inline-block;
+	float:right;
+	color:red;
+	width:28%;
+}
+
+#imgBox{
+	display: inline-block;
+	color:yellow;
+	width:100%;
+	
+}
+
+#buttonBox{
+	display: inline-block;
+	color:yellow;
+	width: 60%;
+  	margin: 0 auto;
+  	padding-top: 75%;
+}
+
+#buttonBox input{
+	margin: 0 auto;
+}
+
+#foot {
+    position: fixed;
+    bottom: 5%;
+    right: 8%;
+    font-family: "Cairo Regular", sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.switcher {
+    width: 100% !important;
+    height: 380px !important;
+}
+
+.switcher img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+</style>
+	
+</h:head>
+
+
+<h:body >
+	
+	<div id="whole">
+		
+		<div id="imgShell">
+			<div id="imgBox">
+				<p:imageSwitch effect="fade" id="fadeEffect" styleClass="switcher" speed="2000" slideshowSpeed="6000">
+    				<ui:repeat value="#{imageSwap.images}" var="image" id="fadeEffectImages">
+        				<h:graphicImage id="image" library="images" name="#{image}" style="width:100%;"/>
+    				</ui:repeat>
+				</p:imageSwitch>
+				
+			</div>
+		</div>
+		
+		<div id="buttonShell">
+			<div id="buttonBox">
+				<h:form>
+					<h:commandButton value="Begin" action="login.xhtml" />
+				</h:form>
+			</div>
+		</div>
+			
+		<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
+	
+	</div>
+	
+</h:body>
+</html>

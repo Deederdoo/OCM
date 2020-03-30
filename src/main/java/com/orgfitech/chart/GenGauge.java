@@ -9,27 +9,20 @@ import javax.inject.Named;
 
 import org.primefaces.model.chart.MeterGaugeChartModel;
 
-import com.orgfitech.jsf.ResultsController;
+import com.orgfitech.jsf.QuestionController;
 
-@Named("adminGauge")
+@Named("genGauge")
 @RequestScoped
-public class AdminGauge implements Serializable{
+public class GenGauge implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	private MeterGaugeChartModel model;
 	
 	private List<Number> intervals;
 	
-	public AdminGauge() {
-		
-		try {
+	public GenGauge() {
 			
-			createGauge(ResultsController.avgAssScore.get("score"));
-			
-		}catch(Exception e){
-			
-			createGauge(0);
-		}
+		createGauge(QuestionController.resultsPCM.get("pcm"));
 	}
 	
 	public void createGauge(int value) {
@@ -57,6 +50,4 @@ public class AdminGauge implements Serializable{
 	public void setModel(MeterGaugeChartModel model) {
 		this.model = model;
 	}
-	
-	
 }
