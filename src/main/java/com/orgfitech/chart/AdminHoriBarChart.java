@@ -3,7 +3,6 @@ package com.orgfitech.chart;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -19,7 +18,6 @@ import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
 
-import com.orgfitech.jsf.QuestionController;
 import com.orgfitech.model.UserDTO;
 
 @Named("adminHoriBarChart")

@@ -2,7 +2,9 @@ package com.orgfitech.jsf;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.enterprise.context.SessionScoped;
@@ -20,11 +22,19 @@ import com.orgfitech.model.UserDTO;
 public class ResultsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	protected boolean toggleGauge = true;
+	public static Map<String, Integer> avgAssScore;
+	
+	protected boolean toggleHoriBar = false;
+	
+	protected boolean toggleGauge = false;
+	
+	protected boolean toggleGauge2 = true;
 	
 	protected boolean toggleBar = false;
 	
 	protected int assessmentID;
+	
+	protected int assessmentAVGScore;
 	
 	protected List<UserDTO> scores;
 	
@@ -55,12 +65,14 @@ public class ResultsController implements Serializable{
 		setAdminCharts(adminDao.readAllTables(assID));
 		setScores(adminDao.readAvgFac(assID));
 		setFactorLabels(adminDao.readFactorLabels(assID));
+		avgAssScore();
 	}
 	
 	public String goToResults(int assID) {
 		
 		this.assessmentID = assID;
 		loadUsers(assID);
+		resetToggles();
 		
 		return "results";
 	}
@@ -73,14 +85,47 @@ public class ResultsController implements Serializable{
 		return "results";
 	}
 	
+	public void avgAssScore() {
+		
+		avgAssScore = new HashMap<>();
+		int count = 0;
+		
+		for(int i = 0; i < adminCharts.size(); i ++) {
+			
+			count += adminCharts.get(i).getPcm();
+		}
+		
+		if(adminCharts.size() > 0) {
+			
+			count = (count / adminCharts.size());
+			
+			assessmentAVGScore = count;
+			avgAssScore.put("score", assessmentAVGScore);
+		}
+	}
+	
 	public void toggle(boolean type) {
 		
 		if(type) {
 			
 			if(!toggleGauge) {
 				
-				setToggleBar(!isToggleBar());
 				setToggleGauge(!isToggleGauge());
+			}
+			
+			if(!toggleHoriBar) {
+				
+				setToggleHoriBar(!isToggleHoriBar());
+			}
+			
+			if(toggleBar) {
+				
+				setToggleBar(!isToggleBar());
+			}
+			
+			if(toggleGauge2) {
+				
+				setToggleGauge2(false);
 			}
 			
 		}else {
@@ -88,12 +133,61 @@ public class ResultsController implements Serializable{
 			if(!toggleBar) {
 				
 				setToggleBar(!isToggleBar());
+			}
+			
+			if(!toggleHoriBar) {
+				
+				setToggleHoriBar(!isToggleHoriBar());
+			}
+			
+			if(toggleGauge) {
+				
 				setToggleGauge(!isToggleGauge());
+			}
+			
+			if(toggleGauge2) {
+				
+				setToggleGauge2(false);
 			}
 		}
 	}
 	
+	private void resetToggles() {
+		
+		toggleHoriBar = false;
+		
+		toggleGauge = false;
+		
+		toggleGauge2 = true;
+		
+		toggleBar = false;
+	}
+	
 	//----------Getters and Setters-------------
+
+	public boolean isToggleGauge2() {
+		return toggleGauge2;
+	}
+
+	public void setToggleGauge2(boolean toggleGauge2) {
+		this.toggleGauge2 = toggleGauge2;
+	}
+
+	public boolean isToggleHoriBar() {
+		return toggleHoriBar;
+	}
+
+	public void setToggleHoriBar(boolean toggleHoriBar) {
+		this.toggleHoriBar = toggleHoriBar;
+	}
+	
+	public int getAssessmentAVGScore() {
+		return assessmentAVGScore;
+	}
+
+	public void setAssessmentAVGScore(int assessmentAVGScore) {
+		this.assessmentAVGScore = assessmentAVGScore;
+	}
 
 	public List<String> getFactorLabels() {
 		return factorLabels;

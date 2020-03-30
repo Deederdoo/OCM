@@ -99,13 +99,30 @@ table tr {
   	float: left;
 }
 
+.jqplot-meterGauge-label {
+	color: #000000;
+	margin-top: 5px;
+}
+  
+  .jqplot-meterGauge-tick {
+	color: #000000;
+	font-size: 24px;
+}
+
+.jqplot-meterGauge-label{
+	color: #000000;
+	font-size: 32px;
+	margin-top: 40%;
+}
+
 </style>
+
 </h:head>
 <h:body>
 
 		<h:form>
 			<h:commandLink action="#{orgfitechController.navigatePages(2)}" >
-				<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
+				<h:graphicImage id="image" library="images" name="OCM-BW.png" style="width:7%;height:7%;"/>
 			</h:commandLink>
 		</h:form>
 
@@ -118,7 +135,7 @@ table tr {
 			</div>
 			
 			<div id="vert">
-				<p:barChart model="#{genBarChart.model}"/>
+				<p:chart type="metergauge" model="#{genGauge.model}" style="height: 40vh;"/>
 			</div>
 			
 		</div>
