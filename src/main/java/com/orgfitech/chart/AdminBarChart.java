@@ -185,7 +185,7 @@ public class AdminBarChart implements Serializable {
 
 		List<String> labels = new ArrayList<>();
 
-		updateCompare(values, labels, "Department");
+		updateCompare(values, labels, "Department", null);
 	}
 
 	private void gender(List<Integer> amount) {
@@ -202,8 +202,14 @@ public class AdminBarChart implements Serializable {
 		labels.add("Male AVG");
 		labels.add("Female AVG");
 		labels.add("Other AVG");
+		
+		List<String> colors = new ArrayList<>();
+		
+		colors.add("rgba(69, 107, 161, 0.8)");
+		colors.add("rgba(242, 48, 255, 0.8)");
+		colors.add("rgba(255, 229, 127, 0.8)");
 
-		updateCompare(values, labels, "AVG PCM");
+		updateCompare(values, labels, "AVG PCM", colors);
 	}
 
 	private void ageGroup(List<Integer> amount) {
@@ -223,10 +229,10 @@ public class AdminBarChart implements Serializable {
 		labels.add("40 to 64");
 		labels.add("65 and Over");
 
-		updateCompare(values, labels, "AVG PCM");
+		updateCompare(values, labels, "AVG PCM", null);
 	}
 
-	private void updateCompare(List<Number> values, List<String> labels, String titleValue) {
+	private void updateCompare(List<Number> values, List<String> labels, String titleValue, List<String> colors) {
 		
 		ChartData data = new ChartData();
 
@@ -236,13 +242,7 @@ public class AdminBarChart implements Serializable {
 
 		barDataSet.setData(values);
 
-		List<String> bgColor = new ArrayList<>();
-
-		bgColor.add("rgba(69, 107, 161, 0.8)");
-		bgColor.add("rgba(242, 48, 255, 0.8)");
-		bgColor.add("rgba(255, 229, 127, 0.8)");
-
-		barDataSet.setBackgroundColor(bgColor);
+		barDataSet.setBackgroundColor(colors);
 
 		List<String> borderColor = new ArrayList<>();
 
