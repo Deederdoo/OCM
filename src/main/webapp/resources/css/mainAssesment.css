@@ -1,72 +1,131 @@
 html {
-    -webkit-font-smoothing: antialiased;
-    min-height: 100%;
-    background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
 }
 
 table {
-    border: solid 1px #DDEEEE;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: auto;
-    width: 70%;
-    margin: 0 auto;
+	border: solid 1px #DDEEEE;
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: auto;
+	width: 80%;
+	margin: 0 auto;
 }
 
 table td {
-    text-align: center;
-    height: 35px;
-    border: solid 1px #DDEEEE;
-font-family: "Cairo Regular", sans-serif;
-font-size: 16px;
+	text-align: center;
+	height: 35px;
+	border: solid 1px #DDEEEE;
+	font-size: 16px;
 }
-h2{
-	font-family: "Cairo Bold", sans-serif;
+
+table tr input[type=submit] {
+background-color: #42a7ad;
+color: white;
+font-family: "Cairo Bold", sans-serif;
+font-size: 18px;
+border-radius: 26px;
+padding: 6px 28px;
+border: 0px;
+
+}
+
+h2 {
+	position: relative;
+	font-family: "Cairo Regular", sans-serif;
 	color: white;
 	font-size: 40px;
+	text-align:center;
 }
 
 table th {
-    border: solid 1px black;
-    background-color: #dadada;
-
-font-family: "Cairo Bold", sans-serif;
-font-size: 16px;
+	border: solid 1px black;
+	background-color: #dadada;
+	font-size: 16px;
 }
 
 table tr:nth-child(even) {
-    background: #f2f2f2;
+	background: #f2f2f2;
 }
 
 table tr {
-    background-color: #ffffff;
+	background-color: #ffffff;
+	font-family: "Cairo Regular", sans-serif;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: #c9c9c9;
+	background-color: #c9c9c9;
 }
 
-
 input[type=submit] {
-    background-color: #42a7ad;
-    color: white;
-    font-family: "Cairo Bold", sans-serif;
-    font-size: 16px;
-    border-radius: 26px;
-    padding: 10px 32px;
-    border: 0px;
-float: right;
+	background-color: #42a7ad;
+	color: white;
+	font-family: "Cairo Bold", sans-serif;
+	font-size: 16px;
+	border-radius: 26px;
+	padding: 10px 32px;
+	border: 0px;
 }
 
 input[type=submit]:hover {
-    background-color: #4e42ad;
+	background-color: #4e42ad;
 }
 
-#foot {
-    position: fixed;
-    bottom: 5%;
-    right: 8%;
-    font-family: "Cairo Regular", sans-serif;
-    font-size: 16px;
-    color: white;
+#formPosition {
+	position: relative;
+	top: 200px;
+	overflow: auto;
 }
+
+#innerForm{
+	width:80%;
+	margin: 0 auto;
+}
+
+#newButtonPosition {
+    position: relative;
+    width:22%;
+    float:right;
+    padding-left: 2%;
+}
+
+#homeButtonPosition{
+	position: relative;
+    width:22%;
+    float:right;
+    padding-left: 2%;
+}
+
+#image {
+	position: absolute;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 7%;
+	height: auto;
+	left: 0.5%;
+	top: 0.5%;
+}
+
+#imageLogoRight {
+	position: absolute;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 10%;
+	height: auto;
+	right: 0;
+	top: -1%;
+}
+
+
+#foot {
+	position: fixed;
+	bottom: 5%;
+	right: 8%;
+	font-family: "Cairo Regular", sans-serif;
+	font-size: 16px;
+	color: white;
+}
+

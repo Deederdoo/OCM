@@ -1,27 +1,89 @@
 html {
-    -webkit-font-smoothing: antialiased;
-    min-height: 100%;
-  
+	-webkit-font-smoothing: antialiased;
+	min-height: 125%;
+	overflow: scroll;
+    overflow-x: hidden;
 }
 
-
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: #f0f0e0;
+	background-color: #f0f0e0;
 }
 
 .commandLink {
 	color: white;
 }
-input[type=Text]{
 
-    border-color: white;
-    border: 50px;
-    padding: 20px;
-    width: 100%;
-    height:50%;
-    
+input[type=Text] {
+	border-color: white;
+	border: 50px;
+	padding: 20px;
+	width: 100%;
+	height: 50%;
 }
-table{
-	 font-family: "Cairo Regular", sans-serif;
-font-size: 16px;
+
+input[type=submit] {
+background-color: #42a7ad;
+color: white;
+font-family: "Cairo Bold", sans-serif;
+font-size: 24px;
+border: 1px;
+border-style:solid;
+border-radius: 26px;
+margin:0.5%;
+width:200px;
+
 }
+
+input[type=submit]:hover {
+background-color: #4e42ad;
+}
+
+table {
+	font-family: "Cairo Regular", sans-serif;
+	font-size: 16px;
+}
+
+#formPosition {
+	position: relative;
+	top: 200px;
+}
+
+#image {
+	position: absolute;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 7%;
+	height: auto;
+	left: 0.5%;
+	top: 0.5%;
+}
+
+#imageLogoRight {
+	position: absolute;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 10%;
+	height: auto;
+	right: 0;
+	top: -1%;
+}
+
+#theTable{
+	overflow:auto;
+	height: calc(100vh - 510px);
+	margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+
+

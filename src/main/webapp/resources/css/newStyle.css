@@ -1,4 +1,4 @@
-       html {
+ html {
     
     -webkit-font-smoothing: antialiased;
      min-height: 100%;
@@ -14,8 +14,6 @@ input[type=Text]{
     height: 8%;
     
 }
-
-
 
 input[type=submit] {
 background-color: #42a7ad;
@@ -34,19 +32,18 @@ background-color: #4e42ad;
 }
 
 #image{
+	position: absolute;
     display: block;
     margin-left: auto;
-    margin-right: auto;
-    padding-left:50px;
-    opacity: 1;
-     width: 340px;
-    height: 20%;
-    top: 70%;
-    left: 50%;
-    padding-top:10%;
-
-    border-radius: 3px;
+    margin-right: auto;    
+    width: 416px;
+    height: 208px; 
+    left: 0;
+    top: 0;
+    
 }
+
+
 
 #companyName{
     font-family: "Cairo Semi-Bold", sans-serif;
@@ -84,7 +81,7 @@ font-family: "Cairo Regular", sans-serif;
     position: fixed;
     width: 340px;
     height: 260px;
-    top: 70%;
+    top: 50%;
     left: 50%;
     margin-top: -140px;
     margin-left: -170px;

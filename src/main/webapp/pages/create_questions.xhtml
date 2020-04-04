@@ -18,113 +18,182 @@
 <h:head>
 
 	<h:outputStylesheet name="css/createQuestion.css" />
-	
+
 </h:head>
+
 <h:body>
+	<h:graphicImage id="imageLogoRight" library="images"
+		name="branding-03.png" />
+
+	<h:graphicImage id="image" library="images" name="OCM-silver.png" />
+
+
+
 	<br />
 	<h2>Questions</h2>
 	<br />
-	<h:form>
 	
+	<h:form id="formPosition">
+	<div id="tableContainer">
+
 		<table>
-		
+
 			<ui:fragment rendered="#{questionDefaultController.boolarray[0]}">
-				<tr><td>Factor 1: </td><td><h:outputText value="#{questionDefaultController.fac[0].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 1:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[0].getDetails()}" /></td>
+				</tr>
+
 				<h:dataTable value="#{questionDefaultController.q1}" var="q1">
 					<h:column>
-						<h:inputText type="text" value="#{q1.details}"/>
+						<h:inputText type="text" value="#{q1.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[1]}">
-				<tr><td>Factor 2: </td><td><h:outputText value="#{questionDefaultController.fac[1].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 2:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[1].getDetails()}" /></td>
+				</tr>
+
+
 				<h:dataTable value="#{questionDefaultController.q2}" var="q2">
 					<h:column>
-						<h:inputText value="#{q2.details}"/>
+						<h:inputText value="#{q2.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[2]}">
-				<tr><td>Factor 3: </td><td><h:outputText value="#{questionDefaultController.fac[2].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 3:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[2].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q3}" var="q3">
 					<h:column>
-						<h:inputText value="#{q3.details}"/>
+						<h:inputText value="#{q3.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[3]}">
-				<tr><td>Factor 4: </td><td><h:outputText value="#{questionDefaultController.fac[3].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 4:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[3].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q4}" var="q4">
 					<h:column>
-						<h:inputText value="#{q4.details}"/>
+						<h:inputText value="#{q4.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[4]}">
-				<tr><td>Factor 5: </td><td><h:outputText value="#{questionDefaultController.fac[4].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 5:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[4].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q5}" var="q5">
 					<h:column>
-						<h:inputText value="#{q5.details}"/>
+						<h:inputText value="#{q5.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[5]}">
-				<tr><td>Factor 6: </td><td><h:outputText value="#{questionDefaultController.fac[5].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 6:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[5].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q6}" var="q6">
 					<h:column>
-						<h:inputText value="#{q6.details}"/>
+						<h:inputText value="#{q6.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[6]}">
-				<tr><td>Factor 7: </td><td><h:outputText value="#{questionDefaultController.fac[6].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 7:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[6].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q7}" var="q7">
 					<h:column>
-						<h:inputText value="#{q7.details}"/>
+						<h:inputText value="#{q7.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[7]}">
-				<tr><td>Factor 8: </td><td><h:outputText value="#{questionDefaultController.fac[7].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 8:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[7].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q8}" var="q8">
 					<h:column>
-						<h:inputText value="#{q8.details}"/>
+						<h:inputText value="#{q8.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[8]}">
-				<tr><td>Factor 9: </td><td><h:outputText value="#{questionDefaultController.fac[8].getDetails()}"/></td></tr>
+				<tr>
+					<th>Factor 9:</th>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[8].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q9}" var="q9">
 					<h:column>
-						<h:inputText value="#{q9.details}"/>
+						<h:inputText value="#{q9.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
+		</table>
+		<table>
 			<ui:fragment rendered="#{questionDefaultController.boolarray[9]}">
-				<tr><td>Factor 10: </td><td><h:outputText value="#{questionDefaultController.fac[9].getDetails()}"/></td></tr>
+				<tr>
+					<td>Factor 10:</td>
+					<td><h:outputText
+							value="#{questionDefaultController.fac[9].getDetails()}" /></td>
+				</tr>
 				<h:dataTable value="#{questionDefaultController.q10}" var="q10">
 					<h:column>
-						<h:inputText value="#{q10.details}"/>
+						<h:inputText value="#{q10.details}" />
 					</h:column>
 				</h:dataTable>
 			</ui:fragment>
-			
 		</table>
-	
-		<h:commandButton value="Submit" action="#{questionController.createQuestion()}">
-			<f:actionListener binding="#{questionDefaultController.mapQuestions()}"/>
-			<f:actionListener binding="#{assessmentController.createAssessment()}"/>
-			<f:actionListener binding="#{factorController.createFactors()}"/>
-		</h:commandButton>
+
+	</div>
+		<div id="submitPosition">
+				<h:commandButton value="Submit"
+					action="#{questionController.createQuestion()}">
+					<f:actionListener
+						binding="#{questionDefaultController.mapQuestions()}" />
+					<f:actionListener
+						binding="#{assessmentController.createAssessment()}" />
+					<f:actionListener binding="#{factorController.createFactors()}" />
+				</h:commandButton>
+				<h:commandButton value="Home"
+					action="#{orgfitechController.navigatePages(1)}" style="margin:5%;"/>
+		</div>
 	</h:form>
 
 </h:body>

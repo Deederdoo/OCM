@@ -19,7 +19,7 @@ public class ImageSwap {
 		images = new ArrayList<>();
 		
 		for(int i = 1; i <= 4; i++) {
-			images.add("slideMenu_" + i + ".gif");
+			images.add("slideMenu_" + i + ".png");
 		}
 	}
 	

@@ -9,13 +9,14 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: auto;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
+    top: 30%;
 }
 
 table td {
     text-align: center;
-    height: 35px;
+    height: 40px;
     border: solid 1px #DDEEEE;
     font-family: "Cairo Regular", sans-serif;
 }
@@ -23,6 +24,7 @@ table td {
 table th {
     border: solid 2px black;
     font-size: 16px;
+    height:35px;
     background-color: #dadada;
     font-family: "Cairo Bold", sans-serif;
 }
@@ -55,6 +57,17 @@ input[type=submit]:hover {
     background-color: #4e42ad;
 }
 
+table tr input[type=submit] {
+background-color: #42a7ad;
+color: white;
+font-family: "Cairo Bold", sans-serif;
+font-size: 18px;
+border-radius: 26px;
+padding: 6px 28px;
+border: 0px;
+
+}
+
 #foot {
     position: fixed;
     bottom: 5%;
@@ -64,13 +77,53 @@ input[type=submit]:hover {
     color: white;
 }
 
-#image{
-    border: 0;
-    width: 15%;
-    height: 15%;
-    opacity: 1;
+#image {
+    position: absolute;
     display: block;
-    margin-left: 1%;
-    margin-top: -1%;
-    float: left;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 7%;
+    height: auto; 
+
+    left: 1%;
+    top: 1%;
 }
+
+#imageLogoRight{
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 10%;
+    height: auto;  
+    right: 0;
+    top: -1%;
+}
+
+#outerContainer{
+	width:80%;
+	margin: 0 auto;
+	height:50vh;
+	position: relative;
+	top: 200px;
+}
+
+#innerContainer{
+	position:relative;
+	margin: 0 auto;
+}
+
+#homeButton {
+	position: relative;
+    width:22%;
+    float:right;
+    padding-right: 9%;
+    margin:1%;
+}
+
+
+
+
+
+
+

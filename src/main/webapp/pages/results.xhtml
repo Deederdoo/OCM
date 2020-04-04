@@ -72,8 +72,8 @@ table tr {
 
 #foot {
 	position: fixed;
-	bottom: 5%;
-	right: 8%;
+	bottom: 2%;
+	right: 2%;
 	font-family: "Cairo Regular", sans-serif;
 	font-size: 16px;
 	color: white;
@@ -174,9 +174,11 @@ background-color: #4e42ad;
 
 		<h:form>
 			<h:commandLink action="#{orgfitechController.navigatePages(1)}" >
-				<h:graphicImage id="image" library="images" name="OCM-BW.png" style="width:7%;height:7%;"/>
+				<h:graphicImage id="image" library="images" name="OCM-silver.png" style="width:7%;height:7%;"/>
 			</h:commandLink>
 		</h:form>
+		
+		<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:18%;height:auto;top:-4%;right:-1%;position:fixed;"/>
 
 	<div id="barcontainer">
 	
@@ -192,6 +194,7 @@ background-color: #4e42ad;
 			</div>
 			
 			<div id="fullvert">
+				<h2 style="color:black;position: fixed;top:20%; right:10%;font-family: 'Cairo Bold', sans-serif;font-size: 200%;">OCM</h2>
 				<p:chart rendered="#{resultsController.toggleGauge2}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
 			</div>
 			
@@ -207,11 +210,14 @@ background-color: #4e42ad;
 				<f:selectItems value="#{compareController.dropDownItems}" />
 			</p:selectOneMenu>
 		
-			<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}" style="margin:2%;">
+			<h:commandButton value="Compare All" action="#{adminHoriBarChart.category(compareController.typeAmount, compareController.type)}" style="margin:2%;float:right;width:160px;">
 				<f:actionListener binding="#{compareController.compare(resultsController.adminCharts)}" />
 				<f:actionListener binding="#{adminBarChart.category(compareController.avgAmount, compareController.type)}" />
 				<f:actionListener binding="#{resultsController.toggle(false)}" />
 			</h:commandButton>
+			<br/>
+			<br/>
+			<h:commandButton value="Return Home" action="#{orgfitechController.navigatePages(1)}" style="margin:2%;float:right;width:160px;"/>
 		</div>
 	</h:form>
 	
@@ -273,6 +279,8 @@ background-color: #4e42ad;
 			</h:form>
 			
 	</div>
+
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 
 </h:body>
 </html>

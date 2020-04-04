@@ -15,8 +15,10 @@
 </h:head>
 <h:body>
 	<br />
+	<h:graphicImage id="imageLogoRight" library="images" name="branding-03.png" />
+
 	<h:commandLink action="generaluser_mainpage">
-		<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" />
+		<h:graphicImage id="image" library="images" name="OCM-silver.png" />
 	</h:commandLink>
 	<br />
 	<h:form style="width: 65%; margin: 0 auto;">
@@ -260,12 +262,14 @@
 		</table>
 		
 	</div>
+	
+		<h:commandButton value="Home" action="#{orgfitechController.navigatePages(2)}" style="width: 150px;"/>
 		
-		<h:commandButton value="Submit" action="generaluser_results">
+		<h:commandButton value="Submit" action="generaluser_results" style="width: 150px;">
 			<f:actionListener binding="#{questionController.submitQScore()}" />
 		</h:commandButton>
 		
 	</h:form>
-	<p id="foot"> © Orgfitech </p>
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 </h:body>
 </html>

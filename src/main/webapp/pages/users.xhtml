@@ -5,6 +5,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <!-- view that supports full C-R-U-D for Employees without navigation to other pages -->
@@ -42,18 +43,23 @@
 		rel="stylesheet" crossorigin="anonymous" />
 
 	<!-- misc style tweaks: table hover color (you can change/add to this if you like), make Id column smaller -->
-<h:outputStylesheet name="css/userStyle.css" />
+	<h:outputStylesheet name="css/userStyle.css" />
 </h:head>
 
 
 <!-- view body  -->
-<h:body style="background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);">
+<h:body
+	style="background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);">
 
 
 	<div class="container-fluid">
-
+		<div>
+			<h:graphicImage id="imageLogoRight" library="images"
+				name="branding-03.png" />
+			<h:graphicImage id="image" library="images" name="OCM-silver.png" />
+		</div>
 		<h:form id="nav">
-			<div style="text-align: right">
+			<div style="text-align: center; padding-top:1%;">
 
 				<h:commandButton class="btn btn-info" value="Home"
 					action="#{userController.homePage()}" />
@@ -62,205 +68,205 @@
 
 			</div>
 		</h:form>
+		<div id="formPosition">
+			<div id="main" role="main" class="main col-12" >
+				<h:form id="addUser">
 
-		<div id="main" role="main" class="main col-12">
-			<h:form id="addUser">
+					<h:commandLink style="color:white;"
+						action="#{userController.showAddPage()}" immediate="true">
+						<i class="fa fa-user-plus" />&#xa0;<h:outputText value="Add User" />
+					</h:commandLink>
 
-				<h:commandLink style="color:white;" action="#{userController.showAddPage()}" immediate="true">
-					<i class="fa fa-user-plus" />&#xa0;<h:outputText value="Add User" />
-				</h:commandLink>
+					<h:panelGroup rendered="#{userController.addPageVisiable}">
+						<h:panelGrid id="fixlayout" columns="4">
 
-				<h:panelGroup rendered="#{userController.addPageVisiable}">
-					<h:panelGrid id="fixlayout" columns="4">
-
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Firstname']}
-									<h:inputText id="new_firstName"
-										value="#{userDTO.firstName}">
-										<f:validator validatorId="emptyInputValidator"/>
-									</h:inputText> </span>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Firstname']}
+										<h:inputText id="new_firstName" value="#{userDTO.firstName}">
+											<f:validator validatorId="emptyInputValidator" />
+										</h:inputText> </span>
+								</div>
+								<h:message for="new_firstName" style="color:red" />
 							</div>
-							<h:message for="new_firstName" style="color:red" />
-						</div>
 
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Lastname']}
-									<h:inputText id="new_lastName"
-										value="#{userDTO.lastName}">
-									</h:inputText> </span>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-user-edit" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Lastname']}
+										<h:inputText id="new_lastName" value="#{userDTO.lastName}">
+										</h:inputText> </span>
+								</div>
+								<h:message for="new_lastName" style="color:red" />
 							</div>
-							<h:message for="new_lastName" style="color:red" />
-						</div>
 
 
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-at" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Email']}
-									<h:inputText id="new_email"
-										value="#{userDTO.email}">
-										<f:validator validatorId="emptyInputValidator"/>
-										<f:validator validatorId="emailValidator"/>
-									</h:inputText> </span>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-at" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Email']}
+										<h:inputText id="new_email" value="#{userDTO.email}">
+											<f:validator validatorId="emptyInputValidator" />
+											<f:validator validatorId="emailValidator" />
+										</h:inputText> </span>
+								</div>
+								<h:message for="new_email" style="color:red" />
 							</div>
-							<h:message for="new_email" style="color:red" />
-						</div>
 
 
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-landmark" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Department']}
-									<h:inputText id="new_department"
-										value="#{userDTO.department}">
-										<f:validator validatorId="emptyInputValidator"/>
-									</h:inputText> </span>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-landmark" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Department']}
+										<h:inputText id="new_department" value="#{userDTO.department}">
+											<f:validator validatorId="emptyInputValidator" />
+										</h:inputText> </span>
+								</div>
+								<h:message for="new_department" style="color:red" />
 							</div>
-							<h:message for="new_department" style="color:red" />
-						</div>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-lock" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Password']}
-									<h:inputText id="new_password"
-										value="#{userDTO.password}">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-lock" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Password']}
+										<h:inputText id="new_password" value="#{userDTO.password}">
 
-										<f:validator validatorId="emptyInputValidator"/>
+											<f:validator validatorId="emptyInputValidator" />
 
-									</h:inputText> </span>
+										</h:inputText> </span>
+								</div>
+								<h:message for="new_password" style="color:red" />
 							</div>
-							<h:message for="new_password" style="color:red" />
-						</div>
 
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-transparent border-0"><i
-									class="fa fa-eye" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Access']}
-									<h:inputText id="new_accessLevel"
-										value="#{userDTO.accesslevel}">
-										<f:validator validatorId="accessLevelValidator"/>
-									</h:inputText> </span>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-transparent border-0"><i
+										class="fa fa-eye" aria-hidden="true" />&#xa0;#{uiconsts['columnLabel_Access']}
+										<h:selectOneMenu value="#{userDTO.accesslevel}" style="width:100%; height:6vh;">
+	   										<f:selectItem itemValue="2" itemLabel="General User (2)" />
+	   										<f:selectItem itemValue="1" itemLabel="Administrator (1)" />
+   										</h:selectOneMenu> 
+			    					</span>
+								</div>
 							</div>
-						</div>
 
-					</h:panelGrid>
+						</h:panelGrid>
 
-					<h:panelGrid id="actions" columns="4" cellpadding="10">
-						<h:commandLink style="color:white;" value="Submit"
-							action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password,userDTO.accesslevel)}" />
+						<h:panelGrid id="actions" columns="4" cellpadding="10">
+							<h:commandLink style="color:white;" value="Submit"
+								action="#{userController.addNewUser(userDTO.firstName,userDTO.lastName,userDTO.email,userDTO.department,userDTO.password,userDTO.accesslevel)}" />
 
-						<h:commandLink value="Dismiss" style="color:white;"
-							action="#{userController.hideAddPage}" immediate="true" />
-					</h:panelGrid>
-				</h:panelGroup>
-			</h:form>
-			<br />
+							<h:commandLink value="Dismiss" style="color:white;"
+								action="#{userController.hideAddPage}" immediate="true" />
+						</h:panelGrid>
+					</h:panelGroup>
+				</h:form>
+				<br />
+			
+			<div id="theTable">
+				<h:form>
+					<h:dataTable id="userTable" binding="#{table}"
+						value="#{userController.users}" var="p"
+						class="table table-hover table-bordered tableUpdated">
 
-			<h:form id="userList">
-				<h:dataTable id="userTable" binding="#{table}"
-					value="#{userController.users}" var="p"
-					class="table table-hover table-bordered tableUpdated">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{p.id}" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{p.id}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">First Name</f:facet>
-						<h:outputText value="#{p.firstName}" rendered="#{not p.editable}" />
-						<h:inputText id="firstname_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
-							rendered="#{p.editable}" value="#{p.firstName}">
-							<f:validateRegex pattern="^.{0,100}$" />
-						</h:inputText>
-						<br />
-						<h:message for="firstname_editable" style="color:red" />
-					</h:column>
-
-
-					<h:column>
-						<f:facet name="header">Last Name</f:facet>
-						<h:outputText value="#{p.lastName}" rendered="#{not p.editable}" />
-						<h:inputText id="lastname_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
-							rendered="#{p.editable}" value="#{p.lastName}">
-							<f:validateRegex pattern="^.{0,100}$" />
-						</h:inputText>
-						<br />
-						<h:message for="lastname_editable" style="color:red" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Email</f:facet>
-						<h:outputText value="#{p.email}" rendered="#{not p.editable}" />
-
-						<h:inputText id="email_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
-							rendered="#{p.editable}" value="#{p.email}">
-							<f:validateRegex pattern="^.{0,100}$" />
-						</h:inputText>
-						<br />
-						<h:message for="email_editable" style="color:red" />
-
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Department</f:facet>
-						<h:outputText value="#{p.department}" rendered="#{not p.editable}" />
-						<h:inputText id="department_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
-							rendered="#{p.editable}" value="#{p.department}">
-							<f:validateRegex pattern="^.{0,100}$" />
-						</h:inputText>
-						<br />
-						<h:message for="department_editable" style="color:red" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+							<h:outputText value="#{p.firstName}" rendered="#{not p.editable}" />
+							<h:inputText id="firstname_editable" size="10" required="true"
+								requiredMessage="#{uiconsts['enter_valid_string']}"
+								rendered="#{p.editable}" value="#{p.firstName}">
+								<f:validateRegex pattern="^.{0,100}$" />
+							</h:inputText>
+							<br />
+							<h:message for="firstname_editable" style="color:red" />
+						</h:column>
 
 
-					<h:column>
-						<f:facet name="header">Password</f:facet>
-						<h:outputText value="#{p.password}" rendered="#{not p.editable}" />
-						<h:inputText id="password_editable" size="10" required="true"
-							requiredMessage="#{uiconsts['enter_valid_string']}"
-							rendered="#{p.editable}" value="#{p.password}">
-							<f:validateRegex pattern="^.{0,100}$" />
-						</h:inputText>
-						<br />
-						<h:message for="password_editable" style="color:red" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Last Name</f:facet>
+							<h:outputText value="#{p.lastName}" rendered="#{not p.editable}" />
+							<h:inputText id="lastname_editable" size="10" required="true"
+								requiredMessage="#{uiconsts['enter_valid_string']}"
+								rendered="#{p.editable}" value="#{p.lastName}">
+								<f:validateRegex pattern="^.{0,100}$" />
+							</h:inputText>
+							<br />
+							<h:message for="lastname_editable" style="color:red" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Access Level</f:facet>
-						<h:outputText value="#{p.accesslevel}"
-							rendered="#{not p.editable}" />
-						<h:inputText id="accesslevel_editable" size="10" 
-							
-							rendered="#{p.editable}" value="#{p.accesslevel}">
-							<f:validator validatorId="accessLevelValidator" />
-						</h:inputText>
-						<br />
-						<h:message for="accesslevel_editable" style="color:red;" />
-						
-					</h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{p.email}" rendered="#{not p.editable}" />
+
+							<h:inputText id="email_editable" size="10" required="true"
+								requiredMessage="#{uiconsts['enter_valid_string']}"
+								rendered="#{p.editable}" value="#{p.email}">
+								<f:validateRegex pattern="^.{0,100}$" />
+							</h:inputText>
+							<br />
+							<h:message for="email_editable" style="color:red" />
+
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Department</f:facet>
+							<h:outputText value="#{p.department}"
+								rendered="#{not p.editable}" />
+							<h:inputText id="department_editable" size="10" required="true"
+								requiredMessage="#{uiconsts['enter_valid_string']}"
+								rendered="#{p.editable}" value="#{p.department}">
+								<f:validateRegex pattern="^.{0,100}$" />
+							</h:inputText>
+							<br />
+							<h:message for="department_editable" style="color:red" />
+						</h:column>
 
 
-					<!-- Action column -->
-					<h:column>
-						<f:facet name="header">Edit</f:facet>
+						<h:column>
+							<f:facet name="header">Password</f:facet>
+							<h:outputText value="#{p.password}" rendered="#{not p.editable}" />
+							<h:inputText id="password_editable" size="10" required="true"
+								requiredMessage="#{uiconsts['enter_valid_string']}"
+								rendered="#{p.editable}" value="#{p.password}">
+								<f:validateRegex pattern="^.{0,100}$" />
+							</h:inputText>
+							<br />
+							<h:message for="password_editable" style="color:red" />
+						</h:column>
 
-						<h:commandLink style="color:black;" action="#{userController.editUser(p)}"
-							rendered="#{not p.editable}">
-							<i class="fa fa-edit" />&#xa0;<h:outputText value="Edit" />
-						</h:commandLink>
+						<h:column>
+							<f:facet name="header">Access Level</f:facet>
+							<h:outputText value="#{p.accesslevel}"
+								rendered="#{not p.editable}" />
+							<h:selectOneMenu id="accesslevel_editable" value="#{p.accesslevel}" rendered="#{p.editable}" style="width:100%; height:6vh;">
+		   						<f:selectItem itemValue="2" itemLabel="General User (2)" />
+		   						<f:selectItem itemValue="1" itemLabel="Administrator (1)" />
+   							</h:selectOneMenu>
+							<br />
+							<h:message for="accesslevel_editable" style="color:red;" />
+
+						</h:column>
+
+
+						<!-- Action column -->
+						<h:column>
+							<f:facet name="header">Edit</f:facet>
+
+							<h:commandLink style="color:black;"
+								action="#{userController.editUser(p)}"
+								rendered="#{not p.editable}">
+								<i class="fa fa-edit" />&#xa0;<h:outputText value="Edit" />
+							</h:commandLink>
               &#xa0;
                             
                         <h:commandLink style="color:black;" value="Save"
-							action="#{userController.updateUser(p)}" rendered="#{p.editable}" />
+								action="#{userController.updateUser(p)}"
+								rendered="#{p.editable}" />
 	
 							 
 						
@@ -268,35 +274,36 @@
                    
 						</h:column>
 
-					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandLink style="color:black;" action="#{userController.deleteUser(p.id)}"
-							immediate="true" rendered="#{not p.editable}">
-							<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
-						</h:commandLink>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandLink style="color:black;"
+								action="#{userController.deleteUser(p.id)}" immediate="true"
+								rendered="#{not p.editable}">
+								<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
+							</h:commandLink>
               &#xa0;
               
               
                         <h:commandLink style="color:black;"
-							action="#{userController.cancelUpdateUser(p)}" immediate="true"
-							rendered="#{p.editable}">
-							<i class="fa fa-undo" />&#xa0;<h:outputText value="Dismiss" />
-						</h:commandLink>
+								action="#{userController.cancelUpdateUser(p)}" immediate="true"
+								rendered="#{p.editable}">
+								<i class="fa fa-undo" />&#xa0;<h:outputText value="Dismiss" />
+							</h:commandLink>
               &#xa0;
               
               
 				    </h:column>
 
 
-				</h:dataTable>
+					</h:dataTable>
 
 
-			</h:form>
+				</h:form>
+			</div>
 
-
+			</div>
 		</div>
 	</div>
-
 
 
 

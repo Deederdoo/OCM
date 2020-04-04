@@ -24,6 +24,20 @@ html {
 	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
 }
 
+input[type=submit] {
+    background-color: #42a7ad;
+    color: white;
+    font-family: "Cairo Bold", sans-serif;
+    font-size: 24px;
+    border-radius: 26px;
+    padding: 10px 32px;
+    border: 0px;
+}
+
+input[type=submit]:hover {
+    background-color: #4e42ad;
+}
+
 #tablecontainer table {
 	border: solid 1px #DDEEEE;
 	border-collapse: collapse;
@@ -68,7 +82,7 @@ table tr {
 #barcontainer{
 	margin: 0 auto;
 	width:90%;
-	padding-top: 10%;
+	padding-top: 15%;
 }
 
 #top{
@@ -89,14 +103,32 @@ table tr {
 }
 
 #image{
-	border: 0;
-	width: 15%;
-	height: 15%;
-	opacity: 1;
-	display: block;
- 	margin-left: 1%;
-  	margin-top: -1%;
-  	float: left;
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 7%;
+    height: auto; 
+
+    left: 1%;
+    top: 1%;
+}
+
+#imageLogoRight{
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 10%;
+    height: auto;  
+    right: 0;
+    top: -1%;
+}
+
+#buttonContainer{
+	padding:2%;
+	margin: 0 auto;
+	width:5%;
 }
 
 .jqplot-meterGauge-label {
@@ -119,12 +151,10 @@ table tr {
 
 </h:head>
 <h:body>
-
-		<h:form>
-			<h:commandLink action="#{orgfitechController.navigatePages(2)}" >
-				<h:graphicImage id="image" library="images" name="OCM-BW.png" style="width:7%;height:7%;"/>
-			</h:commandLink>
-		</h:form>
+		
+		<h:graphicImage id="imageLogoRight" library="images" name="branding-03.png" />
+		
+		<h:graphicImage id="image" library="images" name="OCM-silver.png" />
 
 	<div id="barcontainer">
 	
@@ -141,6 +171,12 @@ table tr {
 		</div>
 		
 	</div>
+	
+	<h:form>
+		<div id="buttonContainer">
+			<h:commandButton value="Home" action="#{orgfitechController.navigatePages(2)}" />
+		</div>
+	</h:form>
 
 </h:body>
 </html>

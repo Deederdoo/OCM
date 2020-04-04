@@ -21,37 +21,45 @@
 </h:head>
 <h:body>
 	<br />
-	<h:form>
-			<h:commandLink action="#{orgfitechController.navigatePages(2)}" >
-				<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
-			</h:commandLink>
-		</h:form>
+	
+	<h:graphicImage id="imageLogoRight" library="images" name="branding-03.png" />
+	    
+    <!--  <h:graphicImage id="image" library="images" name="OCM-silver.png" />-->
+	<h:graphicImage id="image" library="images" name="OCM-silver.png" />
 	<br />
 	
-		<h:form style="width: 65%; margin: 0 auto;">
-		
-			<div style="height: calc(100vh - 200px); overflow: auto; margin-top: 3%">
-				<h:dataTable value="#{assessmentController.assessments}" var="ass"
-					styleClass="table-hover">
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{ass.assessmentID}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Assessment Name</f:facet>
-						<h:outputText value="#{ass.assessmentName}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Action Buttons</f:facet>
-						<h:commandLink rendered="#{assessmentController.notTaken(ass.assessmentID)}" value="Take Assessment" action="#{factorController.genUserDisplayFactors(ass.assessmentID)}" />
-						<h:outputText rendered="#{assessmentController.getFinished()}" value="Finished" />
-					</h:column>
-				</h:dataTable>
-			</div>
+	<div id="outerContainer">
+	<h:form>
+		<div id="innerContainer">
 			
-		</h:form>
+			
+					<h:dataTable value="#{assessmentController.assessments}" var="ass"
+						styleClass="table-hover">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{ass.assessmentID}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Assessment Name</f:facet>
+							<h:outputText value="#{ass.assessmentName}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action Buttons</f:facet>
+							<h:commandLink rendered="#{assessmentController.notTaken(ass.assessmentID)}" value="Take Assessment" action="#{factorController.genUserDisplayFactors(ass.assessmentID)}" />
+							<h:outputText rendered="#{assessmentController.getFinished()}" value="Finished" />
+						</h:column>
+					</h:dataTable>
+				
+		</div>
+		
+		<div id="homeButton">
+				<h:commandButton value="Home" action="#{orgfitechController.navigatePages(2)}" />
+		</div>
+	</h:form>
+	</div>
+	
 	<br/>
 
-	<p id="foot">© Orgfitech</p>
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 </h:body>
 </html>
