@@ -10,7 +10,7 @@ html {
 table {
     border-collapse: collapse;
     border-spacing: 0; table-layout : auto;
-    width: 50%;
+    width: 55%;
     margin: 0 auto;
     table-layout: auto;
 }
@@ -31,7 +31,7 @@ input[type=submit] {
     background-color: #42a7ad;
     color: white;
     font-family: "Cairo Bold", sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 26px;
     padding: 10px 32px;
     border: 0px;
@@ -40,3 +40,54 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #4e42ad;
 }
+
+h2 {
+	position: relative;
+	font-family: "Cairo Regular", sans-serif;
+	color: white;
+	font-size: 40px;
+	text-align:center;
+}
+
+#formPosition {
+    position: relative;
+    top: 120px;
+    
+}
+
+#outputPosition {
+    position: relative;
+    width:55%;
+    margin: 0 auto;
+}
+
+#image{
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 7%;
+    height: auto; 
+
+    left: 1%;
+    top: 1%;
+}
+
+#imageLogoRight{
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 10%;
+    height: auto;  
+    right: 0;
+    top: -1%;
+}
+
+#overFlow{
+	height:60vh;
+	overflow:auto;
+}
+
+
+

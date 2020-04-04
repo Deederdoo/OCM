@@ -5,6 +5,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
@@ -27,46 +28,66 @@
 
 </h:head>
 <h:body>
-	<h:form>
+
+            <h:graphicImage id="imageLogoRight" library="images"
+                name="branding-03.png" />
+            <h:graphicImage id="image" library="images" name="OCM-silver.png" />
+        
+        <div id="formPosition">
+        
+	<h:form class="table table-hover table-bordered tableUpdated">
+		<p:growl id="message" showDetail="true" />
 	<br />
 	<h2>Assessments</h2>
-	<h:dataTable value="#{assessmentController.assessments}" var="ass"
-		styleClass="table-hover">
-		<h:column>
-			<f:facet name="header">ID</f:facet>
-			<h:outputText value="#{ass.assessmentID}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">Assessment Type</f:facet>
-			<h:outputText value="" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">Assessment Name</f:facet>
-			<h:outputText value="#{ass.assessmentName}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">Date Created</f:facet>
-			<h:outputText value="#{ass.date}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">Legacy Assessment</f:facet>
-			<h:outputText value="#{ass.legacy}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">Action Buttons</f:facet>
-			<h:commandLink value="View Results" action="#{resultsController.goToResults(ass.assessmentID)}" />
-			<h:commandLink action="#{assessmentController.deleteAssessmentById(ass.assessmentID)}"
-							immediate="true" style="margin-left:10%;">
-							<i class="fa fa-trash" />&#xa0;<h:outputText value="Delete" />
-			</h:commandLink>
-		</h:column>
-	</h:dataTable>
+		<div id="innerForm">
+			<h:dataTable value="#{assessmentController.assessments}" var="ass"
+				styleClass="table-hover">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{ass.assessmentID}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Assessment Name</f:facet>
+					<h:outputText value="#{ass.assessmentName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date Created</f:facet>
+					<h:outputText value="#{ass.date}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Legacy Assessment</f:facet>
+					<h:outputText value="#{ass.legacy}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Action Buttons</f:facet>
+					<h:commandButton value="View Results" action="#{resultsController.goToResults(ass.assessmentID)}" />
+					<p:commandLink action="#{assessmentController.deleteAssessmentById(ass.assessmentID)}"
+									immediate="true" style="margin-left:12%; color:#cd3b49;"> <h:outputText value="Delete"/>
+									<i class="fa fa-trash" />
+									<p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+					</p:commandLink>
+				</h:column>
+			</h:dataTable>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	        			<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+	        			<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    				</p:confirmDialog>
+		</div>
 
 	<br />
-		<h:commandButton value="New"
-			action="#{factorDefaultController.createQuestionFactors}" />
+		<div id="newButtonPosition">
+			<h:commandButton value="New" style="width: 110px;"
+				action="#{factorDefaultController.createQuestionFactors}" />
+		</div>
+	<br/>
+	<br/>
+	<br/>
+		<div id="homeButtonPosition">
+			<h:commandButton value="Home" style="width: 110px;"
+				action="#{orgfitechController.navigatePages(1)}" />
+		</div>
 	</h:form>
-
-	<p id="foot">© Orgfitech</p>
+</div>
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 </h:body>
 </html>

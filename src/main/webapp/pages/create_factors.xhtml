@@ -20,47 +20,67 @@
 
 </h:head>
 <h:body>
-	<br />
-	<h2>Factors</h2>
-
-	<h:form>
+	<h:graphicImage id="imageLogoRight" library="images"
+		name="branding-03.png" />
 		
-		<h:outputText type="text" value="Assessment Name: "/>
-		<h:inputText id="assessment_name" type="text" value="#{assessmentController.assName}" var="name">
-			<f:validator validatorId="assessmentNameValidator"/>
-			<f:validator validatorId="emptyInputValidator"/>
-		</h:inputText>
-		<h:commandButton id="submit" value="Submit"
-			action="#{questionDefaultController.createDefaultQuestions}" >
-			<f:actionListener binding="#{factorDefaultController.submitFactors()}"/>
-		</h:commandButton>
+     <h:graphicImage id="image" library="images" name="OCM-silver.png" />
+
+	<div id="formPosition">
 		<br />
-		<h:message for="assessment_name" style="color:red;" />
-		<br />
+		<h2>Factors</h2>
 
-		<h:dataTable id="facTable" value="#{factorDefaultController.factorDefaults}"
-			var="fac" styleClass="table-hover">
-			<h:column>
-				<h:outputText type="text" value="Factor #{fac.factorID}:" />
-			</h:column>	
-			<f:facet name="header">Must have between 3-10 factors</f:facet>
-			<h:column>
-				<h:inputText type="text" value="#{fac.details}" />
-			</h:column>
-			<h:column>
-				<h:commandButton value ="Remove" title="remove" action="#{factorDefaultController.removeFactor(fac)}"/>
-			</h:column>	
-		</h:dataTable>
-		
-		<table>
-			<tr>
-    			<td>Add new Factor: </td>
-    			<td><h:inputText size="100" value="#{factorDefaultController.details}" /></td>
-    			<td><h:commandButton value="Add" action="#{factorDefaultController.addFactor()}" /></td>
-    		</tr>
-		</table>
 
-	</h:form>
-
+		<h:form>
+			<div id="overFlow">
+				<div id="outputPosition">
+					<h:outputText type="text" value="Assessment Name: " style="margin-right:7.2%;"/>
+	
+					<h:inputText id="assessment_name" type="text" style="width:30%;"
+						value="#{assessmentController.assName}" var="name">
+						<f:validator validatorId="assessmentNameValidator" />
+						<f:validator validatorId="emptyInputValidator" />
+					</h:inputText>
+					<span />
+					<h:commandButton id="submit" value="Submit" style="margin-left:2%;"
+						action="#{questionDefaultController.createDefaultQuestions}">
+						<f:actionListener
+							binding="#{factorDefaultController.submitFactors()}" />
+					</h:commandButton>
+					<h:commandButton value="Home" style="margin-left:2%;"
+						action="#{orgfitechController.navigatePages(1)}"/>
+	
+					<br />
+					<h:message for="assessment_name" style="color:red;" />
+					<br />
+				</div>
+				<h:dataTable id="facTable"
+					value="#{factorDefaultController.factorDefaults}" var="fac"
+					styleClass="table-hover">
+					<f:facet name="header">Must have between 3-10 factors</f:facet>
+					<h:column></h:column>
+					<h:column>
+						<h:outputText type="text" value="Factor #{fac.factorID}:"/>
+					</h:column>
+					<h:column>
+						<h:inputText type="text" value="#{fac.details}" style="margin:0.5%; width:85%;"/>
+					</h:column>
+					<h:column>
+						<h:commandButton value="Remove" title="remove" style="margin-left:25%;"
+							action="#{factorDefaultController.removeFactor(fac)}" />
+					</h:column>
+				</h:dataTable>
+	
+				<table>
+					<tr>
+						<td>Add new Factor:</td>
+						<td><h:inputText size="100" style="width:55%; margin:0.5%; margin-left:5%;"
+								value="#{factorDefaultController.details}" /></td>
+						<td><h:commandButton value="Add" style="margin-left:-150%"
+								action="#{factorDefaultController.addFactor()}" /></td>
+					</tr>
+				</table>
+			</div>
+		</h:form>
+	</div>
 </h:body>
 </html>

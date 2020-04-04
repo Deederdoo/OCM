@@ -23,14 +23,8 @@
 
 <h:body >
 <br />
-	<h:graphicImage id="image" library="images" name="branding-03.png" />
-
-	<div id="aboutText">
- 
-
- 
- 
-	</div>
+	<h:graphicImage id="image"  library="images" name="logo-horizontal-silver.png" />
+	
 	<div id="logcontainer">
 		<h:form>
 			<h:outputLabel  for="username">Username:    </h:outputLabel>
@@ -43,9 +37,15 @@
 <br />
 <br />
 			<h:outputLabel for="password"> Password: </h:outputLabel>
-			<h:inputText id="password" type="Text" value="#{userDTO.password}">
+			<h:inputSecret id="password" type="password" value="#{userDTO.password}" style=" border-radius: 2px 25px;
+	    			border-color: white;
+	    			border: 50px;
+	    			padding: 20px;
+	    			width: 60%;
+	    			height: 8%;">
+	    			
 				<f:validator validatorId="emptyInputValidator"/>
-			</h:inputText>
+			</h:inputSecret>
 			<h:message for="password" style="color:red;" />
 <br></br>
 <br></br>

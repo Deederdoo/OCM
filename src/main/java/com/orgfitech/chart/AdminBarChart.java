@@ -29,6 +29,7 @@ public class AdminBarChart implements Serializable {
 	private BarChartModel model;
 
 	protected int pcm;
+	BarChartOptions options = new BarChartOptions();
 
 	public AdminBarChart() {
 
@@ -63,7 +64,6 @@ public class AdminBarChart implements Serializable {
 		model.setData(data);
 
 		// Options
-		BarChartOptions options = new BarChartOptions();
 		CartesianScales cScales = new CartesianScales();
 		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
 		CartesianLinearTicks ticks = new CartesianLinearTicks();
@@ -209,7 +209,7 @@ public class AdminBarChart implements Serializable {
 		colors.add("rgba(242, 48, 255, 0.8)");
 		colors.add("rgba(255, 229, 127, 0.8)");
 
-		updateCompare(values, labels, "AVG PCM", colors);
+		updateCompare(values, labels, "Gender Average", colors);
 	}
 
 	private void ageGroup(List<Integer> amount) {
@@ -229,7 +229,7 @@ public class AdminBarChart implements Serializable {
 		labels.add("40 to 64");
 		labels.add("65 and Over");
 
-		updateCompare(values, labels, "AVG PCM", null);
+		updateCompare(values, labels, "Age Group Average", null);
 	}
 
 	private void updateCompare(List<Number> values, List<String> labels, String titleValue, List<String> colors) {
@@ -260,36 +260,17 @@ public class AdminBarChart implements Serializable {
 		this.model.setData(data);
 
 		// Options
-//		BarChartOptions options = new BarChartOptions();
-//		CartesianScales cScales = new CartesianScales();
-//		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
-//		CartesianLinearTicks ticks = new CartesianLinearTicks();
-//		ticks.setMax(100);
-//		ticks.setBeginAtZero(true);
-//		linearAxes.setTicks(ticks);
-//		cScales.addXAxesData(linearAxes);
-//		options.setScales(cScales);
 
-//		Title title = new Title();
-//		title.setDisplay(true);
-//
-//		title.setText(titleValue);
-//		title.setFontSize(24);
-//		title.setFontFamily("Cairo Regular");
-//		title.setFontColor("black");
-//		options.setTitle(title);
-//
-//		Legend legend = new Legend();
-//		legend.setDisplay(false);
-//		legend.setPosition("top");
-//		LegendLabel legendLabels = new LegendLabel();
-//		legendLabels.setFontStyle("bold");
-//		legendLabels.setFontColor("#2980B9");
-//		legendLabels.setFontSize(24);
-//		legend.setLabels(legendLabels);
-//		options.setLegend(legend);
-//
-//		this.model.setOptions(options);
+		Title title = new Title();
+		title.setDisplay(true);
+
+		title.setText(titleValue);
+		title.setFontSize(24);
+		title.setFontFamily("Cairo Regular");
+		title.setFontColor("black");
+		options.setTitle(title);
+
+		this.model.setOptions(options);
 	}
 
 	public BarChartModel getModel() {

@@ -14,16 +14,7 @@
 html {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100%;
-	background-color: #456ba1;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	table-layout: auto;
-	width: 50%;
-	margin: 0 auto;
-	table-layout: auto;
+	background-image: linear-gradient(to bottom right, #42a7ad, #4693B8, #456ba1);
 }
 
 input[type=submit] {
@@ -36,7 +27,6 @@ input[type=submit] {
 	margin-right: 2%;
 	padding: 10px 32px;
 	border: 0px;
-	float: right;
 }
 
 input[type=submit]:hover {
@@ -53,54 +43,130 @@ input[type=submit]:hover {
 }
 
 #image{
-	border: 0;
-	width: 15%;
-	height: 15%;
-	opacity: 1;
-	display: block;
- 	margin-left: 1%;
-  	margin-top: -1%;
-  	float: left;
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 7%;
+    height: auto; 
+
+    left: 1%;
+    top: 1%;
+}
+
+#imageLogoRight{
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 10%;
+    height: auto;  
+    right: 0;
+    top: -1%;
 }
 
 #dropDown {
+	padding-top:10%;
 	margin: 0 auto;
-	padding-left: 35%;
-	padding-right: 35%;
+	color:cyan;
+	width:60%;
+}
+
+#innerContainer{
+	margin: 0 auto;
+	color:#2b3943;
+	height:10vh;
+	border-style:solid;
+	background-color: #4782ae;
+	width:60%;
+}
+
+#dropContainer{
+	color:yellow;
+	width: 80%;
+	height:2vh;
+	margin: 0 auto;
+	margin-top:1%;
+}
+
+#buttonsContainer{
+	width:80%;
+	color:red;
+}
+
+#labelContainer{
+	width: 78%;
+	height:3vh;
+	margin: 0 auto;
+	font-family: "Cairo Regular", sans-serif;
+	color:white;
+	font-size: 24px;
+	
+}
+
+#containMe{
+	color:orange;
+	margin: 0 auto;
+	height:10vh;
+	width:80%;
+}
+
+h2 {
+	position: relative;
+	font-family: "Cairo Regular", sans-serif;
+	color: white;
+	font-size: 40px;
+	text-align:center;
 }
 
 	</style>
 
 </h:head>
 <h:body>
+<h:graphicImage id="imageLogoRight" library="images"
+        name="branding-03.png" />
 
-	<h:form>
-		<h:commandLink action="#{orgfitechController.navigatePages(2)}" >
-			<h:graphicImage id="image" library="images" name="logo-horizontal-silver.png" style="width:15%;height:15%;"/>
-		</h:commandLink>
-	</h:form>
+<h:graphicImage id="image" library="images" name="OCM-silver.png" />
 	
 	<div id="dropDown">
 	
-		<h:outputText value="Choose your Gender and Age Group" style="color:white;"/>
+		<h2>Choose your Gender and Age Group</h2>
 	
 		<h:form>
-			<p:selectOneMenu value="#{compareController.selectedGender}" style="width:20%">
-				<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
-				<f:selectItems value="#{compareController.genderDrop}" />
-		    </p:selectOneMenu>
-		    
-		    <p:selectOneMenu value="#{compareController.selectedAge}" style="width:20%">
-				<f:selectItem itemLabel="Select" itemDisabled="true" noSelectionOption="true" />
-				<f:selectItems value="#{compareController.ageDrop}" />
-		    </p:selectOneMenu>
-		    
+			<div id="innerContainer">
+			
+				<div id="containMe">
+					<div id="labelContainer">
+						<h:outputText value="Age Group" style="float:right;  "/>
+						<h:outputText value="Gender" style="float:left;  "/>
+					</div>
+					<br/>
+					<div id="dropContainer">
+					    <h:selectOneMenu value="#{compareController.selectedGender}" style="float:left; width:20%; height:3vh;">
+				   			<f:selectItems value="#{compareController.genderDrop}" />
+	   					</h:selectOneMenu>
+	   					
+	   					<h:selectOneMenu value="#{compareController.selectedAge}" style="float:right; width:20%; height:3vh;">
+				   			<f:selectItems value="#{compareController.ageDrop}" />
+	   					</h:selectOneMenu>
+				    </div>
+				</div>
+				
+		    </div>
 		    <br/>
 		    
-		    <h:commandButton value="Submit" action="#{compareController.selectedItems}"/>
+		    <div id="buttonsContainer">
+		    	<h:commandButton value="Submit" action="#{compareController.selectedItems}" style="float:right; width: 150px;"/>
+			    <br/>
+			    <br/>
+			    <br/>
+			    <br/>
+			    <h:commandButton value="Home" action="#{orgfitechController.navigatePages(2)}" style="float:right; width: 150px;"/>
+		    </div>
+		    
 	    </h:form>
 	</div>
 		
-	<p id="foot"> © Orgfitech </p>
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 </h:body>
 </html>

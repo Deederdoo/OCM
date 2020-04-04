@@ -19,23 +19,30 @@
 
 
 <h:body>
-<h:graphicImage id="image" library="images" name="backgroundlogo.JPG" />
+	<h:graphicImage id="imageLogoRight" library="images" name="branding-03.png" />
+	
+	<h:graphicImage id="image" library="images" name="OCM-silver.png" />
+	<!--  h:graphicImage id="image" library="images" name="backgroundlogo.JPG" />-->
 	<div id="usercontainer">
 		<h:form>
-			
-			<h:commandButton id="userButton" value="Users" action="#{userController.displayAllUsers}" />
-			</h:form>
-		 </div>
-		 <div id="asscontainer">
-		 <h:form>
-			<h:commandButton id="assButton" value="Assessments" action="#{assessmentController.displayAssessments}" />
-			
-			 <br />
-    <div id="logcontainer">    
-			<h:commandButton id="logOut" value="Log Out" action="#{userController.logOut}" />
-</div>
+
+			<h:commandButton id="userButton" value="Users"
+				action="#{userController.displayAllUsers}" />
 		</h:form>
 	</div>
-	<p id="foot"> © Orgfitech </p>
+	<div id="asscontainer">
+		<h:form>
+			<h:commandButton id="assButton" value="Assessments"
+				action="#{assessmentController.displayAssessments}" />
+			
+		</h:form>
+	</div>
+	<div id="logcontainer">
+	<h:form>
+                <h:commandButton id="logOut" value="Log Out"
+                    action="#{userController.logOut}" />
+                    </h:form>
+    </div>
+	<p id="foot"> © 2020, OrgFitech Inc. All rights reserved. </p>
 </h:body>
 </html>
