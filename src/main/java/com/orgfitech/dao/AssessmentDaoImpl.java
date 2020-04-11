@@ -24,8 +24,8 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 
 	private static final String READ_ALL = "select * from survey where orgid = (?)";
 
-	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM, ORGID) "
-			+ "VALUES (?,?,?,?,?);";
+	private static final String INSERT_ASSESSMENT = "INSERT INTO SURVEY (SURVEYNAME, DATECREATED, ISLEGACY, AVGPCM, ORGID, SURVEYTYPE) "
+			+ "VALUES (?,?,?,?,?,?);";
 
 	private static final String GET_ID_BY_NAME = "SELECT SURVEYID FROM SURVEY WHERE SURVEYNAME = (?);";
 	
@@ -146,6 +146,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			while (rs.next()) {
 				AssessmentDTO newAss = new AssessmentDTO();
 				newAss.setAssessmentID(rs.getInt("surveyid"));
+				newAss.setType(rs.getString("surveytype"));
 				newAss.setAssessmentName(rs.getString("surveyname"));
 				newAss.setDate(rs.getDate("datecreated"));
 				newAss.setLegacy(rs.getBoolean("islegacy"));
@@ -175,6 +176,7 @@ public class AssessmentDaoImpl implements AssessmentDao, Serializable {
 			createPstmt.setBoolean(3, assessment.isLegacy());
 			createPstmt.setDouble(4, assessment.getAvgPCM());
 			createPstmt.setInt(5, assessment.getOrgID());
+			createPstmt.setString(6, assessment.getType());
 			createPstmt.execute();
 			
 		} catch (Exception e) {

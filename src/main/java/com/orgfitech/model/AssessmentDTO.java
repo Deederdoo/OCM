@@ -14,9 +14,18 @@ public class AssessmentDTO implements Serializable {
 	protected int assessmentID;
 	protected String assessmentName;
 	protected Date date;
+	protected String type;
 	protected boolean legacy;
 	protected double avgPCM;
 	protected int orgID;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	/**
 	 * @return the surveyID

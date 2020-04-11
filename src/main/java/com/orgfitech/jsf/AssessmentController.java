@@ -23,6 +23,8 @@ public class AssessmentController implements Serializable {
 	
 	protected String assName;
 	
+	protected String assType;
+	
 	protected boolean finished;
 
 	public static HashMap<Integer, String> assNameMap;
@@ -42,6 +44,14 @@ public class AssessmentController implements Serializable {
 	@Inject
 	public AssessmentController(AssessmentDao assesmentDao) {
 		this.assessmentDao = assesmentDao;
+	}
+
+	public String getAssType() {
+		return assType;
+	}
+
+	public void setAssType(String assType) {
+		this.assType = assType;
 	}
 
 	public void setAssessments(List<AssessmentDTO> assessments) {
@@ -145,6 +155,7 @@ public class AssessmentController implements Serializable {
 
 		assessment = new AssessmentDTO();
 
+		assessment.setType(assType);
 		assessment.setAssessmentName(assName);
 		assessment.setDate(new Date());
 		assessment.setLegacy(false);
@@ -165,3 +176,6 @@ public class AssessmentController implements Serializable {
 		return "main_assessments.xhtml?faces-redirect=true";
 	}
 }
+
+
+//.̴̢̢̨̧̡̡̧̛̛̟̰̟̖͖͇̻̦̱͕̭̹͎̫͔̼͙̩̣͚͙̭̬͔̺̟̹̘̠̙͚̰̟̹̬̭͙̼̜̟͚̞̭̟͔͚̣̰̟͇͖̞̱͔͔̞͇̜͈̗̘͔̭̱̳̜̻͈̮̠̯͓̝̭̣̘͈̲͇̳͓̦̤̪̼̺͆͛̽͌͆͐͂̂̏̔͌̉͌͛͑̉̈́̋̑́̆́̆̏̂̈̓̐̐̈̄̿͂́̌͂͂͆̄̒̐̊̀̅͛̃̽̂͌̾̍̒̈́̈́̽̎̽̇́͑̈͒̌͛̂̍͋̎̄̓̄̆̃̉̆̐͗͊̓͗͒͆̌͐͗̃̾̚̕͘͘͘͘͜͜͝͝͝͝͝ͅͅͅͅͅ.̶̡̢̡̧̡̢̢̢̛͍̬̬̞̖̝͕̩̻̪̱̳̯̤̖̘͎̹͔͉̝̞͉̜̤̼͔̹̥̠͚̗͙͚̗͍̯͎̜̙̼̯̤͎̮̗̺̙͈̼̘͈̯̪͍̞͖͙̜̗̱̜͈͔̯̯̹̪̗͎̤͍̫̟̲͔͚̯͔̯͖̹̪̝̗̪̯̏̈́̇̔̇̊́̋͛͛̆̏̄̈́͆̉̓͂̑́̋̍̄̿̈́̀͆͋̐̈́̍̃̔̆̉͛̾̓̂̃͌̊̍̽̒̎̾̄̽͗͊̅̓͊̂͌̎̆̌̉̅́̽̋̉̿͛̆͌͒̂͛͂͆͋̂̀͆̔͛̂͛͌̀̅̆̂͌̾͘͘̕̕͘̚͜͜͜͝͝͝͠ͅͅ.̴̢̢̨̢̡̧͔͎͖͔͕̞͔̠̮̠͖̻̝̱͕̰̙̬̫̣̻͈͓̪̺̜͇̰͈̫̖͖̫̯̪͕̪̖͉͚̭̫̰̻̖̳̪̹̪̞̺͙̦̩͖͉̳̟̳̬̜͇̹̲͇̹͕̳̖̝̮̦̺̺̭̯̲̟̜͙̗̤̝̯͕̜̀͒͆̇͑̑͆̌̏͗̂̈̆͒̎̃̌̈͆̔̓̿́̍̊̏̃̊̽̎̅̈́̈́̐̆͂̂̽̅͛̃́͋͑̈́́̐̿́͗̀̎̈́̐͋́̇̇̍͛̾̽͋̏̀̾̑̂̒͑̋̓͒͌͌͊͛͆̊́͋́͆̌̚̚͘̚̚̕͘̕͘͘̚͜͜͝͝͝͠ͅͅͅͅͅͅ.̸̧̨̧̧̨̨̢̛̛̛̛̤̭̺͉͉͖̜̯͍̱͇̯̣̟͍͙͎̬͔̦͓͕̪̥̫͍̰̫͇̫̤̟̪̗̩̙̥̩̺̙̟̰͉͍͉͓͍͉̮̭̝͔̗̖͔͍̱͉̩͓̲̥͙̰̫͈̝͖̮̙͙̩̘̰̻̫̪͉̝͚̼̩̱͖̲̱̤̣̦̹͓̋̂͊̽́̇̉͑̎̀͗̌̈́̈́́̊͌̋͑͆͂̈́͆͆̀̄̓̌̏̽͊̐͆͂̽̄̊̽̒̐̄̑̾͛͌̒̋̾̍͗̓̀̐̆̈́͌̋̋̂̽̀̾́͂͂̆̍̈́̅͆͐̓̈́͑̀́͋̅̋̄̍̏̚͘̕̚̕͘͝͠͝ 

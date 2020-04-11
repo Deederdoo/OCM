@@ -61,7 +61,93 @@ public class QuestionDefaultController implements Serializable {
 	}
 	
 	public void loadDefaultQuestions() {
-		setQuestionDefaults(questionDefaultDao.readAllDefaultQuestions());
+		
+		QuestionDefaultDTO qD = new QuestionDefaultDTO();
+		List<QuestionDefaultDTO> def = new ArrayList<>();
+		qD.setQuestionID(1);
+		qD.setFactorID(1);
+		qD.setDetails("Do you believe decisions on your career development are easily accessible, or made by your immediate manager?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(2);
+		qD.setFactorID(1);
+		qD.setDetails("Do you feel you have sufficient input on your career decisions?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(3);
+		qD.setFactorID(2);
+		qD.setDetails("Do you feel creativity is encouraged while not penalizing mistakes in that pursuit?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(4);
+		qD.setFactorID(3);
+		qD.setDetails("Do you feel you are given the opportunity to set goals independently or collaboratively?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(5);
+		qD.setFactorID(3);
+		qD.setDetails("Does the organization actively promote collaboration?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(6);
+		qD.setFactorID(4);
+		qD.setDetails("Do you feel the organization promotes a balanced work and personal life operating style?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(7);
+		qD.setFactorID(4);
+		qD.setDetails("Does the organization provide sufficient time off for important personal events?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(8);
+		qD.setFactorID(4);
+		qD.setDetails("Does the organization provide sufficient opportunities for recreation?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(9);
+		qD.setFactorID(5);
+		qD.setDetails("Do you feel business decisions are made transparently?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(10);
+		qD.setFactorID(6);
+		qD.setDetails("Do you feel you are provided adequate compensation and benefits for your role?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(11);
+		qD.setFactorID(6);
+		qD.setDetails("Do you as an individual find the compensation to be competitive to similar organizations?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(12);
+		qD.setFactorID(6);
+		qD.setDetails("Are you being financially recognized relative to how you believe you are contributing?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(13);
+		qD.setFactorID(7);
+		qD.setDetails("Do you feel there is clear and preferred leadership style?");
+		def.add(qD);
+		
+		qD = new QuestionDefaultDTO();
+		qD.setQuestionID(14);
+		qD.setFactorID(17);
+		qD.setDetails("Do you feel the leadership style is one that promotes accessibility?");
+		def.add(qD);
+		
+		setQuestionDefaults(def);
 	}
 	
 	public String createDefaultQuestions() {

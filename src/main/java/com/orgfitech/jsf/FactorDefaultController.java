@@ -1,6 +1,7 @@
 package com.orgfitech.jsf;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,43 @@ public class FactorDefaultController implements Serializable {
 	
 	public void loadDefaultFactors() {
 		
-		setFactorDefaults(factorDefaultDao.readAllDefaultFactors());
+		FactorDefaultDTO fD = new FactorDefaultDTO();
+		List<FactorDefaultDTO> def = new ArrayList<>();
+		fD.setFactorID(1);
+		fD.setDetails("How career development decisions are made");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(2);
+		fD.setDetails("Does the organization encourage creativity");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(3);
+		fD.setDetails("How flexible the organization is in the way one works");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(4);
+		fD.setDetails("Is a balanced work and personal life valued here");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(5);
+		fD.setDetails("How business decisions are made");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(6);
+		fD.setDetails("The compensation meets my requirements");
+		def.add(fD);
+		
+		fD = new FactorDefaultDTO();
+		fD.setFactorID(7);
+		fD.setDetails("How leaders behave is important to this organization");
+		def.add(fD);
+		
+		setFactorDefaults(def);
 	}
 	
 	public String createQuestionFactors() {
