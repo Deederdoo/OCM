@@ -189,13 +189,21 @@ background-color: #4e42ad;
 			</div>
 			
 			<div id="vert">
-				<p:chart rendered="#{resultsController.toggleGauge}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
-				<p:barChart rendered="#{resultsController.toggleBar}" model="#{adminBarChart.model}"/>
+				<ui:fragment rendered="#{resultsController.toggleGauge}">
+					<p:chart type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
+					<h2 style="color:black;position: fixed;top:20%; right:10%;font-family: 'Cairo Bold', sans-serif;font-size: 200%;">OCM</h2>
+				</ui:fragment>
+				
+				<ui:fragment rendered="#{resultsController.toggleBar}">
+					<p:barChart model="#{adminBarChart.model}"/>
+				</ui:fragment>
 			</div>
 			
 			<div id="fullvert">
-				<h2 style="color:black;position: fixed;top:20%; right:10%;font-family: 'Cairo Bold', sans-serif;font-size: 200%;">OCM</h2>
-				<p:chart rendered="#{resultsController.toggleGauge2}" type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
+				<ui:fragment rendered="#{resultsController.toggleGauge2}">
+					<h2 style="color:black;position: fixed;top:20%; right:10%;font-family: 'Cairo Bold', sans-serif;font-size: 200%;">OCM</h2>
+					<p:chart type="metergauge" model="#{adminGauge.model}" style="height: 40vh;"/>
+				</ui:fragment>
 			</div>
 			
 		</div>

@@ -33,25 +33,37 @@
 		<h:form>
 			<div id="overFlow">
 				<div id="outputPosition">
-					<h:outputText type="text" value="Assessment Name: " style="margin-right:7.2%;"/>
+					<h:outputText type="text" value="Assessment Name: " style="margin-right:6.3%;"/>
 	
 					<h:inputText id="assessment_name" type="text" style="width:30%;"
 						value="#{assessmentController.assName}" var="name">
 						<f:validator validatorId="assessmentNameValidator" />
 						<f:validator validatorId="emptyInputValidator" />
 					</h:inputText>
-					<span />
+					
 					<h:commandButton id="submit" value="Submit" style="margin-left:2%;"
 						action="#{questionDefaultController.createDefaultQuestions}">
 						<f:actionListener
 							binding="#{factorDefaultController.submitFactors()}" />
 					</h:commandButton>
 					<h:commandButton value="Home" style="margin-left:2%;"
-						action="#{orgfitechController.navigatePages(1)}"/>
+						action="#{orgfitechController.navigatePages(1)}" immediate="true"/>
+					<span />
+					
+					
 	
 					<br />
 					<h:message for="assessment_name" style="color:red;" />
 					<br />
+					
+					<h:outputText value="Assessment Type: " style="margin-right:6.9%;"/>
+					<h:selectOneMenu value="#{assessmentController.assType}" style="width:18%; height: 3.6vh; border-radius: 25px 25px;  border: 0px; padding-left:1%;">
+		   				<f:selectItem itemValue="Culture Shaping" itemLabel="Culture Shaping" />
+		   				<f:selectItem itemValue="Employee Screening" itemLabel="Employee Screening" />
+   					</h:selectOneMenu>
+   					<br/>
+   					<br/>
+					
 				</div>
 				<h:dataTable id="facTable"
 					value="#{factorDefaultController.factorDefaults}" var="fac"
